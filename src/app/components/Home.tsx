@@ -1,9 +1,9 @@
-import { Link } from 'react-router';
 import { Helmet } from 'react-helmet-async';
-import { ChevronRight, CheckCircle2, Activity, Cpu, Gauge } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { Activity, Cpu, Gauge, Zap, Orbit, BrainCircuit, ShieldCheck, Microscope } from 'lucide-react';
 import { Render } from "@puckeditor/core";
 import { config } from "../cms/config";
+import { CyberHero } from './CyberHero';
+import { GlowCard } from './ui/GlowCard';
 
 export function Home() {
   const puckData = localStorage.getItem("puck-data");
@@ -15,171 +15,70 @@ export function Home() {
         return <Render config={config} data={data} />;
       }
     } catch (e) {
-      console.error("Failed to parse Puck data", e);
+        // Fallback to default
     }
   }
 
   const features = [
-    {
-      icon: Activity,
-      title: 'Jaw Tracking',
-      description: 'Advanced jaw movement analysis for precise diagnosis',
-    },
-    {
-      icon: Cpu,
-      title: 'EMG Technology',
-      description: 'Electromyography for muscle function assessment',
-    },
-    {
-      icon: Gauge,
-      title: 'Digital Force Analysis',
-      description: 'Precise measurement of dental force distribution',
-    },
-  ];
-
-  const benefits = [
-    'Ideal Bite Correction',
-    'Patient Posture Optimization',
-    'Digital Precision',
-    'Advanced Diagnostics',
-    'Personalized Treatment Plans',
-    'State-of-the-art Technology',
+    { icon: BrainCircuit, title: 'AI Diagnostics', description: 'Advanced machine learning protocols to map your perfect bite pattern.' },
+    { icon: Orbit, title: '3D Jaw Tracking', description: 'Real-time kinetic analysis of mandibular movement in 6 degrees of freedom.' },
+    { icon: Activity, title: 'EMG Biofeedback', description: 'neuromuscular monitoring to ensure muscle harmony and release tension.' },
+    { icon: Microscope, title: 'Micro-Analysis', description: 'Sub-millimeter precision for occlusal contact points and force distribution.' },
+    { icon: ShieldCheck, title: 'Total Protection', description: 'Comprehensive TMJ health preservation using digital splint therapy.' },
+    { icon: Zap, title: 'Laser Precision', description: 'Non-invasive adjustments using state-of-the-art dental laser systems.' },
   ];
 
   return (
-    <div>
+    <div className="bg-dark-950 min-h-screen">
       <Helmet>
-        <title>Best Digital Dental Occlusion Clinic - Middle East</title>
-        <meta name="description" content="Dr. Haitham Sharshar Dental Clinic - The #1 Specialized Center for Digital Dental Occlusion, TMJ Treatment, and Advanced Cosmetic Dentistry in the Middle East." />
-        <meta name="keywords" content="Digital Dental Occlusion, TMJ Specialist, Best Dentist Middle East, Dr. Haitham Sharshar, T-Scan, EMG Dentistry" />
+        <title>Dr. Sharshar | Digital Occlusion Architect</title>
+        <meta name="description" content="The future of dental occlusion. AI-driven diagnostics and laser-precision treatments in the Middle East." />
       </Helmet>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-gold-900 to-gold-700 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                Advanced Digital Dental Occlusion
-              </h1>
-              <p className="text-xl mb-8 text-gold-200">
-                Experience cutting-edge digital dentistry with Dr. Haitham Sharshar - 
-                where precision meets innovation for your perfect smile.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  to="/contact"
-                  className="bg-gold-500 text-white px-8 py-4 rounded-md font-semibold hover:bg-gold-400 transition-colors inline-flex items-center gap-2"
-                >
-                  Book Appointment
-                  <ChevronRight className="w-5 h-5" />
-                </Link>
-                <Link
-                  to="/technology"
-                  className="border-2 border-gold-400 text-white px-8 py-4 rounded-md font-semibold hover:bg-gold-400 hover:text-gold-950 transition-colors"
-                >
-                  Our Technology
-                </Link>
-              </div>
-            </div>
-            <div className="relative">
-              <div className="aspect-square rounded-lg overflow-hidden shadow-2xl">
-                <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1762625570087-6d98fca29531?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBkZW50YWwlMjBjbGluaWMlMjBpbnRlcmlvcnxlbnwxfHx8fDE3NzA3MDk3ODB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                  alt="Modern Dental Clinic"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
+      <CyberHero />
 
-      {/* Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Advanced Technology Suite
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              We utilize cutting-edge systems to provide unparalleled precision in dental care
+      {/* Feature Grid */}
+      <section className="relative py-32 px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-950 via-dark-900 to-dark-950" />
+        
+        <div className="relative max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-neon-cyan font-mono text-sm tracking-[0.5em] mb-4">SYSTEM CAPABILITIES</h2>
+            <h3 className="text-4xl md:text-5xl font-serif text-white mb-6">Intelligence Made Effortless.</h3>
+            <p className="text-gray-400 max-w-2xl mx-auto text-lg font-light">
+                Streamline your dental health with AI-driven protocols designed to simplify, automate, and enhance your smile architecture.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => (
-              <div
+              <GlowCard 
                 key={index}
-                className="bg-gradient-to-br from-gold-50 to-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gold-200"
-              >
-                <div className="bg-gold-700 text-white w-16 h-16 rounded-lg flex items-center justify-center mb-6">
-                  <feature.icon className="w-8 h-8" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </div>
+                icon={feature.icon}
+                title={feature.title}
+                description={feature.description}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* About Preview Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gold-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Specialized Excellence in Digital Dentistry
-              </h2>
-              <p className="text-lg text-gray-600 mb-6">
-                Dr. Haitham Sharshar leads a highly specialized dental center focused on 
-                Digital Dental Occlusion, combining advanced technology with expert care.
-              </p>
-              <div className="grid sm:grid-cols-2 gap-4 mb-8">
-                {benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-6 h-6 text-gold-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{benefit}</span>
-                  </div>
-                ))}
-              </div>
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-2 text-gold-700 font-semibold hover:gap-4 transition-all"
-              >
-                Learn More About Us
-                <ChevronRight className="w-5 h-5" />
-              </Link>
-            </div>
-            <div className="order-1 md:order-2">
-              <div className="rounded-xl overflow-hidden shadow-2xl">
-                <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1631596577204-53ad0d6e6978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkZW50aXN0JTIwcG9ydHJhaXR8ZW58MXx8fHwxNzcwNzEyOTQzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                  alt="Dr. Haitham Sharshar"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="bg-gold-900 text-white py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Experience Advanced Dental Care?
-          </h2>
-          <p className="text-xl text-gold-200 mb-8">
-            Schedule your consultation today and discover the future of digital dentistry
-          </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 bg-gold-500 text-white px-8 py-4 rounded-md font-semibold hover:bg-gold-400 transition-colors"
-          >
-            Schedule Consultation
-            <ChevronRight className="w-5 h-5" />
-          </Link>
+      <section className="relative py-32 overflow-hidden border-t border-white/5">
+        <div className="absolute inset-0 bg-neon-purple/5" />
+        <div className="absolute -top-[50%] -left-[20%] w-[1000px] h-[1000px] bg-neon-cyan/10 blur-[150px] rounded-full mix-blend-screen animate-pulse-slow" />
+        
+        <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
+            <h2 className="text-5xl md:text-7xl font-serif text-white mb-8 tracking-tighter">
+                Ready to Upgrade?
+            </h2>
+            <p className="text-xl text-gray-300 mb-12 font-light">
+                Your smile deserves the precision of the future. Initialize your transformation today.
+            </p>
+            
+            <a href="/contact" className="inline-flex h-12 w-full max-w-xs items-center justify-center rounded-lg border border-neon-cyan bg-neon-cyan/10 px-6 font-medium text-neon-cyan transition-colors hover:bg-neon-cyan hover:text-dark-950 focus:outline-none focus:ring-2 focus:ring-neon-cyan focus:ring-offset-2 focus:ring-offset-dark-950">
+                START SYSTEM ENGINE
+            </a>
         </div>
       </section>
     </div>
