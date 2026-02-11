@@ -3,6 +3,7 @@ import { Activity, Cpu, Gauge, Zap, Orbit, BrainCircuit, ShieldCheck, Microscope
 import { Render } from "@puckeditor/core";
 import { config } from "../cms/config";
 import { CyberHero } from './CyberHero';
+import { ClinicalSimulation } from './ClinicalSimulation';
 import { GlowCard } from './ui/GlowCard';
 
 export function Home() {
@@ -36,6 +37,8 @@ export function Home() {
       </Helmet>
       
       <CyberHero />
+      
+      <ClinicalSimulation />
 
       {/* Feature Grid */}
       <section className="relative py-32 px-4 sm:px-6 lg:px-8">
