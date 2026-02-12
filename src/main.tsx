@@ -4,8 +4,12 @@ import { HelmetProvider } from 'react-helmet-async';
   import App from "./app/App.tsx";
   import "./styles/index.css";
 
-  createRoot(document.getElementById("root")!).render(
-  <HelmetProvider>
-    <App />
-  </HelmetProvider>
+  import { ErrorBoundary } from "./app/components/ErrorBoundary";
+
+createRoot(document.getElementById("root")!).render(
+  <ErrorBoundary>
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
+  </ErrorBoundary>
 );
