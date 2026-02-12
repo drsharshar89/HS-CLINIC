@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Activity, Scan, Maximize, Database } from 'lucide-react';
-import { useState, useEffect } from 'react';
 
 // --- SUB-COMPONENTS ---
 
@@ -9,7 +8,7 @@ function FaceScanner() {
     <div className="relative w-full h-64 bg-dark-900/50 rounded-xl overflow-hidden border border-white/10 group">
       <div className="absolute inset-0 grid place-items-center opacity-30">
         {/* Simple Face Silhouette SVG */}
-        <svg viewBox="0 0 200 200" className="w-48 h-48 stroke-neon-cyan fill-none stroke-[0.5]">
+        <svg viewBox="0 0 200 200" className="w-48 h-48 stroke-gold-400 fill-none stroke-[0.5]">
            <path d="M100,20 C60,20 30,50 30,100 C30,160 60,190 100,190 C140,190 170,160 170,100 C170,50 140,20 100,20 Z" />
            <path d="M60,90 Q80,90 100,90 Q120,90 140,90" className="opacity-50" />
            <path d="M90,120 L110,120" className="opacity-50" />
@@ -27,13 +26,13 @@ function FaceScanner() {
       <motion.div
         animate={{ top: ["0%", "100%", "0%"] }}
         transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-        className="absolute left-0 w-full h-1 bg-neon-cyan/50 shadow-[0_0_20px_rgba(6,182,212,0.8)] z-10"
+        className="absolute left-0 w-full h-1 bg-gold-400/50 shadow-[0_0_20px_rgba(212,175,55,0.8)] z-10"
       />
       
       {/* Grid Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.1)_1px,transparent_1px)] bg-[size:2rem_2rem] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(197,165,90,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(197,165,90,0.08)_1px,transparent_1px)] bg-[size:2rem_2rem] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
-      <div className="absolute bottom-4 left-4 bg-dark-950/80 px-3 py-1 rounded text-xs text-neon-cyan font-mono border border-neon-cyan/30 flex items-center gap-2">
+      <div className="absolute bottom-4 left-4 bg-dark-950/80 px-3 py-1 rounded text-xs text-gold-400 font-mono border border-gold-400/30 flex items-center gap-2">
         <Scan className="w-3 h-3 animate-pulse" />
         MET-SMILE 3D ACQUISITION
       </div>
@@ -42,12 +41,11 @@ function FaceScanner() {
 }
 
 function EmgMonitor() {
-  // Generate random bars
   const bars = Array.from({ length: 20 });
   
   return (
     <div className="relative w-full h-64 bg-dark-900/50 rounded-xl overflow-hidden border border-white/10 p-6 flex flex-col justify-end">
-      <div className="absolute top-4 left-4 flex items-center gap-2 text-neon-purple font-mono text-xs">
+      <div className="absolute top-4 left-4 flex items-center gap-2 text-gold-500 font-mono text-xs">
         <Activity className="w-3 h-3" />
         BIO-FEEDBACK // MASSETER LEFT
       </div>
@@ -63,7 +61,7 @@ function EmgMonitor() {
                 repeatType: "mirror",
                 delay: i * 0.05 
             }}
-            className="w-full bg-gradient-to-t from-neon-purple/20 to-neon-purple rounded-t-sm"
+            className="w-full bg-gradient-to-t from-gold-600/20 to-gold-400 rounded-t-sm"
             style={{ opacity: 0.7 }}
           />
         ))}
@@ -81,7 +79,7 @@ function EmgMonitor() {
 function JawTracker() {
   return (
     <div className="relative w-full h-64 bg-dark-900/50 rounded-xl overflow-hidden border border-white/10 grid place-items-center">
-        <div className="absolute top-4 left-4 flex items-center gap-2 text-neon-blue font-mono text-xs">
+        <div className="absolute top-4 left-4 flex items-center gap-2 text-gold-300 font-mono text-xs">
             <Maximize className="w-3 h-3" />
             MANDIBULAR TRACKING (6DOF)
         </div>
@@ -104,11 +102,11 @@ function JawTracker() {
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute top-16 left-0 w-full h-20"
             >
-                <svg viewBox="0 0 100 60" className="w-full h-full text-neon-blue fill-none stroke-current stroke-2">
+                <svg viewBox="0 0 100 60" className="w-full h-full text-gold-400 fill-none stroke-current stroke-2">
                      <path d="M15,10 Q50,60 85,10" />
                      {/* Condyles */}
-                     <circle cx="15" cy="10" r="3" className="fill-neon-blue" />
-                     <circle cx="85" cy="10" r="3" className="fill-neon-blue" />
+                     <circle cx="15" cy="10" r="3" className="fill-gold-400" />
+                     <circle cx="85" cy="10" r="3" className="fill-gold-400" />
                 </svg>
                 
                 {/* Tracking Dots */}
@@ -121,7 +119,7 @@ function JawTracker() {
         </div>
         
         {/* Data readout */}
-        <div className="absolute top-1/2 right-4 text-right font-mono text-[10px] text-neon-blue space-y-1">
+        <div className="absolute top-1/2 right-4 text-right font-mono text-[10px] text-gold-400 space-y-1">
             <div>X: +0.02mm</div>
             <div>Y: -1.24mm</div>
             <div>Z: +0.00mm</div>
@@ -138,7 +136,7 @@ export function ClinicalSimulation() {
                 <motion.div 
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    className="inline-flex items-center gap-2 text-neon-cyan font-mono text-sm mb-4 border border-neon-cyan/20 px-3 py-1 rounded-full"
+                    className="inline-flex items-center gap-2 text-gold-400 font-mono text-sm mb-4 border border-gold-400/20 px-3 py-1 rounded-full"
                 >
                     <Database className="w-4 h-4" />
                     LIVE TELEMETRY // DEMO MODE

@@ -3,26 +3,35 @@
 @import "./theme.css";
 
 @theme {
-  --color-dark-950: #020617;
-  --color-dark-900: #0f172a;
-  --color-dark-800: #1e293b;
+  --color-dark-950: #050505;
+  --color-dark-900: #0A0A0A;
+  --color-dark-800: #141414;
 
-  --color-neon-cyan: #06b6d4;
-  --color-neon-blue: #3b82f6;
-  --color-neon-purple: #8b5cf6;
+  --color-gold-200: #F0E4B8;
+  --color-gold-300: #E8D48B;
+  --color-gold-400: #D4AF37;
+  --color-gold-500: #C5A55A;
+  --color-gold-600: #A68B3E;
+  --color-gold-700: #8B7332;
   
-  --color-glass: rgba(255, 255, 255, 0.05);
-  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glass: rgba(255, 255, 255, 0.04);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
 
   --font-serif: "Playfair Display", serif;
   --font-mono: "JetBrains Mono", monospace;
 
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-20px); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 }
 
@@ -33,8 +42,8 @@
 body {
     @apply bg-dark-950 text-gray-200 antialiased font-sans;
     background-image: 
-        radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.1) 0%, transparent 30%);
+        radial-gradient(circle at 50% 0%, rgba(197, 165, 90, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 100% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 30%);
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -44,7 +53,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-cyan via-neon-blue to-neon-purple;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-gold-300 via-gold-400 to-gold-600;
 }
 
 .glass-card {
@@ -53,5 +62,5 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .glow-hover {
-    @apply transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)] hover:border-neon-cyan/50;
+    @apply transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.25)] hover:border-gold-400/50;
 }

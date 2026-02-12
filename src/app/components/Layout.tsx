@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { Menu, X, Phone, Mail, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import clinicLogo from '../../assets/logo.png';
-// const clinicLogo = "https://placehold.co/300x100?text=Dr.+Haitham+Sharshar";
 
 export function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -14,22 +13,23 @@ export function Layout() {
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Technology', href: '/technology' },
+    { name: 'Dental Tourism', href: '/dental-tourism' },
     { name: 'Contact', href: '/contact' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="min-h-screen flex flex-col bg-dark-950 font-sans text-gray-200 selection:bg-neon-cyan/30 selection:text-neon-cyan">
+    <div className="min-h-screen flex flex-col bg-dark-950 font-sans text-gray-200 selection:bg-gold-400/30 selection:text-gold-400">
       <header className="fixed w-full z-50 bg-dark-950/80 backdrop-blur-md border-b border-white/5">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Global">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center gap-2">
               <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-2 group">
-                <img className="h-10 w-auto brightness-200 group-hover:drop-shadow-[0_0_10px_rgba(6,182,212,0.8)] transition-all" src={clinicLogo} alt="Dr. Sharshar Logo" />
+                <img className="h-10 w-auto brightness-200 group-hover:drop-shadow-[0_0_10px_rgba(212,175,55,0.6)] transition-all" src={clinicLogo} alt="Dr. Sharshar Logo" />
                 <div className="flex flex-col">
-                  <span className="text-xl font-serif font-bold text-white tracking-tight group-hover:text-neon-cyan transition-colors">DR. SHARSHAR</span>
-                  <span className="text-xs text-neon-cyan tracking-[0.2em] font-mono uppercase">Digital Occlusion</span>
+                  <span className="text-xl font-serif font-bold text-white tracking-tight group-hover:text-gold-400 transition-colors">DR. SHARSHAR</span>
+                  <span className="text-xs text-gold-400 tracking-[0.2em] font-mono uppercase">Digital Occlusion</span>
                 </div>
               </Link>
             </div>
@@ -40,8 +40,8 @@ export function Layout() {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`text-sm font-medium transition-all duration-300 hover:text-neon-cyan hover:tracking-wide ${
-                    isActive(item.href) ? 'text-neon-cyan border-b-2 border-neon-cyan' : 'text-gray-400'
+                  className={`text-sm font-medium transition-all duration-300 hover:text-gold-400 hover:tracking-wide ${
+                    isActive(item.href) ? 'text-gold-400 border-b-2 border-gold-400' : 'text-gray-400'
                   }`}
                 >
                   {item.name}
@@ -77,7 +77,7 @@ export function Layout() {
                   to={item.href}
                   className={`block rounded-md px-3 py-2 text-base font-medium ${
                     isActive(item.href)
-                      ? 'bg-neon-cyan/10 text-neon-cyan'
+                      ? 'bg-gold-400/10 text-gold-400'
                       : 'text-gray-300 hover:bg-white/5 hover:text-white'
                   }`}
                   onClick={() => setMobileMenuOpen(false)}
@@ -110,16 +110,16 @@ export function Layout() {
           <div>
             <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4 font-mono">Contact</h3>
             <ul className="space-y-3">
-              <li className="flex items-center gap-2 text-gray-400 hover:text-neon-cyan transition-colors">
-                <Phone className="h-4 w-4 text-neon-purple" />
+              <li className="flex items-center gap-2 text-gray-400 hover:text-gold-400 transition-colors">
+                <Phone className="h-4 w-4 text-gold-500" />
                 <span>+20 123 456 7890</span>
               </li>
-              <li className="flex items-center gap-2 text-gray-400 hover:text-neon-cyan transition-colors">
-                <Mail className="h-4 w-4 text-neon-purple" />
+              <li className="flex items-center gap-2 text-gray-400 hover:text-gold-400 transition-colors">
+                <Mail className="h-4 w-4 text-gold-500" />
                 <span>clinic@drhaithamsharshar.com</span>
               </li>
-              <li className="flex items-start gap-2 text-gray-400 hover:text-neon-cyan transition-colors">
-                <MapPin className="h-4 w-4 text-neon-purple mt-1" />
+              <li className="flex items-start gap-2 text-gray-400 hover:text-gold-400 transition-colors">
+                <MapPin className="h-4 w-4 text-gold-500 mt-1" />
                 <span>Cairo, Egypt</span>
               </li>
             </ul>
@@ -130,7 +130,7 @@ export function Layout() {
             <ul className="space-y-2">
               {navigation.map((item) => (
                 <li key={item.name}>
-                  <Link to={item.href} className="text-gray-400 hover:text-neon-cyan transition-colors text-sm">
+                  <Link to={item.href} className="text-gray-400 hover:text-gold-400 transition-colors text-sm">
                     {item.name}
                   </Link>
                 </li>

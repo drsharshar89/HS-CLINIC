@@ -46,7 +46,7 @@ export function Home() {
         
         <div className="relative max-w-7xl mx-auto">
           <div className="text-center mb-20">
-            <h2 className="text-neon-cyan font-mono text-sm tracking-[0.5em] mb-4">SYSTEM CAPABILITIES</h2>
+            <h2 className="text-gold-400 font-mono text-sm tracking-[0.5em] mb-4">SYSTEM CAPABILITIES</h2>
             <h3 className="text-4xl md:text-5xl font-serif text-white mb-6">Intelligence Made Effortless.</h3>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg font-light">
                 Streamline your dental health with AI-driven protocols designed to simplify, automate, and enhance your smile architecture.
@@ -68,8 +68,8 @@ export function Home() {
 
       {/* CTA Section */}
       <section className="relative py-32 overflow-hidden border-t border-white/5">
-        <div className="absolute inset-0 bg-neon-purple/5" />
-        <div className="absolute -top-[50%] -left-[20%] w-[1000px] h-[1000px] bg-neon-cyan/10 blur-[150px] rounded-full mix-blend-screen animate-pulse-slow" />
+        <div className="absolute inset-0 bg-gold-600/3" />
+        <div className="absolute -top-[50%] -left-[20%] w-[1000px] h-[1000px] bg-gold-400/8 blur-[150px] rounded-full mix-blend-screen animate-pulse-slow" />
         
         <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
             <h2 className="text-5xl md:text-7xl font-serif text-white mb-8 tracking-tighter">
@@ -79,7 +79,7 @@ export function Home() {
                 Your smile deserves the precision of the future. Initialize your transformation today.
             </p>
             
-            <a href="/contact" className="inline-flex h-12 w-full max-w-xs items-center justify-center rounded-lg border border-neon-cyan bg-neon-cyan/10 px-6 font-medium text-neon-cyan transition-colors hover:bg-neon-cyan hover:text-dark-950 focus:outline-none focus:ring-2 focus:ring-neon-cyan focus:ring-offset-2 focus:ring-offset-dark-950">
+            <a href="/contact" className="inline-flex h-12 w-full max-w-xs items-center justify-center rounded-lg border border-gold-400 bg-gold-400/10 px-6 font-medium text-gold-400 transition-colors hover:bg-gold-400 hover:text-dark-950 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-dark-950">
                 START SYSTEM ENGINE
             </a>
         </div>

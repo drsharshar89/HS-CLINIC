@@ -1,225 +1,138 @@
-import { CheckCircle2, Smile, AlertCircle, Stethoscope, Shield, Zap } from 'lucide-react';
+import { CheckCircle2, Smile, AlertCircle, Stethoscope, Shield, Zap, BrainCircuit, Activity, Scan } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import { SectionHeader } from './ui/SectionHeader';
+import { GlowCard } from './ui/GlowCard';
+import { motion } from 'framer-motion';
 
 export function Services() {
   const services = [
     {
       icon: Stethoscope,
-      title: 'Comprehensive Occlusal Analysis',
-      description: 'Detailed evaluation of how your teeth come together using advanced digital systems.',
-      features: [
-        'Digital bite registration',
-        'Force distribution mapping',
-        'TMJ disorder assessment',
-        'Functional analysis',
-      ],
+      title: 'Occlusal Analysis',
+      description: 'Digital bite registration and force distribution mapping using T-Scan technology.',
     },
     {
       icon: Zap,
-      title: 'EMG Diagnostic Testing',
-      description: 'Electromyography to assess muscle function and detect imbalances in jaw muscles.',
-      features: [
-        'Muscle activity monitoring',
-        'Tension pattern analysis',
-        'Pre/post treatment comparison',
-        'Objective data collection',
-      ],
+      title: 'EMG Diagnostics',
+      description: 'Electromyography to assess muscle function and detect micro-imbalances in jaw muscles.',
     },
     {
-      icon: AlertCircle,
-      title: 'Jaw Tracking & Analysis',
-      description: 'Advanced tracking systems to monitor jaw movement patterns and identify issues.',
-      features: [
-        'Real-time movement tracking',
-        '3D jaw motion analysis',
-        'Range of motion assessment',
-        'Deviation detection',
-      ],
+      icon: Scan,
+      title: '4D Jaw Tracking',
+      description: 'Real-time mandibular movement analysis to identify deviations and restrictions.',
     },
     {
       icon: Shield,
-      title: 'Bite Correction & Optimization',
-      description: 'Personalized treatment to achieve ideal occlusion and eliminate bite problems.',
-      features: [
-        'Custom treatment planning',
-        'Gradual bite adjustment',
-        'Comfort-focused approach',
-        'Long-term stability',
-      ],
+      title: 'Bite Optimization',
+      description: 'Data-driven equilibrium adjustments to stabilize your occlusion long-term.',
     },
     {
       icon: Smile,
-      title: 'Posture Correction Therapy',
-      description: 'Addressing the connection between dental occlusion and body posture.',
-      features: [
-        'Full body posture evaluation',
-        'Bite-posture correlation',
-        'Corrective interventions',
-        'Holistic health improvement',
-      ],
+      title: 'Posture Therapy',
+      description: 'Correcting the descending chain of dysfunction from jaw to spine.',
     },
     {
-      icon: CheckCircle2,
-      title: 'Digital Treatment Planning',
-      description: 'State-of-the-art digital workflow for precise and predictable outcomes.',
-      features: [
-        'Virtual treatment simulation',
-        'Predictable results',
-        'Minimally invasive options',
-        'Advanced technology integration',
-      ],
+      icon: BrainCircuit,
+      title: 'Digital Planning',
+      description: 'AI-assisted treatment simulation for predictable, non-invasive outcomes.',
     },
   ];
 
   const conditions = [
-    'TMJ Disorders',
-    'Chronic Headaches',
-    'Jaw Pain & Clicking',
-    'Teeth Grinding (Bruxism)',
-    'Uneven Bite',
-    'Facial Pain',
-    'Neck & Shoulder Pain',
-    'Worn or Chipped Teeth',
-    'Limited Jaw Movement',
-    'Poor Posture',
+    'TMJ Disorders', 'Chronic Headaches', 'Jaw Clicking', 'Bruxism', 
+    'Uneven Bite', 'Facial Neuralgia', 'Neck Pain', 'Tinnitus', 
+    'Limited Opening', 'Sleep Apnea'
+  ];
+
+  const process = [
+    { step: '01', title: 'Scan', desc: 'Full digital topography & motion capture' },
+    { step: '02', title: 'Analyze', desc: 'AI-driven data interpretation' },
+    { step: '03', title: 'Plan', desc: 'Virtual treatment modeling' },
+    { step: '04', title: 'Execute', desc: 'Laser-guided precision therapy' },
   ];
 
   return (
-    <div>
+    <div className="bg-dark-950 min-h-screen pt-24 pb-12">
       <Helmet>
-        <title>Our Services | Digital Occlusion & TMJ Treatment</title>
-        <meta name="description" content="Comprehensive digital dental services including Occlusal Analysis, EMG Diagnostic Testing, Jaw Tracking, and Posture Correction Therapy." />
+        <title>Services | Digital Occlusion & TMJ</title>
+        <meta name="description" content="Advanced digital dental services: EMG, Jaw Tracking, and T-Scan Analysis." />
       </Helmet>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-gold-900 to-gold-700 text-white py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Our Specialized Services
-          </h1>
-          <p className="text-xl text-gold-200">
-            Comprehensive digital dental solutions for optimal oral health and overall well-being
-          </p>
-        </div>
-      </section>
+      
+      {/* Background Effects */}
+      <div className="fixed inset-0 pointer-events-none">
+         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-400/5 blur-[100px] rounded-full" />
+         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gold-600/5 blur-[100px] rounded-full" />
+      </div>
 
-      {/* Services Grid */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <SectionHeader 
+            title="Precision Protocols" 
+            subtitle="CLINICAL SERVICES" 
+        />
+
+        {/* Services Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-32">
             {services.map((service, index) => (
-              <div
+              <GlowCard 
                 key={index}
-                className="bg-gradient-to-br from-gold-50 to-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gold-200"
-              >
-                <div className="bg-gold-700 text-white w-16 h-16 rounded-lg flex items-center justify-center mb-6">
-                  <service.icon className="w-8 h-8" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 mb-6">{service.description}</p>
-                <ul className="space-y-2">
-                  {service.features.map((feature, fIndex) => (
-                    <li key={fIndex} className="flex items-start gap-2 text-gray-700">
-                      <CheckCircle2 className="w-5 h-5 text-gold-600 flex-shrink-0 mt-0.5" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                icon={service.icon}
+                title={service.title}
+                description={service.description}
+              />
             ))}
-          </div>
         </div>
-      </section>
 
-      {/* Conditions Treated */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gold-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Conditions We Treat
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our specialized approach addresses a wide range of dental and related health issues
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-            {conditions.map((condition, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center gap-3"
-              >
-                <CheckCircle2 className="w-6 h-6 text-gold-600 flex-shrink-0" />
-                <span className="font-semibold text-gray-900">{condition}</span>
-              </div>
-            ))}
-          </div>
+        {/* Conditions Hologram */}
+        <div className="mb-32">
+            <h3 className="text-3xl font-serif text-white text-center mb-12">Target pathologies</h3>
+            <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+                {conditions.map((condition, index) => (
+                    <motion.div 
+                        key={index}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.05 }}
+                        whileHover={{ scale: 1.05, backgroundColor: "rgba(212,175,55,0.12)" }}
+                        className="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-gray-300 font-mono text-sm cursor-default hover:text-gold-400 hover:border-gold-400/50 transition-all"
+                    >
+                        {condition}
+                    </motion.div>
+                ))}
+            </div>
         </div>
-      </section>
 
-      {/* Treatment Process */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our Treatment Process
-            </h2>
-            <p className="text-xl text-gray-600">
-              A systematic approach to achieving optimal results
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              {
-                step: '01',
-                title: 'Initial Consultation',
-                description: 'Comprehensive evaluation of your dental health, symptoms, and concerns.',
-              },
-              {
-                step: '02',
-                title: 'Digital Analysis',
-                description: 'Advanced testing using jaw tracking, EMG, and force analysis systems.',
-              },
-              {
-                step: '03',
-                title: 'Treatment Planning',
-                description: 'Personalized plan developed based on detailed diagnostic data.',
-              },
-              {
-                step: '04',
-                title: 'Implementation & Follow-up',
-                description: 'Precise treatment execution with ongoing monitoring and adjustments.',
-              },
-            ].map((phase, index) => (
-              <div key={index} className="text-center">
-                <div className="bg-gold-700 text-white text-2xl font-bold w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  {phase.step}
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{phase.title}</h3>
-                <p className="text-gray-600">{phase.description}</p>
-              </div>
-            ))}
-          </div>
+        {/* Process Timeline */}
+        <div className="mb-20">
+            <h3 className="text-3xl font-serif text-white text-center mb-16">The Digital Workflow</h3>
+            <div className="grid md:grid-cols-4 gap-8">
+                {process.map((p, i) => (
+                    <div key={i} className="relative group">
+                        {/* Connecting Line */}
+                        {i < process.length - 1 && (
+                            <div className="hidden md:block absolute top-8 left-1/2 w-full h-[1px] bg-gradient-to-r from-gold-400/50 to-transparent z-0" />
+                        )}
+                        
+                        <div className="relative z-10 flex flex-col items-center text-center">
+                            <div className="w-16 h-16 rounded-2xl bg-dark-900 border border-gold-400/30 flex items-center justify-center text-xl font-mono text-gold-400 mb-6 group-hover:bg-gold-400/10 group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(212,175,55,0.1)]">
+                                {p.step}
+                            </div>
+                            <h4 className="text-lg font-bold text-white mb-2">{p.title}</h4>
+                            <p className="text-sm text-gray-500 max-w-[150px]">{p.desc}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="bg-gradient-to-br from-gold-900 to-gold-700 text-white py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Start Your Journey to Better Dental Health
-          </h2>
-          <p className="text-xl text-gold-200 mb-8">
-            Schedule a consultation to learn how our advanced services can help you
-          </p>
-          <a
-            href="/contact"
-            className="inline-block bg-gold-500 text-white px-8 py-4 rounded-md font-semibold hover:bg-gold-400 transition-colors"
-          >
-            Book Your Consultation
-          </a>
+        
+        {/* CTA */}
+        <div className="text-center">
+            <a href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-gold-400 text-dark-950 font-bold rounded-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] transition-all">
+                INITIATE DIAGNOSTIC SCAN <CheckCircle2 className="w-5 h-5" />
+            </a>
         </div>
-      </section>
+
+      </div>
     </div>
   );
 }
