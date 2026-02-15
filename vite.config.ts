@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
-import path from 'path'
-import tailwindcss from '@tailwindcss/vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vitest/config';
+import path from 'path';
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [
@@ -10,6 +10,14 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./src/test/setup.ts'],
+    include: ['src/**/*.test.{ts,tsx}'],
+  },
+  // ⚠️  DO NOT add define: { 'process.env': {}, 'global': 'window' } here.
+  //     See _AGENT_COORD/VITE_CONFIG_RULES.md for why.
   resolve: {
     alias: {
       // Alias @ to the src directory
@@ -19,4 +27,10 @@ export default defineConfig({
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
-})
+
+  // ⚠️  DO NOT add manualChunks for lazy-loaded dependencies (e.g. three).
+  //     See _AGENT_COORD/VITE_CONFIG_RULES.md for why.
+  build: {
+    rollupOptions: {},
+  },
+});

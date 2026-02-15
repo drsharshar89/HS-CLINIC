@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 type SectionHeaderProps = {
   title: string;
@@ -6,22 +6,22 @@ type SectionHeaderProps = {
   className?: string;
 };
 
-export function SectionHeader({ title, subtitle, className = "" }: SectionHeaderProps) {
+export function SectionHeader({ title, subtitle, className = '' }: SectionHeaderProps) {
   return (
-    <div className={`text-center mb-16 ${className}`}>
-        <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-        >
-            <h2 className="text-gold-400 font-mono text-sm tracking-[0.3em] uppercase mb-3">
-                {subtitle}
-            </h2>
-            <h1 className="text-4xl md:text-6xl font-serif text-white font-bold tracking-tight">
-                {title}
-            </h1>
-            <div className="mt-6 h-1 w-24 bg-gradient-to-r from-gold-600 via-gold-400 to-gold-600 mx-auto rounded-full" />
-        </motion.div>
+    <div className={`mb-16 text-center ${className}`}>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="text-gold-400 mb-3 font-mono text-sm tracking-[0.3em] uppercase">
+          {subtitle}
+        </h2>
+        <h1 className="font-serif text-4xl font-bold tracking-tight text-white md:text-6xl">
+          {title}
+        </h1>
+        <div className="from-gold-600 via-gold-400 to-gold-600 mx-auto mt-6 h-1 w-24 rounded-full bg-gradient-to-r" />
+      </motion.div>
     </div>
   );
 }

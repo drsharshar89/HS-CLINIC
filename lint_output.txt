@@ -1,0 +1,74 @@
+
+> hs-clinic-website@0.1.0 lint
+> eslint .
+
+
+F:\HS CLINIC\src\app\components\Layout.tsx
+  2:10  error  'Helmet' is defined but never used  @typescript-eslint/no-unused-vars
+
+F:\HS CLINIC\src\app\components\figma\ImageWithFallback.tsx
+  21:9  error  Redundant alt attribute. Screen-readers already announce `img` tags as an image. You don’t need to use the words `image`, `photo,` or `picture` (or any specified custom words) in the alt prop  jsx-a11y/img-redundant-alt
+
+F:\HS CLINIC\src\app\components\tourism\BeforeAfterSlider.tsx
+  49:20  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\HS CLINIC\src\app\components\tourism\BeforeAfterSlider.tsx:49:20
+  47 |             alt="Before treatment"
+  48 |             className="absolute inset-0 w-full h-full object-cover"
+> 49 |             style={{ minWidth: containerRef.current?.offsetWidth || '100%' }}
+     |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  50 |             loading="lazy"
+  51 |           />
+  52 |         </div>  react-hooks/refs
+  49:32  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\HS CLINIC\src\app\components\tourism\BeforeAfterSlider.tsx:49:32
+  47 |             alt="Before treatment"
+  48 |             className="absolute inset-0 w-full h-full object-cover"
+> 49 |             style={{ minWidth: containerRef.current?.offsetWidth || '100%' }}
+     |                                ^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  50 |             loading="lazy"
+  51 |           />
+  52 |         </div>                           react-hooks/refs
+  49:32  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\HS CLINIC\src\app\components\tourism\BeforeAfterSlider.tsx:49:32
+  47 |             alt="Before treatment"
+  48 |             className="absolute inset-0 w-full h-full object-cover"
+> 49 |             style={{ minWidth: containerRef.current?.offsetWidth || '100%' }}
+     |                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  50 |             loading="lazy"
+  51 |           />
+  52 |         </div>              react-hooks/refs
+  49:32  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\HS CLINIC\src\app\components\tourism\BeforeAfterSlider.tsx:49:32
+  47 |             alt="Before treatment"
+  48 |             className="absolute inset-0 w-full h-full object-cover"
+> 49 |             style={{ minWidth: containerRef.current?.offsetWidth || '100%' }}
+     |                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  50 |             loading="lazy"
+  51 |           />
+  52 |         </div>    react-hooks/refs
+
+F:\HS CLINIC\src\app\components\tourism\ConsultationForm.tsx
+   76:31  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                    react/no-unescaped-entities
+  139:17  error  Visible, non-interactive elements with click handlers must have at least one keyboard listener                                                                                                     jsx-a11y/click-events-have-key-events
+  139:17  error  Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element  jsx-a11y/no-static-element-interactions
+
+F:\HS CLINIC\src\app\components\ui\card.tsx
+  32:10  error  Headings must have content and the content must be accessible by a screen reader  jsx-a11y/heading-has-content
+
+F:\HS CLINIC\src\app\components\ui\pagination.tsx
+  40:5  error  Anchors must have content and the content must be accessible by a screen reader  jsx-a11y/anchor-has-content
+
+✖ 11 problems (11 errors, 0 warnings)
+

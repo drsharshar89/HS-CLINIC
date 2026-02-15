@@ -79,17 +79,17 @@
 }
 
 @theme inline {
-  --color-gold-50: #FDF9EE;
-  --color-gold-100: #F7EFD3;
-  --color-gold-200: #F0E2AB;
-  --color-gold-300: #E5CE7B;
-  --color-gold-400: #D9B94E;
-  --color-gold-500: #C9A227;
-  --color-gold-600: #A0832A;
-  --color-gold-700: #7D6522;
-  --color-gold-800: #5C4A1A;
-  --color-gold-900: #3A2E12;
-  --color-gold-950: #1C1508;
+  --color-gold-50: #fdf9ee;
+  --color-gold-100: #f7efd3;
+  --color-gold-200: #f0e2ab;
+  --color-gold-300: #e5ce7b;
+  --color-gold-400: #d9b94e;
+  --color-gold-500: #c9a227;
+  --color-gold-600: #a0832a;
+  --color-gold-700: #7d6522;
+  --color-gold-800: #5c4a1a;
+  --color-gold-900: #3a2e12;
+  --color-gold-950: #1c1508;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

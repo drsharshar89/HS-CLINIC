@@ -3,15 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta
       name="description"
       content="Dr. Haitham Sharshar Dental Clinic - The leading specialized center for Digital Dental Occlusion, TMJ treatment, and Cosmetic Dentistry in the Middle East."
     />
-    <title>Dental Professional Website</title>
+    <title>Dr. Haitham Sharshar | Digital Occlusion & Cosmetic Dentistry | Cairo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600;700&display=swap" />
   </head>
 
   <body>
     <div id="root"></div>
+    <!-- SAFETY NET: Catch silent module evaluation crashes that cause blank pages.
+         Without this, a crashing ES module produces NO console output — just a blank page.
+         See _AGENT_COORD/VITE_CONFIG_RULES.md for the full root cause analysis. -->
+    <script>
+      window.addEventListener('error', function(e) {
+        if (document.getElementById('root') && document.getElementById('root').children.length === 0) {
+          document.getElementById('root').innerHTML =
+            '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0a0a0a;color:#ef4444;font-family:monospace;padding:2rem;text-align:center">' +
+            '<div><h1 style="font-size:1.5rem;margin-bottom:1rem">⚠ Application Failed to Load</h1>' +
+            '<pre style="background:#1a1a1a;padding:1rem;border-radius:0.5rem;max-width:600px;overflow:auto;text-align:left;font-size:0.875rem;color:#fca5a5">' +
+            e.message + '</pre>' +
+            '<p style="color:#666;margin-top:1rem;font-size:0.75rem">Check browser console for details</p></div></div>';
+        }
+      });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

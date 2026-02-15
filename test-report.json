@@ -1,0 +1,150 @@
+﻿{
+  "config": {
+    "configFile": "F:\\HS CLINIC\\playwright.config.ts",
+    "rootDir": "F:/HS CLINIC/e2e",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "F:/HS CLINIC/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "F:/HS CLINIC/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [["json"]],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 16,
+    "webServer": {
+      "command": "npm run dev",
+      "url": "http://localhost:5173",
+      "reuseExistingServer": true,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "pages.spec.ts",
+      "file": "pages.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Digital Smile Design Page",
+          "file": "pages.spec.ts",
+          "line": 41,
+          "column": 6,
+          "specs": [
+            {
+              "title": "renders DSD content",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 5544,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('body')\nTimeout: 5000ms\nExpected pattern: \u001b[32m/luxarian/i\u001b[39m\nReceived string:  \u001b[31m\"\u001b[39m\n\u001b[31m    Skip to contentDR. SHARSHARDigital OcclusionHomeAboutServicesTechnologySmile DesignDental TourismContactOpen main menuBook ConsultationBefore & AfterThe Split RealityWitness the transformation ΓÇö from scientific blueprint to artistic masterpiece.The ProcessProject TimelineVideo AnalysisComprehensive video analysis, skeletal-fascial identity.2D DesignDesign a plan and blueprint design.3D MockupHyper-fashion, tooth and scanner.Final Try-inPerfects mirror to perfect your smile.Mathematical BeautyGoldenProportionEvery smile we design follows the timeless principles of the Golden Ratio ΓÇö the same mathematical harmony found in nature's most beautiful structures. Precision down to 0.01mm.1.618Ratio0.01mmPrecision98.7%SymmetryStart Your DesignTHE DSD JOURNEY1. DIGITAL CAPTURE & ANALYSISWe utilize advanced 3D imaging to map your unique facial structure and dental anatomy with micron-level accuracy.2. PRECISION PLANNINGA bespoke gold-standard blueprint is meticulously crafted, combining facial aesthetics with dental function.3. FINAL TRANSFORMATIONExperience the seamless realization of your dream smile, expertly crafted and delivered with exceptional artistry.Explore the Full ProcessDR. SHARSHARPioneering the future of digital dentistry in the Middle East. Precision, technology, and art combined.Contact+20 123 456 7890clinic@drhaithamsharshar.comCairo, EgyptQuick LinksHomeAboutServicesTechnologySmile DesignDental TourismContact┬⌐ 2026 Dr. Haitham Sharshar. SYSTEM: ONLINE.┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖\u001b[39m\n\u001b[31m\"\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('body')\u001b[22m\n\u001b[2m    2 ├ù locator resolved to <body>ΓÇª</body>\u001b[22m\n\u001b[2m      - unexpected value \"\u001b[22m\n\u001b[2m    Skip to contentDR. SHARSHARDigital OcclusionHomeAboutServicesTechnologySmile DesignDental TourismContactOpen main menuDR. SHARSHARPioneering the future of digital dentistry in the Middle East. Precision, technology, and art combined.Contact+20 123 456 7890clinic@drhaithamsharshar.comCairo, EgyptQuick LinksHomeAboutServicesTechnologySmile DesignDental TourismContact┬⌐ 2026 Dr. Haitham Sharshar. SYSTEM: ONLINE.\u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m  \u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m\"\u001b[22m\n\u001b[2m    7 ├ù locator resolved to <body>ΓÇª</body>\u001b[22m\n\u001b[2m      - unexpected value \"\u001b[22m\n\u001b[2m    Skip to contentDR. SHARSHARDigital OcclusionHomeAboutServicesTechnologySmile DesignDental TourismContactOpen main menuBook ConsultationBefore & AfterThe Split RealityWitness the transformation ΓÇö from scientific blueprint to artistic masterpiece.The ProcessProject TimelineVideo AnalysisComprehensive video analysis, skeletal-fascial identity.2D DesignDesign a plan and blueprint design.3D MockupHyper-fashion, tooth and scanner.Final Try-inPerfects mirror to perfect your smile.Mathematical BeautyGoldenProportionEvery smile we design follows the timeless principles of the Golden Ratio ΓÇö the same mathematical harmony found in nature's most beautiful structures. Precision down to 0.01mm.1.618Ratio0.01mmPrecision98.7%SymmetryStart Your DesignTHE DSD JOURNEY1. DIGITAL CAPTURE & ANALYSISWe utilize advanced 3D imaging to map your unique facial structure and dental anatomy with micron-level accuracy.2. PRECISION PLANNINGA bespoke gold-standard blueprint is meticulously crafted, combining facial aesthetics with dental function.3. FINAL TRANSFORMATIONExperience the seamless realization of your dream smile, expertly crafted and delivered with exceptional artistry.Explore the Full ProcessDR. SHARSHARPioneering the future of digital dentistry in the Middle East. Precision, technology, and art combined.Contact+20 123 456 7890clinic@drhaithamsharshar.comCairo, EgyptQuick LinksHomeAboutServicesTechnologySmile DesignDental TourismContact┬⌐ 2026 Dr. Haitham Sharshar. SYSTEM: ONLINE.\u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m  \u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('body')\nTimeout: 5000ms\nExpected pattern: \u001b[32m/luxarian/i\u001b[39m\nReceived string:  \u001b[31m\"\u001b[39m\n\u001b[31m    Skip to contentDR. SHARSHARDigital OcclusionHomeAboutServicesTechnologySmile DesignDental TourismContactOpen main menuBook ConsultationBefore & AfterThe Split RealityWitness the transformation ΓÇö from scientific blueprint to artistic masterpiece.The ProcessProject TimelineVideo AnalysisComprehensive video analysis, skeletal-fascial identity.2D DesignDesign a plan and blueprint design.3D MockupHyper-fashion, tooth and scanner.Final Try-inPerfects mirror to perfect your smile.Mathematical BeautyGoldenProportionEvery smile we design follows the timeless principles of the Golden Ratio ΓÇö the same mathematical harmony found in nature's most beautiful structures. Precision down to 0.01mm.1.618Ratio0.01mmPrecision98.7%SymmetryStart Your DesignTHE DSD JOURNEY1. DIGITAL CAPTURE & ANALYSISWe utilize advanced 3D imaging to map your unique facial structure and dental anatomy with micron-level accuracy.2. PRECISION PLANNINGA bespoke gold-standard blueprint is meticulously crafted, combining facial aesthetics with dental function.3. FINAL TRANSFORMATIONExperience the seamless realization of your dream smile, expertly crafted and delivered with exceptional artistry.Explore the Full ProcessDR. SHARSHARPioneering the future of digital dentistry in the Middle East. Precision, technology, and art combined.Contact+20 123 456 7890clinic@drhaithamsharshar.comCairo, EgyptQuick LinksHomeAboutServicesTechnologySmile DesignDental TourismContact┬⌐ 2026 Dr. Haitham Sharshar. SYSTEM: ONLINE.┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖\u001b[39m\n\u001b[31m\"\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('body')\u001b[22m\n\u001b[2m    2 ├ù locator resolved to <body>ΓÇª</body>\u001b[22m\n\u001b[2m      - unexpected value \"\u001b[22m\n\u001b[2m    Skip to contentDR. SHARSHARDigital OcclusionHomeAboutServicesTechnologySmile DesignDental TourismContactOpen main menuDR. SHARSHARPioneering the future of digital dentistry in the Middle East. Precision, technology, and art combined.Contact+20 123 456 7890clinic@drhaithamsharshar.comCairo, EgyptQuick LinksHomeAboutServicesTechnologySmile DesignDental TourismContact┬⌐ 2026 Dr. Haitham Sharshar. SYSTEM: ONLINE.\u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m  \u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m\"\u001b[22m\n\u001b[2m    7 ├ù locator resolved to <body>ΓÇª</body>\u001b[22m\n\u001b[2m      - unexpected value \"\u001b[22m\n\u001b[2m    Skip to contentDR. SHARSHARDigital OcclusionHomeAboutServicesTechnologySmile DesignDental TourismContactOpen main menuBook ConsultationBefore & AfterThe Split RealityWitness the transformation ΓÇö from scientific blueprint to artistic masterpiece.The ProcessProject TimelineVideo AnalysisComprehensive video analysis, skeletal-fascial identity.2D DesignDesign a plan and blueprint design.3D MockupHyper-fashion, tooth and scanner.Final Try-inPerfects mirror to perfect your smile.Mathematical BeautyGoldenProportionEvery smile we design follows the timeless principles of the Golden Ratio ΓÇö the same mathematical harmony found in nature's most beautiful structures. Precision down to 0.01mm.1.618Ratio0.01mmPrecision98.7%SymmetryStart Your DesignTHE DSD JOURNEY1. DIGITAL CAPTURE & ANALYSISWe utilize advanced 3D imaging to map your unique facial structure and dental anatomy with micron-level accuracy.2. PRECISION PLANNINGA bespoke gold-standard blueprint is meticulously crafted, combining facial aesthetics with dental function.3. FINAL TRANSFORMATIONExperience the seamless realization of your dream smile, expertly crafted and delivered with exceptional artistry.Explore the Full ProcessDR. SHARSHARPioneering the future of digital dentistry in the Middle East. Precision, technology, and art combined.Contact+20 123 456 7890clinic@drhaithamsharshar.comCairo, EgyptQuick LinksHomeAboutServicesTechnologySmile DesignDental TourismContact┬⌐ 2026 Dr. Haitham Sharshar. SYSTEM: ONLINE.\u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m  \u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m\"\u001b[22m\n\n    at F:\\HS CLINIC\\e2e\\pages.spec.ts:44:40",
+                        "location": {
+                          "file": "F:\\HS CLINIC\\e2e\\pages.spec.ts",
+                          "column": 40,
+                          "line": 44
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 42 |\u001b[39m   test(\u001b[32m'renders DSD content'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m 43 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/digital-smile-design'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 44 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'body'\u001b[39m))\u001b[33m.\u001b[39mtoContainText(\u001b[35m/luxarian/i\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 45 |\u001b[39m     \u001b[90m// Has hero image\u001b[39m\n \u001b[90m 46 |\u001b[39m     \u001b[36mconst\u001b[39m images \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'img'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 47 |\u001b[39m     \u001b[36mawait\u001b[39m expect(images\u001b[33m.\u001b[39mfirst())\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "F:\\HS CLINIC\\e2e\\pages.spec.ts",
+                            "column": 40,
+                            "line": 44
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('body')\nTimeout: 5000ms\nExpected pattern: \u001b[32m/luxarian/i\u001b[39m\nReceived string:  \u001b[31m\"\u001b[39m\n\u001b[31m    Skip to contentDR. SHARSHARDigital OcclusionHomeAboutServicesTechnologySmile DesignDental TourismContactOpen main menuBook ConsultationBefore & AfterThe Split RealityWitness the transformation ΓÇö from scientific blueprint to artistic masterpiece.The ProcessProject TimelineVideo AnalysisComprehensive video analysis, skeletal-fascial identity.2D DesignDesign a plan and blueprint design.3D MockupHyper-fashion, tooth and scanner.Final Try-inPerfects mirror to perfect your smile.Mathematical BeautyGoldenProportionEvery smile we design follows the timeless principles of the Golden Ratio ΓÇö the same mathematical harmony found in nature's most beautiful structures. Precision down to 0.01mm.1.618Ratio0.01mmPrecision98.7%SymmetryStart Your DesignTHE DSD JOURNEY1. DIGITAL CAPTURE & ANALYSISWe utilize advanced 3D imaging to map your unique facial structure and dental anatomy with micron-level accuracy.2. PRECISION PLANNINGA bespoke gold-standard blueprint is meticulously crafted, combining facial aesthetics with dental function.3. FINAL TRANSFORMATIONExperience the seamless realization of your dream smile, expertly crafted and delivered with exceptional artistry.Explore the Full ProcessDR. SHARSHARPioneering the future of digital dentistry in the Middle East. Precision, technology, and art combined.Contact+20 123 456 7890clinic@drhaithamsharshar.comCairo, EgyptQuick LinksHomeAboutServicesTechnologySmile DesignDental TourismContact┬⌐ 2026 Dr. Haitham Sharshar. SYSTEM: ONLINE.┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖\u001b[39m\n\u001b[31m\"\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('body')\u001b[22m\n\u001b[2m    2 ├ù locator resolved to <body>ΓÇª</body>\u001b[22m\n\u001b[2m      - unexpected value \"\u001b[22m\n\u001b[2m    Skip to contentDR. SHARSHARDigital OcclusionHomeAboutServicesTechnologySmile DesignDental TourismContactOpen main menuDR. SHARSHARPioneering the future of digital dentistry in the Middle East. Precision, technology, and art combined.Contact+20 123 456 7890clinic@drhaithamsharshar.comCairo, EgyptQuick LinksHomeAboutServicesTechnologySmile DesignDental TourismContact┬⌐ 2026 Dr. Haitham Sharshar. SYSTEM: ONLINE.\u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m  \u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m\"\u001b[22m\n\u001b[2m    7 ├ù locator resolved to <body>ΓÇª</body>\u001b[22m\n\u001b[2m      - unexpected value \"\u001b[22m\n\u001b[2m    Skip to contentDR. SHARSHARDigital OcclusionHomeAboutServicesTechnologySmile DesignDental TourismContactOpen main menuBook ConsultationBefore & AfterThe Split RealityWitness the transformation ΓÇö from scientific blueprint to artistic masterpiece.The ProcessProject TimelineVideo AnalysisComprehensive video analysis, skeletal-fascial identity.2D DesignDesign a plan and blueprint design.3D MockupHyper-fashion, tooth and scanner.Final Try-inPerfects mirror to perfect your smile.Mathematical BeautyGoldenProportionEvery smile we design follows the timeless principles of the Golden Ratio ΓÇö the same mathematical harmony found in nature's most beautiful structures. Precision down to 0.01mm.1.618Ratio0.01mmPrecision98.7%SymmetryStart Your DesignTHE DSD JOURNEY1. DIGITAL CAPTURE & ANALYSISWe utilize advanced 3D imaging to map your unique facial structure and dental anatomy with micron-level accuracy.2. PRECISION PLANNINGA bespoke gold-standard blueprint is meticulously crafted, combining facial aesthetics with dental function.3. FINAL TRANSFORMATIONExperience the seamless realization of your dream smile, expertly crafted and delivered with exceptional artistry.Explore the Full ProcessDR. SHARSHARPioneering the future of digital dentistry in the Middle East. Precision, technology, and art combined.Contact+20 123 456 7890clinic@drhaithamsharshar.comCairo, EgyptQuick LinksHomeAboutServicesTechnologySmile DesignDental TourismContact┬⌐ 2026 Dr. Haitham Sharshar. SYSTEM: ONLINE.\u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m    \u001b[22m\n\u001b[2m  \u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m\"\u001b[22m\n\n\n  42 |   test('renders DSD content', async ({ page }) => {\n  43 |     await page.goto('/digital-smile-design');\n> 44 |     await expect(page.locator('body')).toContainText(/luxarian/i);\n     |                                        ^\n  45 |     // Has hero image\n  46 |     const images = page.locator('img');\n  47 |     await expect(images.first()).toBeVisible();\n    at F:\\HS CLINIC\\e2e\\pages.spec.ts:44:40"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-02-15T10:19:30.833Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "F:\\HS CLINIC\\test-results\\pages-Digital-Smile-Design-Page-renders-DSD-content-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "F:\\HS CLINIC\\test-results\\pages-Digital-Smile-Design-Page-renders-DSD-content-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "F:\\HS CLINIC\\e2e\\pages.spec.ts",
+                        "column": 40,
+                        "line": 44
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "9bb6bb2ed574bebb3c58-c7a7da83254bc726822a",
+              "file": "pages.spec.ts",
+              "line": 42,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-02-15T10:19:27.332Z",
+    "duration": 10244.649000000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}
