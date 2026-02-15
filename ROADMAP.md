@@ -28,26 +28,27 @@
 **Owners:** DEV + SAN (parallel)
 
 ### DEV Track
-- [ ] Home page — hero section, services preview, testimonials
-- [ ] About page — doctor bio, clinic info, team section
-- [ ] Services page — service cards with detailed descriptions
-- [ ] Technology page — digital dentistry features
-- [ ] Dental Tourism page — pricing table, FAQ, consultation form, 3D scene
-- [ ] Contact page — form, map, clinic details
+- [x] Home page — hero section, services preview, CTA
+- [x] About page — doctor bio, clinic info, credentials
+- [x] Services page — service cards with detailed descriptions
+- [x] Technology page — digital dentistry features
+- [x] Digital Smile Design page — 4K Stitch designs, DSD journey, golden proportion
+- [x] Dental Tourism page — pricing table, FAQ, consultation form, 3D scene
+- [x] Contact page — form, map, clinic details
 - [ ] Responsive design audit — all pages on mobile/tablet/desktop
 - [ ] Animation polish — framer-motion transitions between pages
 
 ### SAN Track
-- [ ] Verify all 9 schemas are production-ready
+- [x] Verify all 8 schemas are production-ready
 - [ ] Populate sample content in Sanity Studio
-- [ ] Connect frontend pages to CMS data via `useSanityQuery`
-- [ ] Image optimization pipeline via `@sanity/image-url`
-- [ ] Sanity Studio embed at `/studio` route
+- [x] Connect frontend pages to CMS data via `useCmsData.ts` (7 hooks, fallback-first)
+- [x] Image optimization pipeline via `useSanityImage` hook
+- [x] Sanity Studio embed at `/studio` route
 
 ### Contract Sync (ORC validates)
 - [x] `src/types/sanity.ts` matches all Studio schemas exactly
-- [ ] GROQ queries return expected shape — ⚠️ **blocked: no pages use `useSanityQuery` yet** (REQ-003 filed)
-- [ ] Image URLs resolve correctly — ⚠️ **blocked: no pages use `urlFor` yet**
+- [x] GROQ queries return expected shape — all 7 hooks validated
+- [x] Image URLs resolve correctly — `useSanityImage` in Hero + About
 
 **QC Gate:** `npm run build` ✅ | `npm run lint` ✅ | All pages render with CMS data
 

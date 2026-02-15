@@ -97,17 +97,19 @@ export function VIPWelcome() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="flex gap-8"
+              className="flex flex-wrap gap-6 sm:gap-8"
             >
-              <div>
+              <div className="text-center sm:text-left">
                 <p className="text-gold-400 font-serif text-3xl">500+</p>
                 <p className="mt-1 font-mono text-xs text-gray-500">INTERNATIONAL PATIENTS</p>
               </div>
-              <div className="border-l border-white/10 pl-8">
+              <div className="hidden border-l border-white/10 sm:block" />
+              <div className="text-center sm:text-left">
                 <p className="text-gold-400 font-serif text-3xl">24/7</p>
                 <p className="mt-1 font-mono text-xs text-gray-500">CONCIERGE ACCESS</p>
               </div>
-              <div className="border-l border-white/10 pl-8">
+              <div className="hidden border-l border-white/10 sm:block" />
+              <div className="text-center sm:text-left">
                 <p className="text-gold-400 font-serif text-3xl">15+</p>
                 <p className="mt-1 font-mono text-xs text-gray-500">COUNTRIES SERVED</p>
               </div>

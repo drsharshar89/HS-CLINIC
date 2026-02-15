@@ -112,14 +112,14 @@ export default function DigitalSmileDesign() {
 
         {/* CTA overlay bottom-center */}
         <motion.div
-          className="absolute bottom-12 left-1/2 z-10 -translate-x-1/2"
+          className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 sm:bottom-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.6 }}
         >
           <Link
             to="/contact"
-            className="bg-gold-400 hover:bg-gold-500 text-dark-950 shadow-gold-400/20 inline-flex items-center gap-3 rounded-sm px-8 py-4 text-sm font-semibold tracking-[0.15em] uppercase shadow-lg transition-all duration-300 hover:scale-105"
+            className="bg-gold-400 hover:bg-gold-500 text-dark-950 shadow-gold-400/20 inline-flex items-center gap-2 rounded-sm px-5 py-3 text-xs font-semibold tracking-[0.15em] uppercase shadow-lg transition-all duration-300 hover:scale-105 sm:gap-3 sm:px-8 sm:py-4 sm:text-sm"
           >
             Book Consultation
             <ArrowRight className="h-4 w-4" />

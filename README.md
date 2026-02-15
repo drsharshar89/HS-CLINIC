@@ -81,11 +81,12 @@ public/
 ## Key Architecture Decisions
 
 1. **All route components are lazy-loaded** via `React.lazy()` in `routes.tsx`
-2. **Three.js is in a separate chunk** via `manualChunks` in `vite.config.ts`
-3. **Images must be WebP** — no JPG/PNG in `public/images/`
-4. **Fonts loaded via `<link>` in `index.html`** — never use CSS `@import` for fonts
-5. **Path aliases** — always use `@/` prefix for imports (maps to `src/`)
-6. **No polyfills in `index.html`** — Vite handles `process.env` and `global` via config
+2. **Three.js is automatically code-split** by Vite's lazy import system (~941KB isolated chunk)
+3. **Do NOT add `manualChunks` to `vite.config.ts`** — it caused blank pages in production (see `_AGENT_COORD/VITE_CONFIG_RULES.md`)
+4. **Images must be WebP** — no JPG/PNG in `public/images/`
+5. **Fonts loaded via `<link>` in `index.html`** — never use CSS `@import` for fonts
+6. **Path aliases** — always use `@/` prefix for imports (maps to `src/`)
+7. **No `define` polyfills in `vite.config.ts`** — `process.env` and `global` shims were removed (they broke libraries)
 
 ---
 

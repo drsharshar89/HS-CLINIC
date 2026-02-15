@@ -1,6 +1,0 @@
-﻿
-F:\HS CLINIC\src\app\components\figma\ImageWithFallback.tsx
-  21:9  error  Redundant alt attribute. Screen-readers already announce `img` tags as an image. You donΓÇÖt need to use the words `image`, `photo,` or `picture` (or any specified custom words) in the alt prop  jsx-a11y/img-redundant-alt
-
-Γ£û 1 problem (1 error, 0 warnings)
-

@@ -11,7 +11,7 @@
 | Layer | Technology | Notes |
 |-------|-----------|-------|
 | **Framework** | React 18.3 + Vite 6.3 | SPA, client-side routing |
-| **Routing** | react-router-dom v6 | 6 public routes + `/studio` |
+| **Routing** | react-router-dom v6 | 8 public routes + `/studio` |
 | **Styling** | Tailwind CSS 4.1 + custom CSS vars | Dark-mode only, gold accent palette |
 | **State** | Local `useState` only | No global store |
 | **CMS** | Sanity.io (8 schemas) | Client + hooks exist, **zero pages fetch CMS data** |
@@ -25,20 +25,21 @@
 ### Route Map
 
 ```
-/                → Home (CyberHero + ClinicalSimulation + Features + CTA)
-/about           → About (Bio, Values, Credentials)
-/services        → Services (6 services, Conditions, Process Timeline)
-/technology      → Technology (6 tech cards, Hero image, Stats)
-/dental-tourism  → DentalTourism (Hero+3D, Before/After, Why, Services, Pricing, Reviews, Timeline, FAQ, Form, CTA)
-/contact         → Contact (Appointment form, Contact info, Map placeholder)
-/studio          → SanityStudio (CMS admin — outside Layout)
+/                        → Home (CyberHero + ClinicalSimulation + Features + CTA)
+/about                   → About (Bio, Values, Credentials)
+/services                → Services (6 services, Conditions, Process Timeline)
+/technology              → Technology (6 tech cards, Hero image, Stats)
+/digital-smile-design    → DigitalSmileDesign (4K Stitch heroes, Timeline, Golden Proportion, DSD Journey)
+/dental-tourism          → DentalTourism (Hero+3D, Before/After, Why, Services, Pricing, Reviews, Timeline, FAQ, Form, CTA)
+/contact                 → Contact (Appointment form, Contact info, Map placeholder)
+/studio                  → SanityStudio (CMS admin — outside Layout)
 ```
 
 ### Component Inventory
 
 | Category | Count |
 |----------|-------|
-| Page components | 6 |
+| Page components | 8 |
 | Custom components | 10 (CyberHero, ClinicalSimulation, GlowCard, SectionHeader, ErrorBoundary, Layout, BeforeAfterSlider, WhyHSClinic, ServicesGrid, FAQAccordion, ConsultationForm) |
 | shadcn/ui primitives | ~30 (most unused) |
 | Tourism sub-components | 6 |
@@ -118,10 +119,10 @@ Both `Contact.tsx` and `ConsultationForm.tsx` do `console.log` only — no Netli
 - [ ] Add favicon
 
 ### 🟠 P1 — SEO & Accessibility Sprint
-- [ ] JSON-LD structured data on all pages
-- [ ] `<link rel="canonical">` on all pages
-- [ ] Open Graph + Twitter meta tags
-- [ ] Skip-to-content link + `aria-expanded`
+- [x] JSON-LD structured data on all pages
+- [x] `<link rel="canonical">` on all pages
+- [x] Open Graph + Twitter meta tags
+- [x] Skip-to-content link + `aria-expanded`
 - [ ] Color contrast audit
 - [ ] `hreflang` for international targeting
 

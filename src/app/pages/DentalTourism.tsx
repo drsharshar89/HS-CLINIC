@@ -326,7 +326,7 @@ export default function DentalTourism() {
             {[...reviews, ...reviews].map((review, i) => (
               <div
                 key={i}
-                className="bg-dark-900/60 w-[380px] flex-shrink-0 rounded-2xl border border-white/5 p-6 backdrop-blur-md"
+                className="bg-dark-900/60 w-[280px] flex-shrink-0 rounded-2xl border border-white/5 p-6 backdrop-blur-md sm:w-[380px]"
               >
                 <div className="mb-4 flex gap-1">
                   {Array.from({ length: review.stars }).map((_, j) => (
@@ -353,9 +353,9 @@ export default function DentalTourism() {
           {timelineSteps.map((step, i) => (
             <div
               key={i}
-              className="bg-dark-900/50 flex gap-6 rounded-2xl border border-white/5 p-6"
+              className="bg-dark-900/50 flex flex-col gap-4 rounded-2xl border border-white/5 p-6 sm:flex-row sm:gap-6"
             >
-              <div className="bg-gold-400/10 flex h-12 w-12 items-center justify-center rounded-lg">
+              <div className="bg-gold-400/10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg">
                 <step.icon className="text-gold-400 h-6 w-6" />
               </div>
               <div>

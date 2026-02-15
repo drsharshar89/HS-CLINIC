@@ -38,7 +38,10 @@ Only these packages should be in `package.json`. If you need something not on th
 | `tailwindcss` / `@tailwindcss/vite` | CSS framework (v4) |
 | `typescript` / `typescript-eslint` | Type checking |
 | `eslint` / `eslint-plugin-react` / `eslint-plugin-react-hooks` / `eslint-plugin-jsx-a11y` | Linting |
-| `prettier` | Code formatting |
+| `prettier` / `prettier-plugin-tailwindcss` | Code formatting + Tailwind class sorting |
+| `vitest` / `jsdom` / `@testing-library/react` / `@testing-library/dom` / `@testing-library/jest-dom` | Unit testing |
+| `@playwright/test` | End-to-end browser testing |
+| `husky` / `lint-staged` | Pre-commit (lint+format) and pre-push (build+test) hooks |
 | `@types/react` / `@types/react-dom` (^18.x) | TypeScript types — **must match React 18, not 19** |
 | `globals` / `@eslint/js` | ESLint config helpers |
 
@@ -95,8 +98,9 @@ Only these packages should be in `package.json`. If you need something not on th
 
 ## Build & Bundle Rules
 
-- **Three.js isolation:** Always keep `manualChunks` in `vite.config.ts` splitting three/fiber/drei
-- **No polyfills in `index.html`:** Vite's `define` config handles `process.env` and `global`
+- **Three.js isolation:** Vite automatically code-splits Three.js via lazy imports (~941KB chunk). Do **NOT** add `manualChunks` — it caused blank pages in production
+- **No `define` polyfills in `vite.config.ts`:** The `process.env` and `global` shims were removed because they broke libraries. See `_AGENT_COORD/VITE_CONFIG_RULES.md`
+- **Any change to `vite.config.ts`** requires a PROPOSAL in `_AGENT_COORD/PROPOSALS/` + user approval
 - **Fonts:** Loaded via `<link rel="preconnect">` in `index.html` — never CSS `@import`
 - **Import aliases:** Always use `@/` prefix (resolves to `src/`)
 

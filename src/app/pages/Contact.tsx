@@ -148,7 +148,7 @@ export function Contact() {
                       className="bg-dark-950 focus:border-gold-400 focus:ring-gold-400 w-full rounded border border-white/10 px-4 py-3 text-white transition-all outline-none placeholder:text-gray-700 focus:ring-1"
                     />
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
                       <label htmlFor="contact-email" className="sr-only">
                         Email Address
@@ -182,7 +182,7 @@ export function Contact() {
                       />
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
                       <label htmlFor="contact-date" className="sr-only">
                         Preferred Date
@@ -245,7 +245,7 @@ export function Contact() {
 
           {/* Visuals & Info */}
           <div className="space-y-8">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {contactInfo.map((info, index) => (
                 <div
                   key={index}

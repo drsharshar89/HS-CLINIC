@@ -1,6 +1,6 @@
 # Current Status — HS Clinic Website
 
-> Last updated: **2026-02-15 06:05** by Antigravity (SEO Phase)
+> Last updated: **2026-02-15 16:53** by Antigravity (CMS Wiring Complete + Netlify Forms)
 
 ---
 
@@ -19,21 +19,33 @@
 
 ## What's Working
 
-- **8 pages** routed and lazy-loaded: Home, About, Services, Technology, Digital Smile Design, Dental Tourism, Contact, Sanity Studio
+- **8 pages** routed and lazy-loaded:
+  1. Home (`/`)
+  2. About (`/about`)
+  3. Services (`/services`)
+  4. Technology (`/technology`)
+  5. Digital Smile Design (`/digital-smile-design`)
+  6. Dental Tourism (`/dental-tourism`)
+  7. Contact (`/contact`)
+  8. Sanity Studio (`/studio`)
 - **41 shadcn/ui components** in `src/app/components/ui/`
 - **7 tourism feature components** including 3D ImplantScene, ConsultationForm, FAQAccordion
-- **SEO & Metadata** — All 6 pages have OG tags, Twitter Cards, canonical URLs, meta descriptions via `src/lib/seo.ts`
+- **Digital Smile Design page** with 4K Stitch assets (Variant 1 + Variant 2)
+- **SEO & Metadata** — All 8 pages have OG tags, Twitter Cards, canonical URLs, meta descriptions via `src/lib/seo.ts`
 - **Structured Data** — `Dentist` JSON-LD on Home, `Person` JSON-LD on About
-- **Sitemap** — All 7 public routes with `<lastmod>` dates
+- **Sitemap** — All 8 public routes with `<lastmod>` dates
 - **Accessibility** — Skip-to-content link, `aria-current` nav, ARIA-labeled forms, `:focus-visible` outlines
 - **Sanity CMS** configured with 8 schemas, `useSanityQuery` hook, and `sanityClient`
+- **CMS Data Hooks** — `src/hooks/useCmsData.ts` with 7 typed hooks (fallback-first pattern)
+- **All 7 pages wired to CMS** — Hero, Services, Testimonials, About, Tourism, Layout footer, Contact
 - **Sanity Studio** deployed at `https://hs-dental-clinic.sanity.studio/`
 - **Vite** build with Three.js correctly lazy-loaded (~941KB only on /dental-tourism)
 - **Netlify** deploy working with error safety net in `index.html`
 - **Vitest** test framework: 32 tests across 8 files
 - **Playwright E2E** test framework: 12 tests across 4 files
 - **Type-Schema Sync** verified: all 8 Sanity schemas match `src/types/sanity.ts`
-- **Agent Coordination** system active with 3 agents (ORC, DEV, SAN)
+- **QA Fortress** — Husky pre-commit (lint+format), pre-push (build+test)
+- **Guardian Safety Protocol** — 5-step workflow in `.agent/workflows/safety-protocol.md`
 - **VITE_CONFIG_RULES.md** prevents recurring blank page bug
 
 ---
@@ -42,13 +54,13 @@
 
 | Gap | Owner | Notes |
 |-----|-------|-------|
-| **No pages use `useSanityQuery`** | SAN | Hook exists but zero pages are wired to CMS data |
-| **No pages use `urlFor`** | SAN | Image URL builder exists but unused in any component |
+| ~~No pages use `useSanityQuery`~~ | ~~SAN~~ | ✅ **DONE** — All 7 pages wired via `useCmsData.ts` |
+| ~~No pages use `urlFor`~~ | ~~SAN~~ | ✅ **DONE** — `useSanityImage` used in Hero + About |
 | **No sample content in Sanity** | SAN | Schemas deployed but Studio has no content to fetch |
 | Responsive design audit | DEV | Not yet audited across mobile/tablet/desktop |
-| Animation polish | DEV | Page transitions not implemented |
+| ~~Contact form has no backend~~ | ~~DEV~~ | ✅ **DONE** — Both forms wired to Netlify Forms with honeypot spam protection |
 
-> ⚠️ **Phase 1 cannot close** until at least 1 page fetches live CMS data.
+> ✅ **Phase 1 CMS wiring complete.** Pages use fallback-first pattern — site works with defaults, CMS content overrides when published.
 
 ---
 
@@ -60,6 +72,8 @@
 | `/studio` route (REQ-002) | Added by SAN, retroactively filed | 2026-02-15 |
 | `SanityPage.body` type mismatch | Fixed to `(SanityBlock \| SanityImage)[]` | 2026-02-15 |
 | ConsultationForm test regex | Fixed `free consultation` → `free virtual consultation` | 2026-02-15 |
+| Stale docs (manualChunks reference) | Fixed README.md + DEVELOPMENT.md to match coding-rules.md | 2026-02-15 |
+| Missing DSD page in docs | Added Digital Smile Design to all doc files | 2026-02-15 |
 
 ---
 
@@ -67,9 +81,9 @@
 
 | # | Action | Owner | Priority |
 |---|--------|-------|----------|
-| 1 | Wire at least 1 page to CMS via `useSanityQuery` | SAN | HIGH |
+| 1 | ~~Wire at least 1 page to CMS~~ | ~~SAN~~ | ✅ DONE |
 | 2 | Populate sample content in Sanity Studio | SAN | HIGH |
-| 3 | Responsive design audit on all 7 pages | DEV | MEDIUM |
-| 4 | Populate `guidelines/Guidelines.md` with design tokens | ORC | MEDIUM |
-| 5 | SEO & Accessibility audit (Phase 2) | ORC | MEDIUM |
+| 3 | ~~Wire forms to Netlify Forms~~ | ~~DEV~~ | ✅ DONE |
+| 4 | Responsive design audit on all 8 pages | DEV | MEDIUM |
+| 5 | Performance audit (Lighthouse ≥ 90) | ORC | MEDIUM |
 | 6 | Add remaining Phase 3 tests (accessibility, Contact form) | ORC | LOW |

@@ -6,3 +6,16 @@ dist
 coverage
 .vscode
 _AGENT_COORD/
+
+# Build & test artifacts
+test-results/
+test-report.json
+lint_*.txt
+lint_*.json
+
+# System files
+*.swp
+Thumbs.db
+
+# Netlify local
+.netlify/
