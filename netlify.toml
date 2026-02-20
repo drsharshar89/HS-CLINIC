@@ -3,8 +3,11 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "22"
   NPM_FLAGS = "--legacy-peer-deps"
+  # SANITY_API_TOKEN is a server-side-only secret — never bundled into client JS.
+  # The Sanity client uses only VITE_SANITY_PROJECT_ID and VITE_SANITY_DATASET (public).
+  SECRETS_SCAN_OMIT_KEYS = "SANITY_API_TOKEN"
 
 [[redirects]]
   from = "/*"
