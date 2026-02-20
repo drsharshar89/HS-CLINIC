@@ -16,53 +16,54 @@ Only these packages should be in `package.json`. If you need something not on th
 
 ### Production Dependencies
 
-| Package | Purpose |
-|---------|---------|
-| `react` / `react-dom` (18.3) | Core framework |
-| `react-router-dom` (6.x) | Client-side routing |
-| `framer-motion` (11.x) | Animations and transitions |
-| `lucide-react` | Icon library |
-| `three` / `@react-three/fiber` / `@react-three/drei` | 3D implant scene on Dental Tourism page |
-| `@types/three` | TypeScript types for Three.js |
-| `react-helmet-async` | Per-page SEO meta tags |
-| `@radix-ui/react-*` | Headless UI primitives (used by shadcn/ui components) |
-| `class-variance-authority` | Component variant styling (shadcn/ui) |
-| `clsx` / `tailwind-merge` | CSS class utilities |
-| `@sanity/client` / `@sanity/image-url` | Sanity CMS data fetching |
+| Package                                              | Purpose                                               |
+| ---------------------------------------------------- | ----------------------------------------------------- |
+| `react` / `react-dom` (18.3)                         | Core framework                                        |
+| `react-router-dom` (6.x)                             | Client-side routing                                   |
+| `framer-motion` (11.x)                               | Animations and transitions                            |
+| `lucide-react`                                       | Icon library                                          |
+| `three` / `@react-three/fiber` / `@react-three/drei` | 3D implant scene on Dental Tourism page               |
+| `@types/three`                                       | TypeScript types for Three.js                         |
+| `react-helmet-async`                                 | Per-page SEO meta tags                                |
+| `@radix-ui/react-*`                                  | Headless UI primitives (used by shadcn/ui components) |
+| `class-variance-authority`                           | Component variant styling (shadcn/ui)                 |
+| `clsx` / `tailwind-merge`                            | CSS class utilities                                   |
+| `@sanity/client` / `@sanity/image-url`               | Sanity CMS data fetching                              |
+| `@portabletext/react`                                | Renders Sanity rich text (Portable Text) blocks       |
 
 ### Dev Dependencies
 
-| Package | Purpose |
-|---------|---------|
-| `vite` / `@vitejs/plugin-react` | Build tool |
-| `tailwindcss` / `@tailwindcss/vite` | CSS framework (v4) |
-| `typescript` / `typescript-eslint` | Type checking |
-| `eslint` / `eslint-plugin-react` / `eslint-plugin-react-hooks` / `eslint-plugin-jsx-a11y` | Linting |
-| `prettier` / `prettier-plugin-tailwindcss` | Code formatting + Tailwind class sorting |
-| `vitest` / `jsdom` / `@testing-library/react` / `@testing-library/dom` / `@testing-library/jest-dom` | Unit testing |
-| `@playwright/test` | End-to-end browser testing |
-| `husky` / `lint-staged` | Pre-commit (lint+format) and pre-push (build+test) hooks |
-| `@types/react` / `@types/react-dom` (^18.x) | TypeScript types — **must match React 18, not 19** |
-| `globals` / `@eslint/js` | ESLint config helpers |
+| Package                                                                                              | Purpose                                                  |
+| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| `vite` / `@vitejs/plugin-react`                                                                      | Build tool                                               |
+| `tailwindcss` / `@tailwindcss/vite`                                                                  | CSS framework (v4)                                       |
+| `typescript` / `typescript-eslint`                                                                   | Type checking                                            |
+| `eslint` / `eslint-plugin-react` / `eslint-plugin-react-hooks` / `eslint-plugin-jsx-a11y`            | Linting                                                  |
+| `prettier` / `prettier-plugin-tailwindcss`                                                           | Code formatting + Tailwind class sorting                 |
+| `vitest` / `jsdom` / `@testing-library/react` / `@testing-library/dom` / `@testing-library/jest-dom` | Unit testing                                             |
+| `@playwright/test`                                                                                   | End-to-end browser testing                               |
+| `husky` / `lint-staged`                                                                              | Pre-commit (lint+format) and pre-push (build+test) hooks |
+| `@types/react` / `@types/react-dom` (^18.x)                                                          | TypeScript types — **must match React 18, not 19**       |
+| `globals` / `@eslint/js`                                                                             | ESLint config helpers                                    |
 
 ---
 
 ## Forbidden Packages (Do NOT Install)
 
-| Package | Reason |
-|---------|--------|
-| `@mui/material`, `@mui/icons-material` | Wrong design system (we use Tailwind + Radix) |
-| `@emotion/react`, `@emotion/styled` | MUI dependency, not needed |
-| `styled-components` | We use Tailwind, not CSS-in-JS |
-| `next-themes`, `next/*` | Next.js packages — this is Vite |
-| `motion` (standalone) | Duplicate of `framer-motion` |
-| `react-slick`, `slick-carousel` | Use framer-motion for carousels |
-| `react-dnd`, `react-dnd-html5-backend` | No drag-and-drop needed |
-| `recharts`, `chart.js` | No charts on this site |
-| `@popperjs/core`, `react-popper` | Radix handles positioning |
-| `react-responsive-masonry` | Not needed |
-| `jQuery`, `bootstrap` | Incompatible with modern React |
-| `@types/react@^19` | React 18 app — types must be `@types/react@^18` |
+| Package                                | Reason                                          |
+| -------------------------------------- | ----------------------------------------------- |
+| `@mui/material`, `@mui/icons-material` | Wrong design system (we use Tailwind + Radix)   |
+| `@emotion/react`, `@emotion/styled`    | MUI dependency, not needed                      |
+| `styled-components`                    | We use Tailwind, not CSS-in-JS                  |
+| `next-themes`, `next/*`                | Next.js packages — this is Vite                 |
+| `motion` (standalone)                  | Duplicate of `framer-motion`                    |
+| `react-slick`, `slick-carousel`        | Use framer-motion for carousels                 |
+| `react-dnd`, `react-dnd-html5-backend` | No drag-and-drop needed                         |
+| `recharts`, `chart.js`                 | No charts on this site                          |
+| `@popperjs/core`, `react-popper`       | Radix handles positioning                       |
+| `react-responsive-masonry`             | Not needed                                      |
+| `jQuery`, `bootstrap`                  | Incompatible with modern React                  |
+| `@types/react@^19`                     | React 18 app — types must be `@types/react@^18` |
 
 ---
 
@@ -119,6 +120,7 @@ Only these packages should be in `package.json`. If you need something not on th
 ## Adding a New Shadcn/UI Component
 
 If you need a new shadcn/ui component:
+
 1. Check if it requires a new package (e.g., `cmdk` for command palette)
 2. Only install if the component will actually be used by a page/route
 3. Do NOT install shadcn/ui components "just in case"

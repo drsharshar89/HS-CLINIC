@@ -36,6 +36,32 @@ test.describe('Contact Page', () => {
     // Has WhatsApp or phone number
     await expect(page.locator('body')).toContainText(/WhatsApp|0599|contact/i);
   });
+
+  test('contact form submits and shows success state', async ({ page }) => {
+    await page.goto('/contact');
+
+    // Intercept POST to prevent actual network call (no Netlify Forms in dev)
+    await page.route('/', (route) => {
+      if (route.request().method() === 'POST') {
+        route.fulfill({ status: 200, body: 'OK' });
+      } else {
+        route.continue();
+      }
+    });
+
+    // Fill out the form
+    await page.fill('#contact-name', 'Test User');
+    await page.fill('#contact-email', 'test@example.com');
+    await page.fill('#contact-phone', '+201234567890');
+    await page.fill('#contact-date', '2026-03-01');
+    await page.selectOption('#contact-time', '09:00');
+
+    // Submit the form
+    await page.click('button[type="submit"]');
+
+    // Verify success state appears (the "TRANSMISSION RECEIVED" message)
+    await expect(page.locator('text=TRANSMISSION RECEIVED')).toBeVisible({ timeout: 5000 });
+  });
 });
 
 test.describe('Digital Smile Design Page', () => {
