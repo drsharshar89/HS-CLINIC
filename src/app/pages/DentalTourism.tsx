@@ -22,7 +22,7 @@ import { BeforeAfterSlider } from '@/app/components/tourism/BeforeAfterSlider';
 import { CuratedResidences } from '@/app/components/tourism/CuratedResidences';
 import { VIPWelcome } from '@/app/components/tourism/VIPWelcome';
 import { RoyalDentalJourney } from '@/app/components/tourism/RoyalDentalJourney';
-import { useTestimonials, useTourismPricing } from '@/hooks/useCmsData';
+import { useTestimonials, useTourismPricing, useFaqs } from '@/hooks/useCmsData';
 
 const DEFAULT_REVIEWS = [
   {
@@ -93,6 +93,7 @@ const timelineSteps = [
 export default function DentalTourism() {
   const { testimonials: cmsTestimonials } = useTestimonials();
   const { pricing: cmsPricing } = useTourismPricing();
+  const { faqs: cmsFaqs } = useFaqs();
 
   // Use CMS testimonials if available, otherwise hardcoded
   const reviews =
@@ -368,7 +369,7 @@ export default function DentalTourism() {
       </section>
 
       <CuratedResidences />
-      <FAQAccordion />
+      <FAQAccordion cmsFaqs={cmsFaqs} />
       <ConsultationForm />
 
       <section className="relative border-t border-white/5 px-4 py-32 text-center sm:px-6 lg:px-8">

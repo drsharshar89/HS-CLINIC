@@ -1,7 +1,20 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { ChevronDown, DollarSign, ShieldCheck, Clock, Package, UserCheck } from 'lucide-react';
+import {
+  ChevronDown,
+  DollarSign,
+  ShieldCheck,
+  Clock,
+  Package,
+  UserCheck,
+  HelpCircle,
+} from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import type { CmsFaq } from '@/hooks/useCmsData';
+
+interface FAQAccordionProps {
+  cmsFaqs?: CmsFaq[];
+}
 
 const faqs = [
   {
@@ -36,18 +49,41 @@ const faqs = [
   },
 ];
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-};
+function buildFaqSchema(hardcoded: typeof faqs, cms?: CmsFaq[]) {
+  const cmsEntries = (cms ?? []).map((f) => ({
+    '@type': 'Question' as const,
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer' as const, text: f.answer },
+  }));
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      ...hardcoded.map((f) => ({
+        '@type': 'Question' as const,
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer' as const, text: f.a },
+      })),
+      ...cmsEntries,
+    ],
+  };
+}
 
-export function FAQAccordion() {
+export function FAQAccordion({ cmsFaqs }: FAQAccordionProps) {
   const [open, setOpen] = useState<number | null>(null);
+
+  // Merge: hardcoded rich FAQs + CMS FAQs (without duplicating existing questions)
+  const hardcodedQuestions = new Set(faqs.map((f) => f.q.toLowerCase()));
+  const cmsItems = (cmsFaqs ?? [])
+    .filter((f) => !hardcodedQuestions.has(f.question.toLowerCase()))
+    .map((f) => ({
+      icon: HelpCircle,
+      q: f.question,
+      a: f.answer,
+      highlight: '',
+    }));
+  const allFaqs = [...faqs, ...cmsItems];
+  const faqSchema = buildFaqSchema(faqs, cmsFaqs);
 
   return (
     <section className="relative overflow-hidden border-t border-white/5 px-4 py-24 sm:px-6 lg:px-8">
@@ -75,7 +111,7 @@ export function FAQAccordion() {
         </motion.div>
 
         <div className="space-y-3">
-          {faqs.map((faq, i) => {
+          {allFaqs.map((faq, i) => {
             const isOpen = open === i;
             return (
               <motion.div
@@ -130,9 +166,11 @@ export function FAQAccordion() {
                       <div className="px-5 pb-5 pl-19">
                         <div className="border-gold-400/30 ml-5 border-l-2 pl-4">
                           <p className="mb-3 text-sm leading-relaxed text-gray-300">{faq.a}</p>
-                          <span className="bg-gold-400/10 border-gold-400/20 text-gold-400 inline-block rounded-full border px-3 py-1 font-mono text-xs">
-                            {faq.highlight}
-                          </span>
+                          {faq.highlight && (
+                            <span className="bg-gold-400/10 border-gold-400/20 text-gold-400 inline-block rounded-full border px-3 py-1 font-mono text-xs">
+                              {faq.highlight}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </motion.div>

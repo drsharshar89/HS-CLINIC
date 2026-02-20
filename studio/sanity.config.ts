@@ -11,7 +11,23 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [
-    structureTool(),
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title('Content')
+          .items([
+            // Singleton: Site Settings (always exactly one)
+            S.listItem()
+              .title('Site Settings')
+              .icon(() => '⚙️')
+              .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
+            S.divider(),
+            // All other document types (exclude siteSettings from the generic list)
+            ...S.documentTypeListItems().filter(
+              (item) => item.getId() !== 'siteSettings'
+            ),
+          ]),
+    }),
     visionTool(), // GROQ playground — useful for debugging queries
   ],
 
