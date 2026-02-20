@@ -5,9 +5,11 @@
 [build.environment]
   NODE_VERSION = "22"
   NPM_FLAGS = "--legacy-peer-deps"
-  # SANITY_API_TOKEN is a server-side-only secret — never bundled into client JS.
-  # The Sanity client uses only VITE_SANITY_PROJECT_ID and VITE_SANITY_DATASET (public).
-  SECRETS_SCAN_OMIT_KEYS = "SANITY_API_TOKEN"
+  # These env vars are intentionally in the client bundle or source files.
+  # SANITY_API_TOKEN: server-side only, never in client JS.
+  # VITE_SANITY_DATASET / VITE_SANITY_PROJECT_ID: public Sanity config,
+  # embedded by Vite into client JS by design (safe, not secrets).
+  SECRETS_SCAN_OMIT_KEYS = "SANITY_API_TOKEN,VITE_SANITY_DATASET,VITE_SANITY_PROJECT_ID"
 
 [[redirects]]
   from = "/*"
