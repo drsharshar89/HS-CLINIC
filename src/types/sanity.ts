@@ -167,3 +167,72 @@ export interface SanityServicesPageSettings {
   conditions?: string[];
   processSteps?: Array<{ step: string; title: string; description: string }>;
 }
+
+/** DSD page settings (singleton) */
+export interface SanityDsdSettings {
+  _id: string;
+  _type: 'dsdSettings';
+  heroImage?: SanityImage;
+  heroImageAlt?: string;
+  heroCtaText?: string;
+  splitRealityTitle?: string;
+  splitRealitySubtitle?: string;
+  splitRealityImage?: SanityImage;
+  splitRealityImageAlt?: string;
+  timeline?: Array<{ title: string; description: string; iconName?: string }>;
+  goldenTitle?: string;
+  goldenDescription?: string;
+  goldenStats?: Array<{ value: string; label: string }>;
+  goldenImage?: SanityImage;
+  goldenImageAlt?: string;
+  goldenCtaText?: string;
+  journey?: Array<{ number: string; title: string; description: string; iconName?: string }>;
+  journeyCtaText?: string;
+}
+
+/** Tourism page settings (singleton) */
+export interface SanityTourismSettings {
+  _id: string;
+  _type: 'tourismSettings';
+  heroTagline?: string;
+  heroTitle?: string;
+  heroTitleAccent?: string;
+  heroSubtitle?: string;
+  heroCtaText?: string;
+  timelineSteps?: Array<{ step: string; title: string; description: string; iconName?: string }>;
+  fusionSubheading?: string;
+  fusionTitle?: string;
+  vipFeatures?: Array<{ title: string; description: string; iconName?: string }>;
+  vipStats?: Array<{ value: string; label: string }>;
+  whyClinicReasons?: Array<{ title: string; description: string; iconName?: string }>;
+  residences?: Array<{
+    name: string;
+    subtitle: string;
+    stars: number;
+    description: string;
+    features?: string[];
+  }>;
+  bottomCtaText?: string;
+}
+
+/** Before / After case — collection document */
+export interface SanityBeforeAfterCase {
+  _id: string;
+  _type: 'beforeAfterCase';
+  label: string;
+  beforeImage?: SanityImage;
+  afterImage?: SanityImage;
+  treatment?: string;
+  sortOrder?: number;
+}
+
+/** YouTube Video — collection document */
+export interface SanityYoutubeVideo {
+  _id: string;
+  _type: 'youtubeVideo';
+  title: string;
+  videoId: string;
+  description?: string;
+  category: string;
+  sortOrder?: number;
+}

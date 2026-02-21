@@ -39,6 +39,7 @@ export function Layout() {
     { name: 'Technology', href: '/technology' },
     { name: 'Smile Design', href: '/digital-smile-design' },
     { name: 'Dental Tourism', href: '/dental-tourism' },
+    { name: 'Gallery', href: '/gallery' },
     { name: 'Contact', href: '/contact' },
   ];
 

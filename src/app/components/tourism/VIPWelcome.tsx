@@ -1,43 +1,54 @@
 import { motion } from 'framer-motion';
-import { Plane, Crown, Clock, Car, Sparkles, Utensils } from 'lucide-react';
+import { getIcon } from '@/lib/iconMap';
 
-const vipFeatures = [
+interface VIPWelcomeProps {
+  features?: Array<{ title: string; description: string; iconName?: string }>;
+  stats?: Array<{ value: string; label: string }>;
+}
+
+const DEFAULT_VIP_FEATURES = [
   {
-    icon: Plane,
     title: 'Private Terminal Access',
     description:
       'Your concierge awaits tarmac-side. Skip the lines — step off the plane and into luxury.',
+    iconName: 'Plane',
   },
   {
-    icon: Car,
     title: 'Luxury Transfer',
     description:
       'Chauffeured in a premium vehicle from the airport directly to your 5-star accommodation.',
+    iconName: 'Car',
   },
   {
-    icon: Clock,
     title: 'Personal Concierge (24/7)',
     description:
       'Dedicated multilingual coordinator handles everything — scheduling, translations, and local guidance.',
+    iconName: 'Clock',
   },
   {
-    icon: Sparkles,
     title: 'Digital Smile Design Ritual',
     description:
       'Your bespoke consultation: 3D facial scanning and cinematic smile photography by Dr. Sharshar.',
+    iconName: 'Sparkles',
   },
   {
-    icon: Utensils,
     title: 'Curated Recovery Dining',
     description:
       'Post-procedure menus crafted for comfort and healing. Delivered to your suite or at partnered restaurants.',
+    iconName: 'Utensils',
   },
   {
-    icon: Crown,
     title: 'Cultural Experiences',
     description:
       'Private guided tours of the Pyramids, the Egyptian Museum, and Nile-side dining — all scheduled around your treatment.',
+    iconName: 'Crown',
   },
+];
+
+const DEFAULT_VIP_STATS = [
+  { value: '500+', label: 'INTERNATIONAL PATIENTS' },
+  { value: '24/7', label: 'CONCIERGE ACCESS' },
+  { value: '15+', label: 'COUNTRIES SERVED' },
 ];
 
 const containerVariants = {
@@ -50,7 +61,10 @@ const itemVariants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
 
-export function VIPWelcome() {
+export function VIPWelcome({ features, stats }: VIPWelcomeProps) {
+  const vipFeatures = features ?? DEFAULT_VIP_FEATURES;
+  const vipStats = stats ?? DEFAULT_VIP_STATS;
+
   return (
     <section className="relative overflow-hidden border-t border-white/5 px-4 py-32 sm:px-6 lg:px-8">
       {/* Background accents */}
@@ -99,20 +113,20 @@ export function VIPWelcome() {
               transition={{ delay: 0.3 }}
               className="flex flex-wrap gap-6 sm:gap-8"
             >
-              <div className="text-center sm:text-left">
-                <p className="text-gold-400 font-serif text-3xl">500+</p>
-                <p className="mt-1 font-mono text-xs text-gray-500">INTERNATIONAL PATIENTS</p>
-              </div>
-              <div className="hidden border-l border-white/10 sm:block" />
-              <div className="text-center sm:text-left">
-                <p className="text-gold-400 font-serif text-3xl">24/7</p>
-                <p className="mt-1 font-mono text-xs text-gray-500">CONCIERGE ACCESS</p>
-              </div>
-              <div className="hidden border-l border-white/10 sm:block" />
-              <div className="text-center sm:text-left">
-                <p className="text-gold-400 font-serif text-3xl">15+</p>
-                <p className="mt-1 font-mono text-xs text-gray-500">COUNTRIES SERVED</p>
-              </div>
+              {vipStats.map((stat, idx) => (
+                <div key={idx} className="flex items-center gap-6 sm:gap-8">
+                  <div className="text-center sm:text-left">
+                    <p className="text-gold-400 font-serif text-3xl">{stat.value}</p>
+                    <p className="mt-1 font-mono text-xs text-gray-500">{stat.label}</p>
+                  </div>
+                  {idx < vipStats.length - 1 && (
+                    <div
+                      className="hidden border-l border-white/10 sm:block"
+                      style={{ height: '2.5rem' }}
+                    />
+                  )}
+                </div>
+              ))}
             </motion.div>
           </div>
 
@@ -124,23 +138,26 @@ export function VIPWelcome() {
             viewport={{ once: true, margin: '-100px' }}
             className="space-y-4"
           >
-            {vipFeatures.map((feature) => (
-              <motion.div
-                key={feature.title}
-                variants={itemVariants}
-                className="group bg-dark-900/40 hover:border-gold-400/20 hover:bg-dark-900/60 flex gap-5 rounded-xl border border-white/5 p-5 transition-all duration-300"
-              >
-                <div className="bg-gold-400/10 group-hover:bg-gold-400/20 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg transition-colors">
-                  <feature.icon className="text-gold-400 h-5 w-5" />
-                </div>
-                <div>
-                  <h4 className="group-hover:text-gold-300 mb-1 text-sm font-medium text-white transition-colors">
-                    {feature.title}
-                  </h4>
-                  <p className="text-sm leading-relaxed text-gray-500">{feature.description}</p>
-                </div>
-              </motion.div>
-            ))}
+            {vipFeatures.map((feature) => {
+              const Icon = getIcon(feature.iconName);
+              return (
+                <motion.div
+                  key={feature.title}
+                  variants={itemVariants}
+                  className="group bg-dark-900/40 hover:border-gold-400/20 hover:bg-dark-900/60 flex gap-5 rounded-xl border border-white/5 p-5 transition-all duration-300"
+                >
+                  <div className="bg-gold-400/10 group-hover:bg-gold-400/20 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg transition-colors">
+                    <Icon className="text-gold-400 h-5 w-5" />
+                  </div>
+                  <div>
+                    <h4 className="group-hover:text-gold-300 mb-1 text-sm font-medium text-white transition-colors">
+                      {feature.title}
+                    </h4>
+                    <p className="text-sm leading-relaxed text-gray-500">{feature.description}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </div>

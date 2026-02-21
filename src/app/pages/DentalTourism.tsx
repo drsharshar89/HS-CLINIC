@@ -2,17 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { SEO, SITE_NAME, DEFAULT_OG_IMAGE } from '@/lib/seo';
-import {
-  Globe,
-  ChevronRight,
-  Phone,
-  Star,
-  Video,
-  Plane,
-  Shield,
-  BookOpen,
-  Award,
-} from 'lucide-react';
+import { Globe, ChevronRight, Phone, Star, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { WhyHSClinic } from '@/app/components/tourism/WhyHSClinic';
 import { ServicesGrid } from '@/app/components/tourism/ServicesGrid';
@@ -22,39 +12,19 @@ import { BeforeAfterSlider } from '@/app/components/tourism/BeforeAfterSlider';
 import { CuratedResidences } from '@/app/components/tourism/CuratedResidences';
 import { VIPWelcome } from '@/app/components/tourism/VIPWelcome';
 import { RoyalDentalJourney } from '@/app/components/tourism/RoyalDentalJourney';
-import { useTestimonials, useTourismPricing, useFaqs } from '@/hooks/useCmsData';
-
-const timelineSteps = [
-  {
-    icon: Video,
-    step: '01',
-    title: 'Virtual Consultation',
-    desc: 'Share your smile photos. Get a free personalized treatment plan and cost estimate from Dr. Sharshar — all from your home.',
-  },
-  {
-    icon: Plane,
-    step: '02',
-    title: 'VIP Arrival & Tourism',
-    desc: 'We handle airport transfers, recommend 5-star hotels, and plan your Cairo experience — Pyramids, Nile cruises, Khan el-Khalili.',
-  },
-  {
-    icon: Shield,
-    step: '03',
-    title: 'The Procedure at HS Clinic',
-    desc: 'Premium German implants placed with digital precision. Same-day results. Pain-free protocols. International safety standards.',
-  },
-  {
-    icon: BookOpen,
-    step: '04',
-    title: 'Fly Home with Confidence',
-    desc: 'Complete aftercare guide, lifetime warranty on implants, and a video follow-up schedule. Your new smile travels with you.',
-  },
-];
+import {
+  useTestimonials,
+  useTourismPricing,
+  useFaqs,
+  useTourismSettings,
+} from '@/hooks/useCmsData';
+import { getIcon } from '@/lib/iconMap';
 
 export default function DentalTourism() {
   const { testimonials } = useTestimonials();
   const { pricing: cmsPricing } = useTourismPricing();
   const { faqs: cmsFaqs } = useFaqs();
+  const { tourism } = useTourismSettings();
 
   // useTestimonials() already returns fallback data if CMS is empty
   const reviews = testimonials.map((t) => ({
@@ -121,9 +91,7 @@ export default function DentalTourism() {
               className="border-gold-400/30 bg-gold-400/10 text-gold-400 mx-auto mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-2"
             >
               <Globe className="h-4 w-4 animate-pulse" />
-              <span className="font-mono text-xs tracking-wider">
-                DENTAL TOURISM // CAIRO, EGYPT
-              </span>
+              <span className="font-mono text-xs tracking-wider">{tourism.heroTagline}</span>
             </motion.div>
 
             <motion.h1
@@ -132,10 +100,10 @@ export default function DentalTourism() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mb-6 font-serif text-4xl leading-[1.1] font-bold tracking-tight md:text-6xl lg:text-7xl"
             >
-              <span className="text-white">World-Class Implants.</span>
+              <span className="text-white">{tourism.heroTitle}</span>
               <br />
               <span className="from-gold-300 via-gold-400 bg-gradient-to-r to-white bg-clip-text text-transparent">
-                A Majestic Journey.
+                {tourism.heroTitleAccent}
               </span>
             </motion.h1>
 
@@ -145,9 +113,7 @@ export default function DentalTourism() {
               transition={{ delay: 0.5 }}
               className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed font-light text-gray-400 md:text-xl"
             >
-              Your new smile awaits in the cradle of civilization.{' '}
-              <span className="text-white">Premium German technology</span>,{' '}
-              <span className="text-gold-400">unbeatable value</span>, unforgettable experience.
+              {tourism.heroSubtitle}
             </motion.p>
 
             <motion.div
@@ -162,7 +128,7 @@ export default function DentalTourism() {
               >
                 <div className="absolute inset-0 translate-y-full bg-white/30 transition-transform duration-300 group-hover:translate-y-0" />
                 <span className="relative flex items-center gap-2">
-                  Start Your Journey — Free Quote <ChevronRight className="h-5 w-5" />
+                  {tourism.heroCtaText} <ChevronRight className="h-5 w-5" />
                 </span>
               </Link>
               <a
@@ -198,7 +164,7 @@ export default function DentalTourism() {
               whileInView={{ opacity: 1, y: 0 }}
               className="text-gold-400 mb-3 font-mono text-sm tracking-[0.3em] uppercase"
             >
-              WHERE PRECISION MEETS WONDER
+              {tourism.fusionSubheading}
             </motion.h2>
             <motion.h3
               initial={{ opacity: 0, y: 20 }}
@@ -206,7 +172,7 @@ export default function DentalTourism() {
               transition={{ delay: 0.1 }}
               className="mb-6 font-serif text-4xl text-white md:text-6xl"
             >
-              Precision Engineering in a Timeless City
+              {tourism.fusionTitle}
             </motion.h3>
           </div>
 
@@ -227,8 +193,8 @@ export default function DentalTourism() {
         </motion.div>
       </section>
 
-      <VIPWelcome />
-      <WhyHSClinic />
+      <VIPWelcome features={tourism.vipFeatures} stats={tourism.vipStats} />
+      <WhyHSClinic reasons={tourism.whyClinicReasons} />
       <ServicesGrid />
 
       {/* PRICE COMPARISON */}
@@ -306,24 +272,27 @@ export default function DentalTourism() {
           <h3 className="font-serif text-4xl text-white md:text-5xl">Four Steps to Your Smile</h3>
         </div>
         <div className="mx-auto grid max-w-4xl gap-8">
-          {timelineSteps.map((step, i) => (
-            <div
-              key={i}
-              className="bg-dark-900/50 flex flex-col gap-4 rounded-2xl border border-white/5 p-6 sm:flex-row sm:gap-6"
-            >
-              <div className="bg-gold-400/10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg">
-                <step.icon className="text-gold-400 h-6 w-6" />
+          {tourism.timelineSteps.map((step, i) => {
+            const Icon = getIcon(step.iconName);
+            return (
+              <div
+                key={i}
+                className="bg-dark-900/50 flex flex-col gap-4 rounded-2xl border border-white/5 p-6 sm:flex-row sm:gap-6"
+              >
+                <div className="bg-gold-400/10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg">
+                  <Icon className="text-gold-400 h-6 w-6" />
+                </div>
+                <div>
+                  <h4 className="font-serif text-xl text-white">{step.title}</h4>
+                  <p className="text-gray-400">{step.description}</p>
+                </div>
               </div>
-              <div>
-                <h4 className="font-serif text-xl text-white">{step.title}</h4>
-                <p className="text-gray-400">{step.desc}</p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
-      <CuratedResidences />
+      <CuratedResidences residences={tourism.residences} />
       <FAQAccordion cmsFaqs={cmsFaqs} />
       <ConsultationForm />
 
@@ -334,7 +303,7 @@ export default function DentalTourism() {
           to="/contact"
           className="bg-gold-400 text-dark-950 inline-block rounded-lg px-10 py-5 font-bold transition-all hover:scale-105"
         >
-          Book Free Consultation
+          {tourism.bottomCtaText}
         </Link>
       </section>
     </div>

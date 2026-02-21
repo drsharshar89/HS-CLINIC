@@ -43,10 +43,18 @@ export default defineConfig({
               .title('Technology Page Settings')
               .icon(() => '🔬')
               .child(S.document().schemaType('technologySettings').documentId('technologySettings')),
+            S.listItem()
+              .title('DSD Page Settings')
+              .icon(() => '💎')
+              .child(S.document().schemaType('dsdSettings').documentId('dsdSettings')),
+            S.listItem()
+              .title('Tourism Page Settings')
+              .icon(() => '✈️')
+              .child(S.document().schemaType('tourismSettings').documentId('tourismSettings')),
             S.divider(),
             // All other document types (exclude singletons from the generic list)
             ...S.documentTypeListItems().filter(
-              (item) => !['siteSettings', 'hero', 'homepageSettings', 'aboutSettings', 'servicesPageSettings', 'technologySettings'].includes(item.getId() ?? '')
+              (item) => !['siteSettings', 'hero', 'homepageSettings', 'aboutSettings', 'servicesPageSettings', 'technologySettings', 'dsdSettings', 'tourismSettings'].includes(item.getId() ?? '')
             ),
           ]),
     }),

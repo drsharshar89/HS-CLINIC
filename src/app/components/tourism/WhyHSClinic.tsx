@@ -1,40 +1,50 @@
 import { motion } from 'framer-motion';
-import { Shield, Globe, Award, Cpu, HeartPulse, Plane } from 'lucide-react';
+import { getIcon } from '@/lib/iconMap';
 
-const reasons = [
+interface WhyHSClinicProps {
+  reasons?: Array<{ title: string; description: string; iconName?: string }>;
+}
+
+const DEFAULT_REASONS = [
   {
-    icon: Cpu,
     title: 'Fully Digital Workflow',
-    desc: '3D-guided surgery, digital occlusion analysis & in-house 3D printing for 0.01mm precision.',
+    description:
+      '3D-guided surgery, digital occlusion analysis & in-house 3D printing for 0.01mm precision.',
+    iconName: 'Cpu',
   },
   {
-    icon: Shield,
     title: 'International Sterilization',
-    desc: 'Strict infection control protocols exceeding WHO standards. Near-zero infection risk.',
+    description:
+      'Strict infection control protocols exceeding WHO standards. Near-zero infection risk.',
+    iconName: 'Shield',
   },
   {
-    icon: Award,
     title: 'Lifetime Implant Warranty',
-    desc: 'Written lifetime guarantee on all German/Swiss implant systems (Straumann, Nobel Biocare).',
+    description:
+      'Written lifetime guarantee on all German/Swiss implant systems (Straumann, Nobel Biocare).',
+    iconName: 'Award',
   },
   {
-    icon: Globe,
     title: 'English-Speaking Team',
-    desc: 'Fluent communication in English, Arabic & French. No language barriers, ever.',
+    description: 'Fluent communication in English, Arabic & French. No language barriers, ever.',
+    iconName: 'Globe',
   },
   {
-    icon: HeartPulse,
     title: 'Neuro-Occlusion Specialist',
-    desc: "Dr. Sharshar's MSc in Perio-Implantology + EMG jaw-tracking ensures functional perfection.",
+    description:
+      "Dr. Sharshar's MSc in Perio-Implantology + EMG jaw-tracking ensures functional perfection.",
+    iconName: 'HeartPulse',
   },
   {
-    icon: Plane,
     title: 'VIP Travel Concierge',
-    desc: 'Airport pickup, 5-star hotel booking, clinic transfers & curated Cairo sightseeing tours.',
+    description:
+      'Airport pickup, 5-star hotel booking, clinic transfers & curated Cairo sightseeing tours.',
+    iconName: 'Plane',
   },
 ];
 
-export function WhyHSClinic() {
+export function WhyHSClinic({ reasons }: WhyHSClinicProps) {
+  const items = reasons ?? DEFAULT_REASONS;
   return (
     <section className="border-t border-white/5 px-4 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -54,24 +64,27 @@ export function WhyHSClinic() {
         </motion.div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {reasons.map((r, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="group bg-dark-900/50 hover:border-gold-400/30 rounded-2xl border border-white/5 p-6 backdrop-blur transition-all duration-300"
-            >
-              <div className="bg-gold-400/10 border-gold-400/20 group-hover:bg-gold-400/20 group-hover:border-gold-400/40 mb-4 flex h-12 w-12 items-center justify-center rounded-lg border transition-colors">
-                <r.icon className="text-gold-400 h-6 w-6" />
-              </div>
-              <h4 className="group-hover:text-gold-300 mb-2 font-serif text-lg font-bold text-white transition-colors">
-                {r.title}
-              </h4>
-              <p className="text-sm leading-relaxed text-gray-400">{r.desc}</p>
-            </motion.div>
-          ))}
+          {items.map((r, i) => {
+            const Icon = getIcon(r.iconName);
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="group bg-dark-900/50 hover:border-gold-400/30 rounded-2xl border border-white/5 p-6 backdrop-blur transition-all duration-300"
+              >
+                <div className="bg-gold-400/10 border-gold-400/20 group-hover:bg-gold-400/20 group-hover:border-gold-400/40 mb-4 flex h-12 w-12 items-center justify-center rounded-lg border transition-colors">
+                  <Icon className="text-gold-400 h-6 w-6" />
+                </div>
+                <h4 className="group-hover:text-gold-300 mb-2 font-serif text-lg font-bold text-white transition-colors">
+                  {r.title}
+                </h4>
+                <p className="text-sm leading-relaxed text-gray-400">{r.description}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

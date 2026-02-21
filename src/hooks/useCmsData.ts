@@ -17,6 +17,10 @@ import type {
   SanityTechnologySettings,
   SanityHomepageSettings,
   SanityServicesPageSettings,
+  SanityDsdSettings,
+  SanityTourismSettings,
+  SanityBeforeAfterCase,
+  SanityYoutubeVideo,
   SanityImage,
 } from '@/types/sanity';
 
@@ -641,4 +645,342 @@ export function useServicesPageSettings() {
     loading,
     error,
   };
+}
+
+// ─── DSD Page Settings ────────────────────────────────────────────
+const DEFAULT_DSD_SETTINGS = {
+  heroImageAlt: 'Luxarian Scientific Digital Smile Design — blueprint and reveal',
+  heroCtaText: 'Book Consultation',
+  splitRealityTitle: 'The Split Reality',
+  splitRealitySubtitle:
+    'Witness the transformation — from scientific blueprint to artistic masterpiece.',
+  splitRealityImageAlt:
+    'Digital Smile Design split reality — before and after transformation with golden proportion analysis',
+  timeline: [
+    {
+      title: 'Video Analysis',
+      description: 'Comprehensive video analysis, skeletal-fascial identity.',
+      iconName: 'Video',
+    },
+    { title: '2D Design', description: 'Design a plan and blueprint design.', iconName: 'PenTool' },
+    { title: '3D Mockup', description: 'Hyper-fashion, tooth and scanner.', iconName: 'Box' },
+    {
+      title: 'Final Try-in',
+      description: 'Perfects mirror to perfect your smile.',
+      iconName: 'Smile',
+    },
+  ],
+  goldenTitle: 'Golden\nProportion',
+  goldenDescription:
+    "Every smile we design follows the timeless principles of the Golden Ratio — the same mathematical harmony found in nature's most beautiful structures. Precision down to 0.01mm.",
+  goldenStats: [
+    { value: '1.618', label: 'Ratio' },
+    { value: '0.01mm', label: 'Precision' },
+    { value: '98.7%', label: 'Symmetry' },
+  ],
+  goldenImageAlt: 'Golden proportion dental analysis overlay',
+  goldenCtaText: 'Start Your Design',
+  journey: [
+    {
+      number: '1',
+      title: 'DIGITAL CAPTURE & ANALYSIS',
+      description:
+        'We utilize advanced 3D imaging to map your unique facial structure and dental anatomy with micron-level accuracy.',
+      iconName: 'ScanLine',
+    },
+    {
+      number: '2',
+      title: 'PRECISION PLANNING',
+      description:
+        'A bespoke gold-standard blueprint is meticulously crafted, combining facial aesthetics with dental function.',
+      iconName: 'Sparkles',
+    },
+    {
+      number: '3',
+      title: 'FINAL TRANSFORMATION',
+      description:
+        'Experience the seamless realization of your dream smile, expertly crafted and delivered with exceptional artistry.',
+      iconName: 'Crown',
+    },
+  ],
+  journeyCtaText: 'Explore the Full Process',
+};
+
+export function useDsdSettings() {
+  const { data, loading, error } = useSanityQuery<SanityDsdSettings[]>(
+    `*[_type == "dsdSettings"][0...1] {
+      heroImage, heroImageAlt, heroCtaText,
+      splitRealityTitle, splitRealitySubtitle, splitRealityImage, splitRealityImageAlt,
+      timeline, goldenTitle, goldenDescription, goldenStats,
+      goldenImage, goldenImageAlt, goldenCtaText,
+      journey, journeyCtaText
+    }`
+  );
+  const doc = data?.[0];
+  return {
+    dsd: {
+      heroImage: doc?.heroImage ?? null,
+      heroImageAlt: doc?.heroImageAlt ?? DEFAULT_DSD_SETTINGS.heroImageAlt,
+      heroCtaText: doc?.heroCtaText ?? DEFAULT_DSD_SETTINGS.heroCtaText,
+      splitRealityTitle: doc?.splitRealityTitle ?? DEFAULT_DSD_SETTINGS.splitRealityTitle,
+      splitRealitySubtitle: doc?.splitRealitySubtitle ?? DEFAULT_DSD_SETTINGS.splitRealitySubtitle,
+      splitRealityImage: doc?.splitRealityImage ?? null,
+      splitRealityImageAlt: doc?.splitRealityImageAlt ?? DEFAULT_DSD_SETTINGS.splitRealityImageAlt,
+      timeline: doc?.timeline ?? DEFAULT_DSD_SETTINGS.timeline,
+      goldenTitle: doc?.goldenTitle ?? DEFAULT_DSD_SETTINGS.goldenTitle,
+      goldenDescription: doc?.goldenDescription ?? DEFAULT_DSD_SETTINGS.goldenDescription,
+      goldenStats: doc?.goldenStats ?? DEFAULT_DSD_SETTINGS.goldenStats,
+      goldenImage: doc?.goldenImage ?? null,
+      goldenImageAlt: doc?.goldenImageAlt ?? DEFAULT_DSD_SETTINGS.goldenImageAlt,
+      goldenCtaText: doc?.goldenCtaText ?? DEFAULT_DSD_SETTINGS.goldenCtaText,
+      journey: doc?.journey ?? DEFAULT_DSD_SETTINGS.journey,
+      journeyCtaText: doc?.journeyCtaText ?? DEFAULT_DSD_SETTINGS.journeyCtaText,
+    },
+    loading,
+    error,
+  };
+}
+
+// ─── Tourism Page Settings ────────────────────────────────────────
+const DEFAULT_TOURISM = {
+  heroTagline: 'DENTAL TOURISM // CAIRO, EGYPT',
+  heroTitle: 'World-Class Implants.',
+  heroTitleAccent: 'A Majestic Journey.',
+  heroSubtitle:
+    'Your new smile awaits in the cradle of civilization. Premium German technology, unbeatable value, unforgettable experience.',
+  heroCtaText: 'Start Your Journey — Free Quote',
+  timelineSteps: [
+    {
+      step: '01',
+      title: 'Virtual Consultation',
+      description:
+        'Share your smile photos. Get a free personalized treatment plan and cost estimate from Dr. Sharshar — all from your home.',
+      iconName: 'Video',
+    },
+    {
+      step: '02',
+      title: 'VIP Arrival & Tourism',
+      description:
+        'We handle airport transfers, recommend 5-star hotels, and plan your Cairo experience — Pyramids, Nile cruises, Khan el-Khalili.',
+      iconName: 'Plane',
+    },
+    {
+      step: '03',
+      title: 'The Procedure at HS Clinic',
+      description:
+        'Premium German implants placed with digital precision. Same-day results. Pain-free protocols. International safety standards.',
+      iconName: 'Shield',
+    },
+    {
+      step: '04',
+      title: 'Fly Home with Confidence',
+      description:
+        'Complete aftercare guide, lifetime warranty on implants, and a video follow-up schedule. Your new smile travels with you.',
+      iconName: 'BookOpen',
+    },
+  ],
+  fusionSubheading: 'WHERE PRECISION MEETS WONDER',
+  fusionTitle: 'Precision Engineering in a Timeless City',
+  vipFeatures: [
+    {
+      title: 'Private Terminal Access',
+      description:
+        'Your concierge awaits tarmac-side. Skip the lines — step off the plane and into luxury.',
+      iconName: 'Plane',
+    },
+    {
+      title: 'Luxury Transfer',
+      description:
+        'Chauffeured in a premium vehicle from the airport directly to your 5-star accommodation.',
+      iconName: 'Car',
+    },
+    {
+      title: 'Personal Concierge (24/7)',
+      description:
+        'Dedicated multilingual coordinator handles everything — scheduling, translations, and local guidance.',
+      iconName: 'Clock',
+    },
+    {
+      title: 'Digital Smile Design Ritual',
+      description:
+        'Your bespoke consultation: 3D facial scanning and cinematic smile photography by Dr. Sharshar.',
+      iconName: 'Sparkles',
+    },
+    {
+      title: 'Curated Recovery Dining',
+      description:
+        'Post-procedure menus crafted for comfort and healing. Delivered to your suite or at partnered restaurants.',
+      iconName: 'Utensils',
+    },
+    {
+      title: 'Cultural Experiences',
+      description:
+        'Private guided tours of the Pyramids, the Egyptian Museum, and Nile-side dining — all scheduled around your treatment.',
+      iconName: 'Crown',
+    },
+  ],
+  vipStats: [
+    { value: '500+', label: 'INTERNATIONAL PATIENTS' },
+    { value: '24/7', label: 'CONCIERGE ACCESS' },
+    { value: '15+', label: 'COUNTRIES SERVED' },
+  ],
+  whyClinicReasons: [
+    {
+      title: 'Fully Digital Workflow',
+      description:
+        '3D-guided surgery, digital occlusion analysis & in-house 3D printing for 0.01mm precision.',
+      iconName: 'Cpu',
+    },
+    {
+      title: 'International Sterilization',
+      description:
+        'Strict infection control protocols exceeding WHO standards. Near-zero infection risk.',
+      iconName: 'Shield',
+    },
+    {
+      title: 'Lifetime Implant Warranty',
+      description:
+        'Written lifetime guarantee on all German/Swiss implant systems (Straumann, Nobel Biocare).',
+      iconName: 'Award',
+    },
+    {
+      title: 'English-Speaking Team',
+      description: 'Fluent communication in English, Arabic & French. No language barriers, ever.',
+      iconName: 'Globe',
+    },
+    {
+      title: 'Neuro-Occlusion Specialist',
+      description:
+        "Dr. Sharshar's MSc in Perio-Implantology + EMG jaw-tracking ensures functional perfection.",
+      iconName: 'HeartPulse',
+    },
+    {
+      title: 'VIP Travel Concierge',
+      description:
+        'Airport pickup, 5-star hotel booking, clinic transfers & curated Cairo sightseeing tours.',
+      iconName: 'Plane',
+    },
+  ],
+  residences: [
+    {
+      name: 'St. Regis Cairo',
+      subtitle: 'Nile Corniche',
+      stars: 5,
+      description: 'Unrivaled Nile views with bespoke butler service. 15 minutes from the clinic.',
+      features: ['Butler Service', 'Nile Views', 'Spa & Pool'],
+    },
+    {
+      name: 'Four Seasons',
+      subtitle: 'First Residence, Giza',
+      stars: 5,
+      description:
+        'Iconic luxury overlooking the Pyramids. Complimentary airport transfers for our patients.',
+      features: ['Pyramid Views', 'Private Balcony', 'Fine Dining'],
+    },
+    {
+      name: 'Kempinski Nile Hotel',
+      subtitle: 'Garden City',
+      stars: 5,
+      description:
+        'European elegance on the banks of the Nile. Walking distance to historic Cairo.',
+      features: ['Riverside Terrace', 'Heated Pool', 'Concierge'],
+    },
+    {
+      name: 'Marriott Mena House',
+      subtitle: 'Giza Plateau',
+      stars: 5,
+      description: 'Sleep at the foot of the Great Pyramids. A legendary retreat since 1886.',
+      features: ['Historic Palace', 'Garden Oasis', 'Pyramid Gate'],
+    },
+  ],
+  bottomCtaText: 'Book Free Consultation',
+};
+
+export function useTourismSettings() {
+  const { data, loading, error } = useSanityQuery<SanityTourismSettings[]>(
+    `*[_type == "tourismSettings"][0...1] {
+      heroTagline, heroTitle, heroTitleAccent, heroSubtitle, heroCtaText,
+      timelineSteps, fusionSubheading, fusionTitle,
+      vipFeatures, vipStats, whyClinicReasons, residences,
+      bottomCtaText
+    }`
+  );
+  const doc = data?.[0];
+  return {
+    tourism: {
+      heroTagline: doc?.heroTagline ?? DEFAULT_TOURISM.heroTagline,
+      heroTitle: doc?.heroTitle ?? DEFAULT_TOURISM.heroTitle,
+      heroTitleAccent: doc?.heroTitleAccent ?? DEFAULT_TOURISM.heroTitleAccent,
+      heroSubtitle: doc?.heroSubtitle ?? DEFAULT_TOURISM.heroSubtitle,
+      heroCtaText: doc?.heroCtaText ?? DEFAULT_TOURISM.heroCtaText,
+      timelineSteps: doc?.timelineSteps ?? DEFAULT_TOURISM.timelineSteps,
+      fusionSubheading: doc?.fusionSubheading ?? DEFAULT_TOURISM.fusionSubheading,
+      fusionTitle: doc?.fusionTitle ?? DEFAULT_TOURISM.fusionTitle,
+      vipFeatures: doc?.vipFeatures ?? DEFAULT_TOURISM.vipFeatures,
+      vipStats: doc?.vipStats ?? DEFAULT_TOURISM.vipStats,
+      whyClinicReasons: doc?.whyClinicReasons ?? DEFAULT_TOURISM.whyClinicReasons,
+      residences: doc?.residences ?? DEFAULT_TOURISM.residences,
+      bottomCtaText: doc?.bottomCtaText ?? DEFAULT_TOURISM.bottomCtaText,
+    },
+    loading,
+    error,
+  };
+}
+
+/* ================================================================
+   Before / After Cases — collection hook (Gallery + Slider)
+   ================================================================ */
+const DEFAULT_BA_CASES = [
+  {
+    before: '/images/dental/dental-implant-dr-haitham-sharshar.webp',
+    after: '/images/dental/Full-arch-dental-implant-dr-haitham-sharshar.webp',
+    label: 'Full Arch Rehabilitation',
+    treatment: 'Dental Implants',
+  },
+  {
+    before: '/images/dental/All-on-4-Dental-Implants-dr haitham sharshar.webp',
+    after: '/images/dental/dental-implant-dr-haitham-sharshar.webp',
+    label: 'All-on-4 Dental Implants',
+    treatment: 'Dental Implants',
+  },
+];
+
+export function useBeforeAfterCases() {
+  const { data, loading, error } = useSanityQuery<SanityBeforeAfterCase[]>(
+    `*[_type == "beforeAfterCase"] | order(sortOrder asc) { _id, label, beforeImage, afterImage, treatment, sortOrder }`
+  );
+
+  // If CMS has data, map with image URLs; otherwise use hardcoded paths
+  const cases =
+    data && data.length > 0
+      ? data.map((c) => ({
+          before: c.beforeImage
+            ? `https://cdn.sanity.io/images/nk38o90y/production/${c.beforeImage.asset._ref.replace('image-', '').replace('-webp', '.webp').replace('-jpg', '.jpg').replace('-png', '.png')}`
+            : '/images/dental/dental-implant-dr-haitham-sharshar.webp',
+          after: c.afterImage
+            ? `https://cdn.sanity.io/images/nk38o90y/production/${c.afterImage.asset._ref.replace('image-', '').replace('-webp', '.webp').replace('-jpg', '.jpg').replace('-png', '.png')}`
+            : '/images/dental/dental-implant-dr-haitham-sharshar.webp',
+          label: c.label,
+          treatment: c.treatment ?? '',
+        }))
+      : DEFAULT_BA_CASES;
+
+  return { cases, loading, error };
+}
+
+/* ================================================================
+   YouTube Videos — filtered by page category
+   ================================================================ */
+export function useYoutubeVideos(category: string) {
+  const { data, loading, error } = useSanityQuery<SanityYoutubeVideo[]>(
+    `*[_type == "youtubeVideo" && category == "${category}"] | order(sortOrder asc) { _id, title, videoId, description, category, sortOrder }`
+  );
+
+  const videos = (data ?? []).map((v) => ({
+    videoId: v.videoId,
+    title: v.title,
+    description: v.description ?? '',
+  }));
+
+  return { videos, loading, error };
 }

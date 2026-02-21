@@ -15,6 +15,7 @@ const Contact = lazy(() =>
 );
 const DigitalSmileDesign = lazy(() => import('@/app/pages/DigitalSmileDesign'));
 const DentalTourism = lazy(() => import('@/app/pages/DentalTourism'));
+const Gallery = lazy(() => import('@/app/pages/Gallery'));
 const SanityStudio = lazy(() => import('@/app/pages/SanityStudio'));
 const NotFound = lazy(() =>
   import('@/app/pages/NotFound').then((module) => ({ default: module.NotFound }))
@@ -81,6 +82,14 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<PageLoader />}>
             <DentalTourism />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'gallery',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Gallery />
           </Suspense>
         ),
       },

@@ -50,6 +50,12 @@ export const SEO = {
       'Experience luxury scientific Digital Smile Design at HS Clinic Cairo. Golden proportion analysis, 3D mockups, and precision planning for your perfect smile transformation.',
     canonical: SITE_URL + '/digital-smile-design',
   },
+  gallery: {
+    title: 'Before & After Gallery | Real Patient Transformations | HS Clinic Cairo',
+    description:
+      'See real before and after dental transformations by Dr. Haitham Sharshar. Full arch rehabilitation, All-on-4 implants, veneers, and cosmetic dentistry results.',
+    canonical: SITE_URL + '/gallery',
+  },
 } as const;
 
 /** JSON-LD: LocalBusiness schema for Google Rich Results */

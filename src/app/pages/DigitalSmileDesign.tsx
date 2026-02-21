@@ -1,18 +1,10 @@
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import {
-  Video,
-  PenTool,
-  Box,
-  Smile,
-  ScanLine,
-  Sparkles,
-  Crown,
-  ArrowRight,
-  ChevronRight,
-} from 'lucide-react';
+import { ArrowRight, ChevronRight } from 'lucide-react';
 import { SEO, SITE_NAME, DEFAULT_OG_IMAGE, DSD_JSONLD } from '@/lib/seo';
+import { useDsdSettings } from '@/hooks/useCmsData';
+import { getIcon } from '@/lib/iconMap';
 
 /* ────────── animation presets ────────── */
 const fadeUp = {
@@ -28,54 +20,9 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.15 } },
 };
 
-/* ────────── timeline data ────────── */
-const timeline = [
-  {
-    icon: Video,
-    title: 'Video Analysis',
-    desc: 'Comprehensive video analysis, skeletal-fascial identity.',
-  },
-  {
-    icon: PenTool,
-    title: '2D Design',
-    desc: 'Design a plan and blueprint design.',
-  },
-  {
-    icon: Box,
-    title: '3D Mockup',
-    desc: 'Hyper-fashion, tooth and scanner.',
-  },
-  {
-    icon: Smile,
-    title: 'Final Try-in',
-    desc: 'Perfects mirror to perfect your smile.',
-  },
-];
-
-/* ────────── journey cards ────────── */
-const journey = [
-  {
-    icon: ScanLine,
-    num: '1',
-    title: 'DIGITAL CAPTURE & ANALYSIS',
-    desc: 'We utilize advanced 3D imaging to map your unique facial structure and dental anatomy with micron-level accuracy.',
-  },
-  {
-    icon: Sparkles,
-    num: '2',
-    title: 'PRECISION PLANNING',
-    desc: 'A bespoke gold-standard blueprint is meticulously crafted, combining facial aesthetics with dental function.',
-  },
-  {
-    icon: Crown,
-    num: '3',
-    title: 'FINAL TRANSFORMATION',
-    desc: 'Experience the seamless realization of your dream smile, expertly crafted and delivered with exceptional artistry.',
-  },
-];
-
 export default function DigitalSmileDesign() {
   const seo = SEO.digitalSmileDesign;
+  const { dsd } = useDsdSettings();
 
   return (
     <div className="bg-dark-950 min-h-screen">
@@ -104,7 +51,7 @@ export default function DigitalSmileDesign() {
         {/* 4K Stitch Variant 2 as full hero */}
         <motion.img
           src="/images/dsd/variant2-4k.webp"
-          alt="Luxarian Scientific Digital Smile Design — blueprint and reveal"
+          alt={dsd.heroImageAlt}
           className="block h-auto w-full"
           initial={{ opacity: 0, scale: 1.02 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -126,7 +73,7 @@ export default function DigitalSmileDesign() {
             to="/contact"
             className="bg-gold-400 hover:bg-gold-500 text-dark-950 shadow-gold-400/20 inline-flex items-center gap-2 rounded-sm px-5 py-3 text-xs font-semibold tracking-[0.15em] uppercase shadow-lg transition-all duration-300 hover:scale-105 sm:gap-3 sm:px-8 sm:py-4 sm:text-sm"
           >
-            Book Consultation
+            {dsd.heroCtaText}
             <ArrowRight className="h-4 w-4" />
           </Link>
         </motion.div>
@@ -149,11 +96,9 @@ export default function DigitalSmileDesign() {
             Before &amp; After
           </p>
           <h2 className="font-serif text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-            The Split Reality
+            {dsd.splitRealityTitle}
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-400">
-            Witness the transformation — from scientific blueprint to artistic masterpiece.
-          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-400">{dsd.splitRealitySubtitle}</p>
         </motion.div>
 
         {/* 4K Stitch Variant 1 as full-width showcase */}
@@ -166,7 +111,7 @@ export default function DigitalSmileDesign() {
         >
           <img
             src="/images/dsd/variant1-4k.webp"
-            alt="Digital Smile Design split reality — before and after transformation with golden proportion analysis"
+            alt={dsd.splitRealityImageAlt}
             className="block h-auto w-full"
             loading="lazy"
           />
@@ -208,26 +153,31 @@ export default function DigitalSmileDesign() {
             <div className="from-gold-400/30 via-gold-400 to-gold-400/30 absolute top-[52px] right-[12%] left-[12%] hidden h-px bg-gradient-to-r md:block" />
 
             <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-4">
-              {timeline.map((step, i) => (
-                <motion.div
-                  key={step.title}
-                  className="group flex flex-col items-center text-center"
-                  variants={fadeUp}
-                  custom={i * 0.1}
-                >
-                  {/* Icon circle */}
-                  <div className="border-gold-400/40 bg-dark-900/80 group-hover:border-gold-400 relative mb-5 flex h-[104px] w-[104px] items-center justify-center rounded-full border-2 backdrop-blur transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]">
-                    <step.icon className="text-gold-400 h-8 w-8 transition-transform duration-300 group-hover:scale-110" />
-                    {/* Gold dot on the connecting line */}
-                    <div className="bg-gold-400 absolute -bottom-[7px] hidden h-3.5 w-3.5 rounded-full shadow-[0_0_12px_rgba(212,175,55,0.5)] md:block" />
-                  </div>
+              {dsd.timeline.map((step, i) => {
+                const Icon = getIcon(step.iconName);
+                return (
+                  <motion.div
+                    key={step.title}
+                    className="group flex flex-col items-center text-center"
+                    variants={fadeUp}
+                    custom={i * 0.1}
+                  >
+                    {/* Icon circle */}
+                    <div className="border-gold-400/40 bg-dark-900/80 group-hover:border-gold-400 relative mb-5 flex h-[104px] w-[104px] items-center justify-center rounded-full border-2 backdrop-blur transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]">
+                      <Icon className="text-gold-400 h-8 w-8 transition-transform duration-300 group-hover:scale-110" />
+                      {/* Gold dot on the connecting line */}
+                      <div className="bg-gold-400 absolute -bottom-[7px] hidden h-3.5 w-3.5 rounded-full shadow-[0_0_12px_rgba(212,175,55,0.5)] md:block" />
+                    </div>
 
-                  <h3 className="mb-2 text-lg font-semibold tracking-wide text-white">
-                    {step.title}
-                  </h3>
-                  <p className="max-w-[200px] text-sm leading-relaxed text-gray-400">{step.desc}</p>
-                </motion.div>
-              ))}
+                    <h3 className="mb-2 text-lg font-semibold tracking-wide text-white">
+                      {step.title}
+                    </h3>
+                    <p className="max-w-[200px] text-sm leading-relaxed text-gray-400">
+                      {step.description}
+                    </p>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         </div>
@@ -251,23 +201,20 @@ export default function DigitalSmileDesign() {
                 Mathematical Beauty
               </p>
               <h2 className="mb-6 font-serif text-4xl leading-tight font-bold text-white md:text-5xl lg:text-6xl">
-                Golden
-                <br />
-                Proportion
+                {dsd.goldenTitle.split('\n').map((line, i) => (
+                  <span key={i}>
+                    {i > 0 && <br />}
+                    {line}
+                  </span>
+                ))}
               </h2>
               <p className="mb-8 max-w-md text-lg leading-relaxed text-gray-400">
-                Every smile we design follows the timeless principles of the Golden Ratio — the same
-                mathematical harmony found in nature&apos;s most beautiful structures. Precision
-                down to 0.01mm.
+                {dsd.goldenDescription}
               </p>
 
               {/* Stat badges */}
               <div className="mb-8 flex flex-wrap gap-4">
-                {[
-                  { label: 'Ratio', value: '1.618' },
-                  { label: 'Precision', value: '0.01mm' },
-                  { label: 'Symmetry', value: '98.7%' },
-                ].map((s) => (
+                {dsd.goldenStats.map((s) => (
                   <div
                     key={s.label}
                     className="bg-dark-800/60 rounded-lg border border-white/5 px-5 py-3 backdrop-blur"
@@ -284,7 +231,7 @@ export default function DigitalSmileDesign() {
                 to="/contact"
                 className="text-gold-400 hover:text-gold-300 group inline-flex items-center gap-2 text-sm font-medium tracking-widest uppercase transition-colors"
               >
-                Start Your Design
+                {dsd.goldenCtaText}
                 <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </motion.div>
@@ -300,7 +247,7 @@ export default function DigitalSmileDesign() {
               <div className="relative overflow-hidden rounded-sm shadow-2xl shadow-black/40">
                 <img
                   src="/images/dsd/variant1-4k.webp"
-                  alt="Golden proportion dental analysis overlay"
+                  alt={dsd.goldenImageAlt}
                   className="block h-auto w-full"
                   loading="lazy"
                 />
@@ -341,23 +288,26 @@ export default function DigitalSmileDesign() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {journey.map((card) => (
-              <motion.div
-                key={card.num}
-                className="border-gold-400/30 group hover:border-gold-400 rounded-sm border bg-white/60 p-8 text-center backdrop-blur transition-all duration-500 hover:shadow-lg md:p-10"
-                variants={fadeUp}
-              >
-                {/* Icon */}
-                <div className="border-gold-400/30 group-hover:border-gold-400 mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border transition-colors">
-                  <card.icon className="text-gold-600 h-9 w-9 transition-transform duration-300 group-hover:scale-110" />
-                </div>
+            {dsd.journey.map((card) => {
+              const Icon = getIcon(card.iconName);
+              return (
+                <motion.div
+                  key={card.number}
+                  className="border-gold-400/30 group hover:border-gold-400 rounded-sm border bg-white/60 p-8 text-center backdrop-blur transition-all duration-500 hover:shadow-lg md:p-10"
+                  variants={fadeUp}
+                >
+                  {/* Icon */}
+                  <div className="border-gold-400/30 group-hover:border-gold-400 mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border transition-colors">
+                    <Icon className="text-gold-600 h-9 w-9 transition-transform duration-300 group-hover:scale-110" />
+                  </div>
 
-                <h3 className="text-dark-950 mb-3 text-base font-bold tracking-wider">
-                  {card.num}. {card.title}
-                </h3>
-                <p className="text-dark-950/70 text-sm leading-relaxed">{card.desc}</p>
-              </motion.div>
-            ))}
+                  <h3 className="text-dark-950 mb-3 text-base font-bold tracking-wider">
+                    {card.number}. {card.title}
+                  </h3>
+                  <p className="text-dark-950/70 text-sm leading-relaxed">{card.description}</p>
+                </motion.div>
+              );
+            })}
           </motion.div>
 
           {/* CTA */}
@@ -372,7 +322,7 @@ export default function DigitalSmileDesign() {
               to="/contact"
               className="bg-gold-400 hover:bg-gold-500 text-dark-950 shadow-gold-400/20 inline-flex items-center gap-3 rounded-sm px-10 py-4 text-sm font-semibold tracking-[0.15em] uppercase shadow-lg transition-all duration-300 hover:scale-105"
             >
-              Explore the Full Process
+              {dsd.journeyCtaText}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>

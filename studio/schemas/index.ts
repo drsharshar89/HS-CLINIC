@@ -10,6 +10,10 @@ import { aboutSettings } from './aboutSettings';
 import { technologySettings } from './technologySettings';
 import { homepageSettings } from './homepageSettings';
 import { servicesPageSettings } from './servicesPageSettings';
+import { dsdSettings } from './dsdSettings';
+import { tourismSettings } from './tourismSettings';
+import { beforeAfterCase } from './beforeAfterCase';
+import { youtubeVideo } from './youtubeVideo';
 
 export const schemaTypes = [
   hero,
@@ -24,4 +28,8 @@ export const schemaTypes = [
   technologySettings,
   homepageSettings,
   servicesPageSettings,
+  dsdSettings,
+  tourismSettings,
+  beforeAfterCase,
+  youtubeVideo,
 ];
