@@ -15,6 +15,7 @@ import {
 import type { LucideIcon } from 'lucide-react';
 import { useState } from 'react';
 import clinicLogo from '../../assets/logo.webp';
+import { FloatingCTA } from './FloatingCTA';
 import { useSiteSettings } from '@/hooks/useCmsData';
 
 /** Maps Sanity social platform strings → Lucide icons */
@@ -224,12 +225,38 @@ export function Layout() {
             </ul>
           </div>
         </div>
-        <div className="mt-12 border-t border-white/5 pt-8 text-center">
-          <p className="font-mono text-xs text-gray-500">
+        <div className="mt-12 border-t border-white/5 pt-8">
+          <div className="mb-4 flex flex-wrap justify-center gap-4 text-xs">
+            <Link
+              to="/privacy-policy"
+              className="hover:text-gold-400 text-gray-500 transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              to="/terms-of-service"
+              className="hover:text-gold-400 text-gray-500 transition-colors"
+            >
+              Terms of Service
+            </Link>
+            <Link
+              to="/medical-disclaimer"
+              className="hover:text-gold-400 text-gray-500 transition-colors"
+            >
+              Medical Disclaimer
+            </Link>
+            <Link to="/guarantee" className="hover:text-gold-400 text-gray-500 transition-colors">
+              Guarantee
+            </Link>
+          </div>
+          <p className="text-center font-mono text-xs text-gray-500">
             &copy; {new Date().getFullYear()} Dr. Haitham Sharshar. SYSTEM: ONLINE.
           </p>
         </div>
       </footer>
+
+      {/* Floating WhatsApp + Call CTA */}
+      <FloatingCTA />
     </div>
   );
 }

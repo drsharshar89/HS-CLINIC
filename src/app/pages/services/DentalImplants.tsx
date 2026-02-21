@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -11,6 +12,8 @@ import {
   buildBreadcrumbJsonLd,
   buildFaqJsonLd,
 } from '@/lib/seo';
+import { useServicePillar } from '@/hooks/useCmsData';
+import { MedicallyReviewedBadge } from '@/app/components/MedicallyReviewedBadge';
 
 const breadcrumbs = buildBreadcrumbJsonLd([
   { name: 'Home', url: SITE_URL + '/' },
@@ -18,80 +21,30 @@ const breadcrumbs = buildBreadcrumbJsonLd([
   { name: 'Dental Implants', url: SITE_URL + '/services/dental-implants' },
 ]);
 
-const faqs = [
-  {
-    question: 'How much do dental implants cost in Cairo compared to the USA or UK?',
-    answer:
-      'A single dental implant at HS Clinic costs approximately $450 USD, compared to $3,000–$5,000 in the USA or £2,000–£3,500 in the UK. Full-arch All-on-4 rehabilitation starts at $5,500 versus $20,000–$30,000 in Western countries — a savings of 70–90%.',
-  },
-  {
-    question: 'What makes digitally guided implant surgery safer than traditional placement?',
-    answer:
-      'Dr. Haitham Sharshar uses CBCT 3D imaging to create a complete virtual model of your jaw, then digitally plans the exact implant position, angle, and depth. A 3D-printed surgical guide ensures the implant is placed with sub-millimeter accuracy, avoiding nerves and sinus cavities while maximizing bone contact for faster healing.',
-  },
-  {
-    question: 'Am I a candidate for dental implants if I have bone loss?',
-    answer:
-      'Yes, in most cases. Dr. Sharshar uses CBCT 3D imaging to assess bone volume and density precisely. Bone grafting, sinus lifts, or zygomatic implants can be used to rebuild bone when needed. The digital planning workflow ensures every option is explored before recommending treatment.',
-  },
-  {
-    question: 'What is the All-on-4 technique and who is it for?',
-    answer:
-      'All-on-4 is a full-arch rehabilitation technique where 4 strategically placed dental implants support an entire arch of fixed teeth. It is ideal for patients who are fully edentulous (missing all teeth) or have severely compromised teeth. Dr. Sharshar uses CBCT-guided planning to optimize implant angles for maximum bone engagement, often avoiding the need for bone grafting.',
-  },
-  {
-    question: 'How long does the dental implant process take from start to finish?',
-    answer:
-      'The digital planning phase takes 1–2 visits. Implant placement surgery is completed in a single session. Healing (osseointegration) typically takes 3–6 months, during which a temporary prosthesis is worn. The final prosthetic is delivered once integration is confirmed via follow-up CBCT scan.',
-  },
-];
-
-const faqJsonLd = buildFaqJsonLd(faqs);
-
-const steps = [
-  {
-    title: 'CBCT 3D Scan',
-    description: 'Complete three-dimensional imaging of your jaw, teeth, nerves, and sinuses.',
-  },
-  {
-    title: 'Digital Planning',
-    description:
-      'Virtual implant placement with precise angle, depth, and prosthetic outcome simulation.',
-  },
-  {
-    title: 'Surgical Guide',
-    description:
-      '3D-printed guide manufactured from your digital plan for sub-millimeter accuracy.',
-  },
-  {
-    title: 'Guided Placement',
-    description:
-      'Minimally invasive implant surgery using the printed guide for exact positioning.',
-  },
-  {
-    title: 'Prosthetic Delivery',
-    description:
-      'Custom-designed crown, bridge, or full-arch prosthesis delivered after osseointegration.',
-  },
-];
-
 export default function DentalImplants() {
+  const { pillar } = useServicePillar('dental-implants');
+
+  const faqJsonLd = useMemo(() => buildFaqJsonLd(pillar.faqs), [pillar.faqs]);
+
+  const seoTitle = pillar.seoTitle ?? SEO.dentalImplants.title;
+  const seoDesc = pillar.seoDescription ?? SEO.dentalImplants.description;
+
   return (
     <div className="bg-dark-950 min-h-screen pt-24 pb-12">
       <Helmet>
-        <title>{SEO.dentalImplants.title}</title>
-        <meta name="description" content={SEO.dentalImplants.description} />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
         <link rel="canonical" href={SEO.dentalImplants.canonical} />
-        <meta property="og:title" content={SEO.dentalImplants.title} />
-        <meta property="og:description" content={SEO.dentalImplants.description} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
         <meta property="og:url" content={SEO.dentalImplants.canonical} />
         <meta property="og:image" content={DEFAULT_OG_IMAGE} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:locale" content="en_EG" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={SEO.dentalImplants.title} />
-        <meta name="twitter:description" content={SEO.dentalImplants.description} />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
         <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
         <script type="application/ld+json">{JSON.stringify(DENTAL_IMPLANTS_JSONLD)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbs)}</script>
@@ -111,6 +64,7 @@ export default function DentalImplants() {
           <ChevronRight className="h-3 w-3" />
           <span className="text-amber-400">Dental Implants</span>
         </nav>
+        <MedicallyReviewedBadge lastUpdated="Feb 2026" />
       </div>
 
       {/* Hero Section */}
@@ -121,28 +75,32 @@ export default function DentalImplants() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="mb-6 text-4xl font-bold text-white md:text-5xl">
-            Digitally Guided <span className="text-amber-400">Dental Implant Surgery</span> in Cairo
+            Digitally Guided{' '}
+            <span className="text-amber-400">
+              {pillar.heroTitle.includes('Dental Implant')
+                ? 'Dental Implant Surgery'
+                : pillar.heroTitle}
+            </span>{' '}
+            in Cairo
           </h1>
           <p className="mb-8 max-w-3xl text-lg leading-relaxed text-gray-300">
-            Dr. Haitham Sharshar performs digitally guided dental implant surgery using CBCT 3D
-            imaging, computer-designed surgical guides, and precision-planned prosthetic outcomes.
-            Whether you need a single implant, All-on-4 full-arch rehabilitation, or complex
-            multi-implant reconstruction, every case is planned with sub-millimeter digital accuracy
-            at HS Clinic, Cairo, Egypt.
+            {pillar.heroSubtitle}
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
               to="/contact"
               className="text-dark-950 inline-flex items-center gap-2 rounded-lg bg-amber-500 px-6 py-3 font-semibold transition-colors hover:bg-amber-400"
             >
-              Book Free Consultation <ArrowRight className="h-4 w-4" />
+              {pillar.ctaPrimary} <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link
-              to="/dental-tourism"
-              className="inline-flex items-center gap-2 rounded-lg border border-amber-500/30 px-6 py-3 font-semibold text-amber-400 transition-colors hover:bg-amber-500/10"
-            >
-              Dental Tourism Packages
-            </Link>
+            {pillar.ctaSecondary && (
+              <Link
+                to="/dental-tourism"
+                className="inline-flex items-center gap-2 rounded-lg border border-amber-500/30 px-6 py-3 font-semibold text-amber-400 transition-colors hover:bg-amber-500/10"
+              >
+                {pillar.ctaSecondary}
+              </Link>
+            )}
           </div>
         </motion.div>
       </section>
@@ -177,60 +135,54 @@ export default function DentalImplants() {
       </section>
 
       {/* Digital Workflow Steps */}
-      <section className="mx-auto mb-20 max-w-6xl px-4">
-        <h2 className="mb-8 text-3xl font-bold text-white">The Digital Implant Process</h2>
-        <div className="grid gap-6 md:grid-cols-5">
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-dark-900/50 relative rounded-xl border border-amber-500/20 p-5"
-            >
-              <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-amber-500/20 text-sm font-bold text-amber-400">
-                {i + 1}
-              </div>
-              <h3 className="mb-2 text-lg font-semibold text-white">{step.title}</h3>
-              <p className="text-sm text-gray-400">{step.description}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      {pillar.technologies.length > 0 && (
+        <section className="mx-auto mb-20 max-w-6xl px-4">
+          <h2 className="mb-8 text-3xl font-bold text-white">The Digital Implant Process</h2>
+          <div className="grid gap-6 md:grid-cols-5">
+            {pillar.technologies.map((step, i) => (
+              <motion.div
+                key={step.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-dark-900/50 relative rounded-xl border border-amber-500/20 p-5"
+              >
+                <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-amber-500/20 text-sm font-bold text-amber-400">
+                  {i + 1}
+                </div>
+                <h3 className="mb-2 text-lg font-semibold text-white">{step.name}</h3>
+                <p className="text-sm text-gray-400">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Implant Types */}
-      <section className="mx-auto mb-20 max-w-6xl px-4">
-        <h2 className="mb-8 text-3xl font-bold text-white">Implant Solutions We Offer</h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          {[
-            {
-              title: 'Single Tooth Implants',
-              desc: 'Individual implant and crown to replace a single missing tooth with natural-looking aesthetics and full chewing function.',
-            },
-            {
-              title: 'All-on-4 Full Arch',
-              desc: 'Four strategically placed implants supporting a complete arch of fixed teeth. Ideal for fully edentulous patients or those with severely compromised dentition.',
-            },
-            {
-              title: 'Full-Arch Reconstruction',
-              desc: 'Comprehensive treatment combining multiple implants, bone grafting if needed, and custom prosthetics for complete mouth rehabilitation.',
-            },
-          ].map((item) => (
-            <div key={item.title} className="bg-dark-900/50 rounded-xl border border-white/10 p-6">
-              <CheckCircle2 className="mb-3 h-6 w-6 text-amber-400" />
-              <h3 className="mb-2 text-xl font-semibold text-white">{item.title}</h3>
-              <p className="text-sm text-gray-400">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {pillar.benefits.length > 0 && (
+        <section className="mx-auto mb-20 max-w-6xl px-4">
+          <h2 className="mb-8 text-3xl font-bold text-white">Implant Solutions We Offer</h2>
+          <div className="grid gap-6 md:grid-cols-3">
+            {pillar.benefits.map((item) => (
+              <div
+                key={item.title}
+                className="bg-dark-900/50 rounded-xl border border-white/10 p-6"
+              >
+                <CheckCircle2 className="mb-3 h-6 w-6 text-amber-400" />
+                <h3 className="mb-2 text-xl font-semibold text-white">{item.title}</h3>
+                <p className="text-sm text-gray-400">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* FAQ Section */}
       <section className="mx-auto mb-20 max-w-6xl px-4">
         <h2 className="mb-8 text-3xl font-bold text-white">Frequently Asked Questions</h2>
         <div className="space-y-4">
-          {faqs.map((faq) => (
+          {pillar.faqs.map((faq) => (
             <details
               key={faq.question}
               className="group bg-dark-900/50 rounded-xl border border-white/10"
@@ -242,6 +194,46 @@ export default function DentalImplants() {
               <p className="px-5 pb-5 text-sm leading-relaxed text-gray-400">{faq.answer}</p>
             </details>
           ))}
+        </div>
+      </section>
+
+      {/* Related Services Cross-Links */}
+      <section className="mx-auto mb-20 max-w-6xl px-4">
+        <h2 className="mb-6 text-2xl font-bold text-white">Related Services</h2>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <Link
+            to="/services/full-arch-rehabilitation"
+            className="group bg-dark-900/50 rounded-xl border border-white/10 p-5 transition-colors hover:border-amber-400/30"
+          >
+            <h3 className="font-semibold text-white transition-colors group-hover:text-amber-400">
+              Full-Arch Rehabilitation
+            </h3>
+            <p className="mt-2 text-sm text-gray-400">
+              Complete mouth restoration with implant-supported prosthetics
+            </p>
+          </Link>
+          <Link
+            to="/services/tmj-tmd-treatment"
+            className="group bg-dark-900/50 rounded-xl border border-white/10 p-5 transition-colors hover:border-amber-400/30"
+          >
+            <h3 className="font-semibold text-white transition-colors group-hover:text-amber-400">
+              TMJ/TMD Treatment
+            </h3>
+            <p className="mt-2 text-sm text-gray-400">
+              Digital occlusal analysis and neuromuscular therapy
+            </p>
+          </Link>
+          <Link
+            to="/dental-tourism"
+            className="group bg-dark-900/50 rounded-xl border border-white/10 p-5 transition-colors hover:border-amber-400/30"
+          >
+            <h3 className="font-semibold text-white transition-colors group-hover:text-amber-400">
+              Dental Tourism
+            </h3>
+            <p className="mt-2 text-sm text-gray-400">
+              VIP concierge packages for international patients
+            </p>
+          </Link>
         </div>
       </section>
 

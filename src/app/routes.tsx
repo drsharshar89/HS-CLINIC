@@ -22,6 +22,10 @@ const TmdTreatment = lazy(() => import('@/app/pages/services/TmdTreatment'));
 const ClearAligners = lazy(() => import('@/app/pages/services/ClearAligners'));
 const FullArchRehab = lazy(() => import('@/app/pages/services/FullArchRehab'));
 const TourismProgram = lazy(() => import('@/app/pages/tourism/TourismProgram'));
+const PrivacyPolicy = lazy(() => import('@/app/pages/legal/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('@/app/pages/legal/TermsOfService'));
+const MedicalDisclaimer = lazy(() => import('@/app/pages/legal/MedicalDisclaimer'));
+const Guarantee = lazy(() => import('@/app/pages/legal/Guarantee'));
 const NotFound = lazy(() =>
   import('@/app/pages/NotFound').then((module) => ({ default: module.NotFound }))
 );
@@ -143,6 +147,38 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<PageLoader />}>
             <Contact />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'privacy-policy',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <PrivacyPolicy />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'terms-of-service',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <TermsOfService />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'medical-disclaimer',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <MedicalDisclaimer />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'guarantee',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Guarantee />
           </Suspense>
         ),
       },

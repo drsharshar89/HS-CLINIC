@@ -22,6 +22,7 @@ import type {
   SanityTourismSettings,
   SanityBeforeAfterCase,
   SanityYoutubeVideo,
+  SanityServicePillar,
   SanityImage,
 } from '@/types/sanity';
 
@@ -984,4 +985,306 @@ export function useYoutubeVideos(category: string) {
   }));
 
   return { videos, loading, error };
+}
+
+/* ================================================================
+   SERVICE PILLAR PAGES — CMS-driven with hardcoded fallbacks
+   ================================================================ */
+
+export interface ServicePillarData {
+  heroTagline: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  faqs: Array<{ question: string; answer: string }>;
+  benefits: Array<{ title: string; description?: string }>;
+  technologies: Array<{ name: string; description?: string; iconName?: string }>;
+  ctaPrimary: string;
+  ctaSecondary: string;
+  seoTitle?: string;
+  seoDescription?: string;
+}
+
+const PILLAR_DEFAULTS: Record<string, ServicePillarData> = {
+  'dental-implants': {
+    heroTagline: '',
+    heroTitle: 'Digitally Guided Dental Implant Surgery in Cairo',
+    heroSubtitle:
+      'Dr. Haitham Sharshar performs digitally guided dental implant surgery using CBCT 3D imaging, computer-designed surgical guides, and precision-planned prosthetic outcomes. Whether you need a single implant, All-on-4 full-arch rehabilitation, or complex multi-implant reconstruction, every case is planned with sub-millimeter digital accuracy at HS Clinic, Cairo, Egypt.',
+    faqs: [
+      {
+        question: 'How much do dental implants cost in Cairo compared to the USA or UK?',
+        answer:
+          'A single dental implant at HS Clinic costs approximately $450 USD, compared to $3,000\u2013$5,000 in the USA or \u00a32,000\u2013\u00a33,500 in the UK. Full-arch All-on-4 rehabilitation starts at $5,500 versus $20,000\u2013$30,000 in Western countries \u2014 a savings of 70\u201390%.',
+      },
+      {
+        question: 'What makes digitally guided implant surgery safer than traditional placement?',
+        answer:
+          'Dr. Haitham Sharshar uses CBCT 3D imaging to create a complete virtual model of your jaw, then digitally plans the exact implant position, angle, and depth. A 3D-printed surgical guide ensures the implant is placed with sub-millimeter accuracy, avoiding nerves and sinus cavities while maximizing bone contact for faster healing.',
+      },
+      {
+        question: 'Am I a candidate for dental implants if I have bone loss?',
+        answer:
+          'Yes, in most cases. Dr. Sharshar uses CBCT 3D imaging to assess bone volume and density precisely. Bone grafting, sinus lifts, or zygomatic implants can be used to rebuild bone when needed.',
+      },
+      {
+        question: 'What is the All-on-4 technique and who is it for?',
+        answer:
+          'All-on-4 is a full-arch rehabilitation technique where 4 strategically placed dental implants support an entire arch of fixed teeth. It is ideal for patients who are fully edentulous or have severely compromised teeth.',
+      },
+      {
+        question: 'How long does the dental implant process take from start to finish?',
+        answer:
+          'The digital planning phase takes 1\u20132 visits. Implant placement surgery is completed in a single session. Healing typically takes 3\u20136 months, during which a temporary prosthesis is worn.',
+      },
+    ],
+    benefits: [
+      {
+        title: 'Single Tooth Implants',
+        description:
+          'Individual implant and crown to replace a single missing tooth with natural-looking aesthetics and full chewing function.',
+      },
+      {
+        title: 'All-on-4 Full Arch',
+        description:
+          'Four strategically placed implants supporting a complete arch of fixed teeth.',
+      },
+      {
+        title: 'Full-Arch Reconstruction',
+        description:
+          'Comprehensive treatment combining multiple implants, bone grafting if needed, and custom prosthetics.',
+      },
+    ],
+    technologies: [
+      {
+        name: 'CBCT 3D Scan',
+        description: 'Complete three-dimensional imaging of your jaw, teeth, nerves, and sinuses.',
+      },
+      {
+        name: 'Digital Planning',
+        description:
+          'Virtual implant placement with precise angle, depth, and prosthetic outcome simulation.',
+      },
+      {
+        name: 'Surgical Guide',
+        description:
+          '3D-printed guide manufactured from your digital plan for sub-millimeter accuracy.',
+      },
+      {
+        name: 'Guided Placement',
+        description:
+          'Minimally invasive implant surgery using the printed guide for exact positioning.',
+      },
+      {
+        name: 'Prosthetic Delivery',
+        description:
+          'Custom-designed crown, bridge, or full-arch prosthesis delivered after osseointegration.',
+      },
+    ],
+    ctaPrimary: 'Book Free Consultation',
+    ctaSecondary: 'Dental Tourism Packages',
+  },
+  'tmj-tmd-treatment': {
+    heroTagline: "Middle East's Most Advanced TMD Center",
+    heroTitle: 'Advanced TMJ/TMD Neuromuscular Treatment',
+    heroSubtitle:
+      'Dr. Haitham Sharshar provides the most comprehensive TMD/TMJ treatment protocol in the Middle East, combining jaw tracking (Zebris JMA-Optic+, Germany), surface EMG electromyography, TENS neuromuscular therapy, Occlusense digital pressure mapping, and custom Neurobite occlusal splint therapy.',
+    faqs: [
+      {
+        question: 'What is TMD and how do I know if I have it?',
+        answer:
+          'Temporomandibular Disorder (TMD) is a group of conditions affecting the jaw joint (TMJ), masticatory muscles, and occlusion. Symptoms include jaw pain, clicking or popping sounds, headaches, ear pain, limited mouth opening, and teeth grinding.',
+      },
+      {
+        question: 'What is jaw tracking and why is it important for TMD diagnosis?',
+        answer:
+          'Jaw tracking (JT-3D by Zebris, Germany) records your mandibular movement patterns in three dimensions. It measures range of motion, velocity, trajectory deviations, and opening/closing paths.',
+      },
+      {
+        question: 'How does Dr. Sharshar use EMG in TMD treatment?',
+        answer:
+          'Surface electromyography (EMG) measures the electrical activity of your masticatory muscles. Dr. Sharshar uses EMG to identify muscle hyperactivity, asymmetry, fatigue patterns, and dysfunction.',
+      },
+      {
+        question: 'What is a Neurobite splint and how does it differ from a regular night guard?',
+        answer:
+          'A Neurobite occlusal splint is a custom-designed appliance fabricated using data from your EMG, jaw tracking, and TENS sessions. It is calibrated to your specific neuromuscular rest position.',
+      },
+      {
+        question: 'Is Dr. Sharshar the only dentist in the Middle East with this TMD technology?',
+        answer:
+          'Dr. Haitham Sharshar is the Official JMA-Optic+ Digital Occlusion System Certified Trainer for Zebris Co. (Germany) \u2014 the chosen international trainer for the entire Middle East region.',
+      },
+    ],
+    benefits: [],
+    technologies: [
+      {
+        name: 'Jaw Tracking (JT-3D)',
+        description:
+          'Records 3D mandibular movement patterns, range of motion, velocity, and trajectory deviations.',
+      },
+      {
+        name: 'Surface EMG',
+        description:
+          'Measures electrical activity of masseter and temporalis muscles to identify hyperactivity and dysfunction.',
+      },
+      {
+        name: 'TENS Unit',
+        description:
+          'Relaxes masticatory muscles to find the neuromuscular rest (myocentric) jaw position.',
+      },
+      {
+        name: 'Occlusense',
+        description:
+          'Wireless real-time bite force distribution mapping for precise occlusal adjustment.',
+      },
+      {
+        name: 'Neurobite Splint',
+        description:
+          'Neuromuscular occlusal splint designed from patient-specific EMG and jaw tracking data.',
+      },
+    ],
+    ctaPrimary: 'Book TMD Consultation',
+    ctaSecondary: '',
+  },
+  'clear-aligners': {
+    heroTagline: '',
+    heroTitle: 'Digitally Integrated Clear Aligner Therapy',
+    heroSubtitle:
+      'Invisible orthodontics with full digital integration at HS Clinic Cairo. Dr. Haitham Sharshar combines 3D treatment planning, digital occlusal analysis (T-Scan + Jaw Tracking), and progressive clear aligner therapy to deliver functional and aesthetic tooth alignment.',
+    faqs: [
+      {
+        question: 'How do digital clear aligners differ from traditional braces?',
+        answer:
+          'Clear aligners are removable, virtually invisible orthodontic trays made from medical-grade thermoplastic. Unlike metal braces, they have no wires or brackets, are more comfortable, and allow normal eating and brushing.',
+      },
+      {
+        question: 'How long does clear aligner treatment take?',
+        answer:
+          'Treatment duration varies based on complexity. Simple cases may take 3\u20136 months, while moderate to complex cases typically require 9\u201318 months.',
+      },
+      {
+        question: "What makes Dr. Sharshar's approach to clear aligners unique?",
+        answer:
+          'Dr. Sharshar integrates clear aligner therapy with digital occlusal analysis using T-Scan and jaw tracking. This ensures your teeth are aligned for optimal bite function, not just aesthetics.',
+      },
+      {
+        question: 'Can clear aligners fix bite problems (malocclusion)?',
+        answer:
+          'Yes. Modern clear aligners can treat many types of malocclusion including overbite, underbite, crossbite, open bite, and crowding.',
+      },
+    ],
+    benefits: [
+      {
+        title: 'Digitally Planned',
+        description:
+          'Full 3D treatment simulation before you start \u2014 see your results in advance.',
+      },
+      {
+        title: 'Virtually Invisible',
+        description: 'Clear, removable trays that are nearly undetectable when worn.',
+      },
+      {
+        title: 'Occlusion-Optimized',
+        description: 'Digital bite analysis ensures functional alignment, not just straight teeth.',
+      },
+      {
+        title: 'Comfortable & Removable',
+        description: 'No wires or brackets. Remove for eating, brushing, and special occasions.',
+      },
+      {
+        title: 'Precise & Predictable',
+        description:
+          'Computer-designed sequential trays for controlled, progressive tooth movement.',
+      },
+      {
+        title: 'Quality Controlled',
+        description: 'exocad-certified digital workflow for elite accuracy in every aligner tray.',
+      },
+    ],
+    technologies: [],
+    ctaPrimary: 'Book Aligner Consultation',
+    ctaSecondary: '',
+  },
+  'full-arch-rehabilitation': {
+    heroTagline: '',
+    heroTitle: 'Full-Arch Rehabilitation & All-on-4 Implants',
+    heroSubtitle:
+      'Complete oral rehabilitation combining dental implants, prosthetics, and digital occlusal analysis. Dr. Haitham Sharshar delivers All-on-4 and full-mouth reconstruction with CBCT-guided precision, same-day temporary teeth, and digital occlusion verification.',
+    faqs: [
+      {
+        question: 'What is All-on-4 dental implant treatment?',
+        answer:
+          'All-on-4 is a clinically proven technique where 4 dental implants are strategically placed in each jaw to support a full arch of fixed prosthetic teeth.',
+      },
+      {
+        question:
+          'How much does full-arch rehabilitation cost at HS Clinic compared to the USA/UK?',
+        answer:
+          'Full-arch All-on-4 rehabilitation at HS Clinic starts at approximately $5,500 USD per arch, compared to $20,000\u2013$30,000 in the USA or \u00a315,000\u2013\u00a325,000 in the UK.',
+      },
+      {
+        question: 'Can I get temporary teeth on the same day as implant surgery?',
+        answer:
+          'Yes. Dr. Sharshar offers immediate loading protocols where a temporary fixed prosthesis is attached to the implants on the same day as surgery.',
+      },
+      {
+        question: 'How long do full-arch implant prosthetics last?',
+        answer:
+          'With proper care and regular maintenance, implant-supported full-arch prosthetics can last 15\u201325+ years. The titanium implants themselves can last a lifetime.',
+      },
+    ],
+    benefits: [
+      {
+        title: 'CBCT-Guided Planning',
+        description:
+          'Complete 3D jaw mapping for precise implant position, angulation, and prosthetic outcome prediction.',
+      },
+      {
+        title: 'Same-Day Teeth',
+        description:
+          'Immediate loading protocol \u2014 leave with a fixed temporary prosthesis on the day of surgery.',
+      },
+      {
+        title: 'Digital Occlusion Verification',
+        description:
+          'T-Scan and jaw tracking ensure your prosthetic bite is functionally optimized.',
+      },
+      {
+        title: 'Minimal Bone Requirements',
+        description:
+          'Angled posterior implants maximize bone contact, often avoiding the need for bone grafting.',
+      },
+    ],
+    technologies: [],
+    ctaPrimary: 'Book Consultation',
+    ctaSecondary: 'International Patient? See Tourism Packages',
+  },
+};
+
+export function useServicePillar(slug: string) {
+  const { data, loading, error } = useSanityQuery<SanityServicePillar[]>(
+    `*[_type == "servicePillar" && slug.current == "${slug}"][0...1] {
+      serviceTitle, seoTitle, seoDescription,
+      heroTagline, heroTitle, heroSubtitle, heroImage,
+      sections, technologies, benefits, faqs,
+      ctaPrimary, ctaSecondary
+    }`
+  );
+  const doc = data?.[0];
+  const defaults = PILLAR_DEFAULTS[slug] ?? PILLAR_DEFAULTS['dental-implants'];
+
+  const pillar: ServicePillarData = {
+    heroTagline: doc?.heroTagline ?? defaults.heroTagline,
+    heroTitle: doc?.heroTitle ?? defaults.heroTitle,
+    heroSubtitle: doc?.heroSubtitle ?? defaults.heroSubtitle,
+    faqs: doc?.faqs ?? defaults.faqs,
+    benefits: doc?.benefits ?? defaults.benefits,
+    technologies: doc?.technologies ?? defaults.technologies,
+    ctaPrimary: doc?.ctaPrimary ?? defaults.ctaPrimary,
+    ctaSecondary: doc?.ctaSecondary ?? defaults.ctaSecondary,
+    seoTitle: doc?.seoTitle,
+    seoDescription: doc?.seoDescription,
+  };
+
+  return { pillar, loading, error };
 }

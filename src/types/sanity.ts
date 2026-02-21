@@ -236,3 +236,37 @@ export interface SanityYoutubeVideo {
   category: string;
   sortOrder?: number;
 }
+
+/** Service Pillar Page — per-service CMS document */
+export interface SanityServicePillar {
+  _id: string;
+  _type: 'servicePillar';
+  slug: { current: string };
+  serviceTitle: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  heroTagline?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  heroImage?: SanityImage;
+  sections?: Array<{
+    heading: string;
+    body?: SanityBlock[];
+    iconName?: string;
+  }>;
+  technologies?: Array<{
+    name: string;
+    description?: string;
+    iconName?: string;
+  }>;
+  benefits?: Array<{
+    title: string;
+    description?: string;
+  }>;
+  faqs?: Array<{
+    question: string;
+    answer: string;
+  }>;
+  ctaPrimary?: string;
+  ctaSecondary?: string;
+}

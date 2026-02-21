@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -11,6 +12,8 @@ import {
   buildBreadcrumbJsonLd,
   buildFaqJsonLd,
 } from '@/lib/seo';
+import { useServicePillar } from '@/hooks/useCmsData';
+import { MedicallyReviewedBadge } from '@/app/components/MedicallyReviewedBadge';
 
 const breadcrumbs = buildBreadcrumbJsonLd([
   { name: 'Home', url: SITE_URL + '/' },
@@ -18,75 +21,30 @@ const breadcrumbs = buildBreadcrumbJsonLd([
   { name: 'Clear Aligners', url: SITE_URL + '/services/clear-aligners' },
 ]);
 
-const faqs = [
-  {
-    question: 'How do digital clear aligners differ from traditional braces?',
-    answer:
-      'Clear aligners are removable, virtually invisible orthodontic trays made from medical-grade thermoplastic. Unlike metal braces, they have no wires or brackets, are more comfortable, and allow normal eating and brushing. At HS Clinic, Dr. Sharshar integrates digital occlusal analysis to ensure your teeth are not just straight but functionally optimized for a proper bite.',
-  },
-  {
-    question: 'How long does clear aligner treatment take?',
-    answer:
-      'Treatment duration varies based on complexity. Simple cases may take 3–6 months, while moderate to complex cases typically require 9–18 months. Dr. Sharshar provides a digital treatment simulation during consultation so you can see your projected timeline and final result before starting.',
-  },
-  {
-    question: "What makes Dr. Sharshar's approach to clear aligners unique?",
-    answer:
-      'Dr. Sharshar integrates clear aligner therapy with digital occlusal analysis using T-Scan and jaw tracking. This ensures your teeth are aligned not only for aesthetics but for optimal bite function, reducing the risk of TMJ problems, premature wear, and relapse. As an Official exocad Certified ICTP Trainer, he applies elite digital dentistry quality control to every case.',
-  },
-  {
-    question: 'Can clear aligners fix bite problems (malocclusion)?',
-    answer:
-      'Yes. Modern clear aligners can treat many types of malocclusion including overbite, underbite, crossbite, open bite, and crowding. Dr. Sharshar uses digital occlusal analysis to plan treatment that addresses both alignment and functional bite correction simultaneously.',
-  },
-];
-
-const faqJsonLd = buildFaqJsonLd(faqs);
-
-const benefits = [
-  {
-    title: 'Digitally Planned',
-    desc: 'Full 3D treatment simulation before you start — see your results in advance.',
-  },
-  {
-    title: 'Virtually Invisible',
-    desc: 'Clear, removable trays that are nearly undetectable when worn.',
-  },
-  {
-    title: 'Occlusion-Optimized',
-    desc: 'Digital bite analysis ensures functional alignment, not just straight teeth.',
-  },
-  {
-    title: 'Comfortable & Removable',
-    desc: 'No wires or brackets. Remove for eating, brushing, and special occasions.',
-  },
-  {
-    title: 'Precise & Predictable',
-    desc: 'Computer-designed sequential trays for controlled, progressive tooth movement.',
-  },
-  {
-    title: 'Quality Controlled',
-    desc: 'exocad-certified digital workflow for elite accuracy in every aligner tray.',
-  },
-];
-
 export default function ClearAligners() {
+  const { pillar } = useServicePillar('clear-aligners');
+
+  const faqJsonLd = useMemo(() => buildFaqJsonLd(pillar.faqs), [pillar.faqs]);
+
+  const seoTitle = pillar.seoTitle ?? SEO.clearAligners.title;
+  const seoDesc = pillar.seoDescription ?? SEO.clearAligners.description;
+
   return (
     <div className="bg-dark-950 min-h-screen pt-24 pb-12">
       <Helmet>
-        <title>{SEO.clearAligners.title}</title>
-        <meta name="description" content={SEO.clearAligners.description} />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
         <link rel="canonical" href={SEO.clearAligners.canonical} />
-        <meta property="og:title" content={SEO.clearAligners.title} />
-        <meta property="og:description" content={SEO.clearAligners.description} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
         <meta property="og:url" content={SEO.clearAligners.canonical} />
         <meta property="og:image" content={DEFAULT_OG_IMAGE} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:locale" content="en_EG" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={SEO.clearAligners.title} />
-        <meta name="twitter:description" content={SEO.clearAligners.description} />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
         <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
         <script type="application/ld+json">{JSON.stringify(CLEAR_ALIGNERS_JSONLD)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbs)}</script>
@@ -106,6 +64,7 @@ export default function ClearAligners() {
           <ChevronRight className="h-3 w-3" />
           <span className="text-amber-400">Clear Aligners</span>
         </nav>
+        <MedicallyReviewedBadge lastUpdated="Feb 2026" />
       </div>
 
       {/* Hero */}
@@ -119,42 +78,41 @@ export default function ClearAligners() {
             Digitally Integrated <span className="text-amber-400">Clear Aligner Therapy</span>
           </h1>
           <p className="mb-8 max-w-3xl text-lg leading-relaxed text-gray-300">
-            Invisible orthodontics with full digital integration at HS Clinic Cairo. Dr. Haitham
-            Sharshar combines 3D treatment planning, digital occlusal analysis (T-Scan + Jaw
-            Tracking), and progressive clear aligner therapy to deliver functional and aesthetic
-            tooth alignment — not just straight teeth, but a proper bite.
+            {pillar.heroSubtitle}
           </p>
           <Link
             to="/contact"
             className="text-dark-950 inline-flex items-center gap-2 rounded-lg bg-amber-500 px-6 py-3 font-semibold transition-colors hover:bg-amber-400"
           >
-            Book Aligner Consultation <ArrowRight className="h-4 w-4" />
+            {pillar.ctaPrimary} <ArrowRight className="h-4 w-4" />
           </Link>
         </motion.div>
       </section>
 
       {/* Benefits Grid */}
-      <section className="mx-auto mb-20 max-w-6xl px-4">
-        <h2 className="mb-8 text-3xl font-bold text-white">
-          Why Choose Digital Clear Aligners at HS Clinic?
-        </h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {benefits.map((b, i) => (
-            <motion.div
-              key={b.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              viewport={{ once: true }}
-              className="bg-dark-900/50 rounded-xl border border-white/10 p-6"
-            >
-              <CheckCircle2 className="mb-3 h-6 w-6 text-amber-400" />
-              <h3 className="mb-2 text-lg font-semibold text-white">{b.title}</h3>
-              <p className="text-sm text-gray-400">{b.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      {pillar.benefits.length > 0 && (
+        <section className="mx-auto mb-20 max-w-6xl px-4">
+          <h2 className="mb-8 text-3xl font-bold text-white">
+            Why Choose Digital Clear Aligners at HS Clinic?
+          </h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {pillar.benefits.map((b, i) => (
+              <motion.div
+                key={b.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                viewport={{ once: true }}
+                className="bg-dark-900/50 rounded-xl border border-white/10 p-6"
+              >
+                <CheckCircle2 className="mb-3 h-6 w-6 text-amber-400" />
+                <h3 className="mb-2 text-lg font-semibold text-white">{b.title}</h3>
+                <p className="text-sm text-gray-400">{b.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* NLP Content */}
       <section className="mx-auto mb-20 max-w-6xl px-4">
@@ -182,7 +140,7 @@ export default function ClearAligners() {
       <section className="mx-auto mb-20 max-w-6xl px-4">
         <h2 className="mb-8 text-3xl font-bold text-white">Frequently Asked Questions</h2>
         <div className="space-y-4">
-          {faqs.map((faq) => (
+          {pillar.faqs.map((faq) => (
             <details
               key={faq.question}
               className="group bg-dark-900/50 rounded-xl border border-white/10"
@@ -194,6 +152,44 @@ export default function ClearAligners() {
               <p className="px-5 pb-5 text-sm leading-relaxed text-gray-400">{faq.answer}</p>
             </details>
           ))}
+        </div>
+      </section>
+
+      {/* Related Services */}
+      <section className="mx-auto mb-20 max-w-6xl px-4">
+        <h2 className="mb-6 text-2xl font-bold text-white">Related Services</h2>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <Link
+            to="/digital-smile-design"
+            className="group bg-dark-900/50 rounded-xl border border-white/10 p-5 transition-colors hover:border-amber-400/30"
+          >
+            <h3 className="font-semibold text-white transition-colors group-hover:text-amber-400">
+              Digital Smile Design
+            </h3>
+            <p className="mt-2 text-sm text-gray-400">
+              Preview your final smile before treatment begins
+            </p>
+          </Link>
+          <Link
+            to="/services/tmj-tmd-treatment"
+            className="group bg-dark-900/50 rounded-xl border border-white/10 p-5 transition-colors hover:border-amber-400/30"
+          >
+            <h3 className="font-semibold text-white transition-colors group-hover:text-amber-400">
+              TMJ/TMD Treatment
+            </h3>
+            <p className="mt-2 text-sm text-gray-400">Ensure your bite is functionally optimized</p>
+          </Link>
+          <Link
+            to="/services/dental-implants"
+            className="group bg-dark-900/50 rounded-xl border border-white/10 p-5 transition-colors hover:border-amber-400/30"
+          >
+            <h3 className="font-semibold text-white transition-colors group-hover:text-amber-400">
+              Dental Implants
+            </h3>
+            <p className="mt-2 text-sm text-gray-400">
+              Replace missing teeth with digitally guided implants
+            </p>
+          </Link>
         </div>
       </section>
 
