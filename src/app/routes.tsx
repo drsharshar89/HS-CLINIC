@@ -17,6 +17,11 @@ const DigitalSmileDesign = lazy(() => import('@/app/pages/DigitalSmileDesign'));
 const DentalTourism = lazy(() => import('@/app/pages/DentalTourism'));
 const Gallery = lazy(() => import('@/app/pages/Gallery'));
 const SanityStudio = lazy(() => import('@/app/pages/SanityStudio'));
+const DentalImplants = lazy(() => import('@/app/pages/services/DentalImplants'));
+const TmdTreatment = lazy(() => import('@/app/pages/services/TmdTreatment'));
+const ClearAligners = lazy(() => import('@/app/pages/services/ClearAligners'));
+const FullArchRehab = lazy(() => import('@/app/pages/services/FullArchRehab'));
+const TourismProgram = lazy(() => import('@/app/pages/tourism/TourismProgram'));
 const NotFound = lazy(() =>
   import('@/app/pages/NotFound').then((module) => ({ default: module.NotFound }))
 );
@@ -86,10 +91,50 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: 'dental-tourism/program',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <TourismProgram />
+          </Suspense>
+        ),
+      },
+      {
         path: 'gallery',
         element: (
           <Suspense fallback={<PageLoader />}>
             <Gallery />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'services/dental-implants',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <DentalImplants />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'services/tmj-tmd-treatment',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <TmdTreatment />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'services/clear-aligners',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <ClearAligners />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'services/full-arch-rehabilitation',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <FullArchRehab />
           </Suspense>
         ),
       },

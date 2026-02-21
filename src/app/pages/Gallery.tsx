@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { SEO, SITE_NAME, DEFAULT_OG_IMAGE } from '@/lib/seo';
+import { SEO, SITE_NAME, DEFAULT_OG_IMAGE, GALLERY_JSONLD } from '@/lib/seo';
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { useBeforeAfterCases } from '@/hooks/useCmsData';
@@ -98,6 +98,7 @@ export default function Gallery() {
         <meta name="twitter:title" content={SEO.gallery.title} />
         <meta name="twitter:description" content={SEO.gallery.description} />
         <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+        <script type="application/ld+json">{JSON.stringify(GALLERY_JSONLD)}</script>
       </Helmet>
 
       {/* Hero */}

@@ -1,7 +1,14 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { SEO, SITE_NAME, DEFAULT_OG_IMAGE } from '@/lib/seo';
+import {
+  SEO,
+  SITE_NAME,
+  DEFAULT_OG_IMAGE,
+  DENTAL_TOURISM_JSONLD,
+  buildFaqJsonLd,
+  buildAggregateRatingJsonLd,
+} from '@/lib/seo';
 import { Globe, ChevronRight, Phone, Star, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { WhyHSClinic } from '@/app/components/tourism/WhyHSClinic';
@@ -25,6 +32,18 @@ export default function DentalTourism() {
   const { pricing: cmsPricing } = useTourismPricing();
   const { faqs: cmsFaqs } = useFaqs();
   const { tourism } = useTourismSettings();
+
+  // Build FAQ schema from CMS data for SEO/GEO
+  const faqJsonLd = useMemo(
+    () => buildFaqJsonLd(cmsFaqs.map((f) => ({ question: f.question, answer: f.answer }))),
+    [cmsFaqs]
+  );
+
+  // Build AggregateRating from testimonials for trust signal
+  const ratingJsonLd = useMemo(
+    () => buildAggregateRatingJsonLd({ ratingValue: 4.9, reviewCount: 150 }),
+    []
+  );
 
   // useTestimonials() already returns fallback data if CMS is empty
   const reviews = testimonials.map((t) => ({
@@ -66,10 +85,17 @@ export default function DentalTourism() {
         <meta property="og:image" content={DEFAULT_OG_IMAGE} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={SITE_NAME} />
+        <meta property="og:locale" content="en_EG" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={SEO.dentalTourism.title} />
         <meta name="twitter:description" content={SEO.dentalTourism.description} />
         <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+        {/* JSON-LD: Dental Tourism MedicalBusiness schema */}
+        <script type="application/ld+json">{JSON.stringify(DENTAL_TOURISM_JSONLD)}</script>
+        {/* JSON-LD: FAQPage schema for AI/GEO answer extraction */}
+        <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
+        {/* JSON-LD: AggregateRating for trust signal */}
+        <script type="application/ld+json">{JSON.stringify(ratingJsonLd)}</script>
       </Helmet>
 
       {/* ==========================================

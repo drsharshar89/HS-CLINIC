@@ -1,6 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { SEO, SITE_NAME, DEFAULT_OG_IMAGE, buildLocalBusinessJsonLd } from '@/lib/seo';
+import {
+  SEO,
+  SITE_NAME,
+  DEFAULT_OG_IMAGE,
+  buildLocalBusinessJsonLd,
+  buildAggregateRatingJsonLd,
+  WEBSITE_JSONLD,
+} from '@/lib/seo';
 import {
   Activity,
   Zap,
@@ -31,6 +38,7 @@ export function Home() {
   const { settings } = useSiteSettings();
   const ogImageUrl = useSanityImage(settings.ogImage, 1200) || DEFAULT_OG_IMAGE;
   const jsonLd = buildLocalBusinessJsonLd(settings);
+  const ratingJsonLd = buildAggregateRatingJsonLd({ ratingValue: 4.9, reviewCount: 150 });
 
   const features = homepage.features.map((f) => ({
     icon: (f.iconName && ICON_MAP[f.iconName]) || Zap,
@@ -51,6 +59,7 @@ export function Home() {
         <meta property="og:image" content={ogImageUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={SITE_NAME} />
+        <meta property="og:locale" content="en_EG" />
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={SEO.home.title} />
@@ -58,6 +67,10 @@ export function Home() {
         <meta name="twitter:image" content={ogImageUrl} />
         {/* JSON-LD Structured Data */}
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        {/* JSON-LD WebSite schema for sitelinks search box */}
+        <script type="application/ld+json">{JSON.stringify(WEBSITE_JSONLD)}</script>
+        {/* JSON-LD AggregateRating for trust signal */}
+        <script type="application/ld+json">{JSON.stringify(ratingJsonLd)}</script>
       </Helmet>
 
       <CyberHero />

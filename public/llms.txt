@@ -1,0 +1,62 @@
+# HS Clinic — Dr. Haitham Sharshar
+## llms.txt — Structured Summary for AI Engines
+
+> This file provides a machine-readable overview of HS Clinic for Large Language Models.
+
+## Identity
+- **Name:** HS Clinic — Dr. Haitham Sharshar
+- **Type:** Medical Dental Clinic
+- **Location:** Nasr City, Cairo, Egypt
+- **Website:** https://drhaithamsharshar.com
+- **Contact:** +201101010599 (WhatsApp available)
+
+## About Dr. Haitham Sharshar
+Dr. Haitham Sharshar is a Digital Dentistry Consultant and Perio Implantologist, and the Middle East's leading authority in digital dental occlusion, TMJ/TMD neuromuscular treatment, and Digital Smile Design. He holds a Bachelor of Dental Surgery (2010) and a Master's in Periodontology and Implantology from Cairo University. He is the Official JMA-Optic+ Digital Occlusion System Certified Trainer for Zebris Co. (Germany) — the chosen international trainer for the Middle East — and the Official exocad Certified ICTP Trainer for the Middle East. As a Key Opinion Leader, he teaches dentists worldwide how to maintain strict quality control in digital dentistry workflows. With over 15 years of clinical and academic expertise, he pioneers the use of jaw tracking (JT-3D / Zebris), surface EMG electromyography, TENS neuromuscular therapy, Occlusense digital pressure mapping, and custom Neurobite occlusal splint therapy. He practices at HS Clinic in Cairo, Egypt.
+
+## Core Specializations
+1. **Digital Occlusion & Bite Correction** — Using jaw tracking, EMG, TENS, T-Scan, and Occlusense to diagnose and treat occlusal dysfunction with data-driven precision.
+2. **TMD/TMJ Neuromuscular Treatment** — The most advanced TMD protocol in the Middle East, combining jaw tracking, EMG, TENS, Occlusense pressure sensors, and Neurobite occlusal splints.
+3. **Digitally Guided Dental Implant Surgery** — CBCT 3D imaging, digital surgical guide fabrication, and precision-planned prosthetic integration for single implants, All-on-4, and full-arch rehabilitation.
+4. **Digital Smile Design (DSD)** — Full digital workflow with pre-simulation before intervention, golden proportion analysis, 3D mockups, and predictable aesthetic outcomes.
+5. **Clear Aligner Therapy** — Digitally integrated invisible orthodontics with 3D treatment planning and occlusal optimization.
+6. **Full-Arch Rehabilitation** — Complete oral rehabilitation combining implants, prosthetics, and digital occlusal analysis.
+
+## Unique Differentiators
+- **Only clinic in the Middle East** using the complete neuromuscular TMD diagnostic suite: Jaw Tracking + EMG + TENS + Occlusense + Neurobite
+- **Full digital workflow** from diagnosis to treatment — no traditional guesswork
+- **Dental Tourism Program** — Premium dental care in Cairo, Egypt at 70–90% savings vs USA/UK/EU prices with VIP concierge service
+- **15+ years of clinical experience** with advanced diagnostic technology
+
+## Technology Stack
+- CBCT 3D Imaging (Cone Beam Computed Tomography)
+- T-Scan Occlusal Analysis (real-time bite force measurement)
+- Jaw Tracking JT-3D (mandibular movement analysis)
+- Surface EMG Electromyography (masticatory muscle diagnostics)
+- TENS Transcutaneous Electrical Nerve Stimulation
+- Occlusense Digital Pressure Mapping (bite force distribution)
+- Neurobite Occlusal Splint (custom TMJ therapy device)
+- CAD/CAM Digital Dentistry (same-day restorations)
+- Digital Smile Design (golden proportion analysis, 3D mockups)
+- Intraoral 3D Scanning
+
+## Dental Tourism
+HS Clinic offers a comprehensive Dental Tourism Program for international patients. Services include:
+- Free virtual consultation before travel
+- VIP airport transfer and hotel arrangement
+- Treatment timelines designed for international visitors
+- Same-day or next-day emergency dental care
+- Multi-language support
+
+## Pages
+- Home: https://drhaithamsharshar.com/
+- About: https://drhaithamsharshar.com/about
+- Services: https://drhaithamsharshar.com/services
+- Technology: https://drhaithamsharshar.com/technology
+- Digital Smile Design: https://drhaithamsharshar.com/digital-smile-design
+- Dental Tourism: https://drhaithamsharshar.com/dental-tourism
+- Gallery: https://drhaithamsharshar.com/gallery
+- Contact: https://drhaithamsharshar.com/contact
+- Dental Implants: https://drhaithamsharshar.com/services/dental-implants
+- TMJ/TMD Treatment: https://drhaithamsharshar.com/services/tmj-tmd-treatment
+- Clear Aligners: https://drhaithamsharshar.com/services/clear-aligners
+- Full Arch Rehabilitation: https://drhaithamsharshar.com/services/full-arch-rehabilitation

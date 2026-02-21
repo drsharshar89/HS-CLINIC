@@ -9,7 +9,15 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
-import { SEO, SITE_NAME, DEFAULT_OG_IMAGE, SERVICES_JSONLD } from '@/lib/seo';
+import {
+  SEO,
+  SITE_NAME,
+  DEFAULT_OG_IMAGE,
+  SERVICES_JSONLD,
+  DENTAL_IMPLANTS_JSONLD,
+  TMD_TREATMENT_JSONLD,
+  CLEAR_ALIGNERS_JSONLD,
+} from '@/lib/seo';
 import { SectionHeader } from '@/app/components/ui/SectionHeader';
 import { GlowCard } from '@/app/components/ui/GlowCard';
 import { motion } from 'framer-motion';
@@ -53,6 +61,10 @@ export function Services() {
         <meta name="twitter:description" content={SEO.services.description} />
         <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
         <script type="application/ld+json">{JSON.stringify(SERVICES_JSONLD)}</script>
+        {/* Per-service MedicalProcedure schemas for AI/GEO pillar dominance */}
+        <script type="application/ld+json">{JSON.stringify(DENTAL_IMPLANTS_JSONLD)}</script>
+        <script type="application/ld+json">{JSON.stringify(TMD_TREATMENT_JSONLD)}</script>
+        <script type="application/ld+json">{JSON.stringify(CLEAR_ALIGNERS_JSONLD)}</script>
       </Helmet>
 
       {/* Background Effects */}

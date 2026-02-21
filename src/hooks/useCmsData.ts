@@ -5,6 +5,7 @@
  * the hardcoded defaults are used so the site never breaks.
  */
 import { useSanityQuery, useSanityImage } from '@/hooks/useSanity';
+import { urlFor } from '@/lib/sanityClient';
 import type {
   SanityHero,
   SanityService,
@@ -950,15 +951,15 @@ export function useBeforeAfterCases() {
     `*[_type == "beforeAfterCase"] | order(sortOrder asc) { _id, label, beforeImage, afterImage, treatment, sortOrder }`
   );
 
-  // If CMS has data, map with image URLs; otherwise use hardcoded paths
+  // If CMS has data, use urlFor() for proper image URLs; otherwise use hardcoded paths
   const cases =
     data && data.length > 0
       ? data.map((c) => ({
           before: c.beforeImage
-            ? `https://cdn.sanity.io/images/nk38o90y/production/${c.beforeImage.asset._ref.replace('image-', '').replace('-webp', '.webp').replace('-jpg', '.jpg').replace('-png', '.png')}`
+            ? urlFor(c.beforeImage).auto('format').width(800).url()
             : '/images/dental/dental-implant-dr-haitham-sharshar.webp',
           after: c.afterImage
-            ? `https://cdn.sanity.io/images/nk38o90y/production/${c.afterImage.asset._ref.replace('image-', '').replace('-webp', '.webp').replace('-jpg', '.jpg').replace('-png', '.png')}`
+            ? urlFor(c.afterImage).auto('format').width(800).url()
             : '/images/dental/dental-implant-dr-haitham-sharshar.webp',
           label: c.label,
           treatment: c.treatment ?? '',

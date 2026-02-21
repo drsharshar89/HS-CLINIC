@@ -14,6 +14,7 @@ import { dsdSettings } from './dsdSettings';
 import { tourismSettings } from './tourismSettings';
 import { beforeAfterCase } from './beforeAfterCase';
 import { youtubeVideo } from './youtubeVideo';
+import { servicePillar } from './servicePillar';
 
 export const schemaTypes = [
   hero,
@@ -32,4 +33,5 @@ export const schemaTypes = [
   tourismSettings,
   beforeAfterCase,
   youtubeVideo,
+  servicePillar,
 ];
