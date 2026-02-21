@@ -36,6 +36,7 @@ export interface SanityHero {
   ctaText?: string;
   ctaLink?: string;
   backgroundImage?: SanityImage;
+  backgroundImageAlt?: string;
 }
 
 /** Individual service card */
@@ -47,6 +48,7 @@ export interface SanityService {
   description: string;
   icon?: string;
   image?: SanityImage;
+  imageAlt?: string;
   order?: number;
 }
 
@@ -60,6 +62,7 @@ export interface SanityTestimonial {
   text: string;
   stars: number;
   image?: SanityImage;
+  imageAlt?: string;
 }
 
 /** Doctor / staff profile */
@@ -70,6 +73,7 @@ export interface SanityTeamMember {
   role: string;
   bio?: SanityBlock[];
   image?: SanityImage;
+  imageAlt?: string;
   order?: number;
 }
 
@@ -117,4 +121,49 @@ export interface SanitySiteSettings {
   email?: string;
   address?: string;
   socialLinks?: Array<{ platform: string; url: string }>;
+  workingHours?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  ogImage?: SanityImage;
+  ogImageAlt?: string;
+  geoLat?: number;
+  geoLng?: number;
+}
+
+/** About page settings (singleton) */
+export interface SanityAboutSettings {
+  _id: string;
+  _type: 'aboutSettings';
+  quote?: string;
+  values?: Array<{ title: string; description: string; iconName?: string }>;
+  stats?: Array<{ value: string; label: string }>;
+  certifications?: string[];
+}
+
+/** Technology page settings (singleton) */
+export interface SanityTechnologySettings {
+  _id: string;
+  _type: 'technologySettings';
+  technologies?: Array<{ title: string; description: string; iconName?: string }>;
+  heroImage?: SanityImage;
+  heroImageAlt?: string;
+  stats?: Array<{ value: string; label: string }>;
+}
+
+/** Homepage settings (singleton) */
+export interface SanityHomepageSettings {
+  _id: string;
+  _type: 'homepageSettings';
+  features?: Array<{ title: string; description: string; iconName?: string }>;
+  ctaTitle?: string;
+  ctaSubtitle?: string;
+  ctaButtonText?: string;
+}
+
+/** Services page settings (singleton) */
+export interface SanityServicesPageSettings {
+  _id: string;
+  _type: 'servicesPageSettings';
+  conditions?: string[];
+  processSteps?: Array<{ step: string; title: string; description: string }>;
 }

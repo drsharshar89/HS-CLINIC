@@ -6,6 +6,10 @@ import { page } from './page';
 import { tourismPricing } from './tourismPricing';
 import { faq } from './faq';
 import { siteSettings } from './siteSettings';
+import { aboutSettings } from './aboutSettings';
+import { technologySettings } from './technologySettings';
+import { homepageSettings } from './homepageSettings';
+import { servicesPageSettings } from './servicesPageSettings';
 
 export const schemaTypes = [
   hero,
@@ -16,4 +20,8 @@ export const schemaTypes = [
   tourismPricing,
   faq,
   siteSettings,
+  aboutSettings,
+  technologySettings,
+  homepageSettings,
+  servicesPageSettings,
 ];

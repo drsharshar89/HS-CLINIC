@@ -16,15 +16,37 @@ export default defineConfig({
         S.list()
           .title('Content')
           .items([
-            // Singleton: Site Settings (always exactly one)
+            // Singletons (always exactly one document each)
             S.listItem()
               .title('Site Settings')
               .icon(() => '⚙️')
               .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
+            S.listItem()
+              .title('Hero Section')
+              .icon(() => '🏠')
+              .child(S.document().schemaType('hero').documentId('hero')),
             S.divider(),
-            // All other document types (exclude siteSettings from the generic list)
+            // Page Settings singletons
+            S.listItem()
+              .title('Homepage Settings')
+              .icon(() => '🏡')
+              .child(S.document().schemaType('homepageSettings').documentId('homepageSettings')),
+            S.listItem()
+              .title('About Page Settings')
+              .icon(() => '📋')
+              .child(S.document().schemaType('aboutSettings').documentId('aboutSettings')),
+            S.listItem()
+              .title('Services Page Settings')
+              .icon(() => '🩺')
+              .child(S.document().schemaType('servicesPageSettings').documentId('servicesPageSettings')),
+            S.listItem()
+              .title('Technology Page Settings')
+              .icon(() => '🔬')
+              .child(S.document().schemaType('technologySettings').documentId('technologySettings')),
+            S.divider(),
+            // All other document types (exclude singletons from the generic list)
             ...S.documentTypeListItems().filter(
-              (item) => item.getId() !== 'siteSettings'
+              (item) => !['siteSettings', 'hero', 'homepageSettings', 'aboutSettings', 'servicesPageSettings', 'technologySettings'].includes(item.getId() ?? '')
             ),
           ]),
     }),

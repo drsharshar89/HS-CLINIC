@@ -69,8 +69,8 @@ export const LOCAL_BUSINESS_JSONLD = {
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 30.0444,
-    longitude: 31.2357,
+    latitude: 30.0511,
+    longitude: 31.3656,
   },
   image: DEFAULT_OG_IMAGE,
   priceRange: '$$',
@@ -100,4 +100,128 @@ export const DOCTOR_JSONLD = {
   image: DEFAULT_OG_IMAGE,
   description:
     'Board-certified prosthodontist and pioneer in digital dental occlusion with over 15 years of clinical experience.',
+};
+
+/**
+ * Build a LocalBusiness JSON-LD from CMS settings.
+ * Falls back to the hardcoded constant for any missing field.
+ */
+export function buildLocalBusinessJsonLd(settings: {
+  clinicName?: string;
+  phone?: string;
+  address?: string;
+  geoLat?: number;
+  geoLng?: number;
+  socialLinks?: Array<{ platform: string; url: string }>;
+}) {
+  return {
+    ...LOCAL_BUSINESS_JSONLD,
+    name: settings.clinicName || LOCAL_BUSINESS_JSONLD.name,
+    telephone: settings.phone || LOCAL_BUSINESS_JSONLD.telephone,
+    address: {
+      '@type': 'PostalAddress' as const,
+      streetAddress: settings.address || 'Nasr City',
+      addressLocality: 'Cairo',
+      addressCountry: 'EG',
+    },
+    geo: {
+      '@type': 'GeoCoordinates' as const,
+      latitude: settings.geoLat ?? LOCAL_BUSINESS_JSONLD.geo.latitude,
+      longitude: settings.geoLng ?? LOCAL_BUSINESS_JSONLD.geo.longitude,
+    },
+    sameAs: settings.socialLinks?.map((s) => s.url) ?? [],
+  };
+}
+
+/**
+ * Build a Person JSON-LD for a team member/doctor from CMS data.
+ */
+export function buildDoctorJsonLd(doctor: { name: string; role: string; bioExcerpt: string }) {
+  return {
+    ...DOCTOR_JSONLD,
+    name: doctor.name || DOCTOR_JSONLD.name,
+    jobTitle: doctor.role || DOCTOR_JSONLD.jobTitle,
+    description: doctor.bioExcerpt || DOCTOR_JSONLD.description,
+  };
+}
+
+/** JSON-LD: Services page — list of offered dental services */
+export const SERVICES_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalBusiness',
+  name: 'HS Clinic - Dr. Haitham Sharshar',
+  url: SITE_URL + '/services',
+  medicalSpecialty: 'Dentistry',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Dental Services',
+    itemListElement: [
+      {
+        '@type': 'OfferCatalog',
+        name: 'Digital Occlusion & TMJ',
+        description: 'EMG analysis, jaw tracking, T-Scan diagnostics for occlusal optimization.',
+      },
+      {
+        '@type': 'OfferCatalog',
+        name: 'Cosmetic Dentistry',
+        description: 'Veneers, smile makeovers, aesthetic restorations with Digital Smile Design.',
+      },
+      {
+        '@type': 'OfferCatalog',
+        name: 'Dental Implants',
+        description:
+          'Single implants, All-on-4, full-arch rehabilitation with CBCT-guided planning.',
+      },
+      {
+        '@type': 'OfferCatalog',
+        name: 'Full-Arch Rehabilitation',
+        description:
+          'Complete oral rehabilitation combining implants, prosthetics, and occlusal analysis.',
+      },
+    ],
+  },
+};
+
+/** JSON-LD: Technology page — diagnostic equipment and methods */
+export const TECHNOLOGY_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalBusiness',
+  name: 'HS Clinic - Advanced Diagnostics',
+  url: SITE_URL + '/technology',
+  medicalSpecialty: 'Dentistry',
+  description:
+    'State-of-the-art dental technology: CBCT 3D imaging, T-Scan occlusal analysis, EMG diagnostics, and CAD/CAM digital dentistry.',
+  availableService: [
+    {
+      '@type': 'MedicalProcedure',
+      name: 'CBCT 3D Imaging',
+      description: 'Cone beam computed tomography for precise 3D dental and jaw imaging.',
+    },
+    {
+      '@type': 'MedicalProcedure',
+      name: 'T-Scan Occlusal Analysis',
+      description: 'Digital occlusal force measurement and bite analysis.',
+    },
+    {
+      '@type': 'MedicalProcedure',
+      name: 'EMG Diagnostics',
+      description: 'Electromyography for jaw muscle activity assessment.',
+    },
+  ],
+};
+
+/** JSON-LD: Digital Smile Design page — the DSD procedure */
+export const DSD_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalProcedure',
+  name: 'Luxarian Scientific Digital Smile Design',
+  url: SITE_URL + '/digital-smile-design',
+  description:
+    'A precision cosmetic planning procedure using golden proportion analysis, 3D mockups, and digital facial mapping to design the perfect smile.',
+  procedureType: 'http://schema.org/NoninvasiveProcedure',
+  howPerformed:
+    'Video analysis → 2D blueprint design → 3D mockup → final try-in with golden proportion verification.',
+  preparation: 'Initial consultation and comprehensive digital scanning.',
+  bodyLocation: 'Teeth and facial structure',
+  status: 'http://schema.org/EventScheduled',
 };

@@ -9,11 +9,11 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
-import { SEO, SITE_NAME, DEFAULT_OG_IMAGE } from '@/lib/seo';
+import { SEO, SITE_NAME, DEFAULT_OG_IMAGE, SERVICES_JSONLD } from '@/lib/seo';
 import { SectionHeader } from '@/app/components/ui/SectionHeader';
 import { GlowCard } from '@/app/components/ui/GlowCard';
 import { motion } from 'framer-motion';
-import { useServices } from '@/hooks/useCmsData';
+import { useServices, useServicesPageSettings } from '@/hooks/useCmsData';
 
 /** Map Lucide icon name strings from CMS to actual components */
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -28,32 +28,13 @@ const ICON_MAP: Record<string, LucideIcon> = {
 
 export function Services() {
   const { services: cmsServices } = useServices();
+  const { pageSettings } = useServicesPageSettings();
 
   const services = cmsServices.map((s) => ({
     icon: (s.icon && ICON_MAP[s.icon]) || Stethoscope,
     title: s.title,
     description: s.description,
   }));
-
-  const conditions = [
-    'TMJ Disorders',
-    'Chronic Headaches',
-    'Jaw Clicking',
-    'Bruxism',
-    'Uneven Bite',
-    'Facial Neuralgia',
-    'Neck Pain',
-    'Tinnitus',
-    'Limited Opening',
-    'Sleep Apnea',
-  ];
-
-  const process = [
-    { step: '01', title: 'Scan', desc: 'Full digital topography & motion capture' },
-    { step: '02', title: 'Analyze', desc: 'AI-driven data interpretation' },
-    { step: '03', title: 'Plan', desc: 'Virtual treatment modeling' },
-    { step: '04', title: 'Execute', desc: 'Laser-guided precision therapy' },
-  ];
 
   return (
     <div className="bg-dark-950 min-h-screen pt-24 pb-12">
@@ -71,6 +52,7 @@ export function Services() {
         <meta name="twitter:title" content={SEO.services.title} />
         <meta name="twitter:description" content={SEO.services.description} />
         <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+        <script type="application/ld+json">{JSON.stringify(SERVICES_JSONLD)}</script>
       </Helmet>
 
       {/* Background Effects */}
@@ -98,7 +80,7 @@ export function Services() {
         <div className="mb-32">
           <h3 className="mb-12 text-center font-serif text-3xl text-white">Target pathologies</h3>
           <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-4">
-            {conditions.map((condition, index) => (
+            {pageSettings.conditions.map((condition, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -117,10 +99,10 @@ export function Services() {
         <div className="mb-20">
           <h3 className="mb-16 text-center font-serif text-3xl text-white">The Digital Workflow</h3>
           <div className="grid gap-8 md:grid-cols-4">
-            {process.map((p, i) => (
+            {pageSettings.processSteps.map((p, i) => (
               <div key={i} className="group relative">
                 {/* Connecting Line */}
-                {i < process.length - 1 && (
+                {i < pageSettings.processSteps.length - 1 && (
                   <div className="from-gold-400/50 absolute top-8 left-1/2 z-0 hidden h-[1px] w-full bg-gradient-to-r to-transparent md:block" />
                 )}
 
@@ -129,7 +111,7 @@ export function Services() {
                     {p.step}
                   </div>
                   <h4 className="mb-2 text-lg font-bold text-white">{p.title}</h4>
-                  <p className="max-w-[150px] text-sm text-gray-500">{p.desc}</p>
+                  <p className="text-sm text-gray-500 md:max-w-[150px]">{p.description}</p>
                 </div>
               </div>
             ))}

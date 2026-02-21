@@ -34,6 +34,13 @@ export const hero = defineType({
       type: 'image',
       options: { hotspot: true },
     }),
+    defineField({
+      name: 'backgroundImageAlt',
+      title: 'Background Image Alt Text',
+      type: 'string',
+      description: 'Describe the image for accessibility & SEO (e.g. "Modern dental clinic interior")',
+      validation: (rule) => rule.required(),
+    }),
   ],
   preview: {
     select: { title: 'title', media: 'backgroundImage' },

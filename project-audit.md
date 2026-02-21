@@ -1,7 +1,7 @@
 # HS Clinic — Current State & Next Steps Blueprint
 
-> **Date:** 2026-02-15  
-> **Author:** ORC (Orchestration Agent)  
+> **Date:** 2026-02-15
+> **Author:** ORC (Orchestration Agent)
 > **Live site:** [hs-clinic-dental-tourism-v3-fresh.netlify.app](https://hs-clinic-dental-tourism-v3-fresh.netlify.app/)
 
 ---
@@ -14,7 +14,7 @@
 | **Routing** | react-router-dom v6 | 8 public routes + `/studio` |
 | **Styling** | Tailwind CSS 4.1 + custom CSS vars | Dark-mode only, gold accent palette |
 | **State** | Local `useState` only | No global store |
-| **CMS** | Sanity.io (8 schemas) | Client + hooks exist, **zero pages fetch CMS data** |
+| **CMS** | Sanity.io (13 schemas) | Client + hooks wired to all 7 pages via `useCmsData.ts` |
 | **3D** | Three.js / @react-three | Lazy-loaded `ImplantScene` on `/dental-tourism` |
 | **Animations** | Framer Motion | CyberHero, ClinicalSimulation, DentalTourism |
 | **SEO** | react-helmet-async | `<title>` + `<meta description>` on every page |
@@ -58,19 +58,19 @@
 
 ---
 
-## 3. Critical Issues 🔴
+## 3. Resolved Critical Issues (Previously 🔴)
 
-### 3.1 Missing Before/After Slider Images
-`DentalTourism.tsx` references `/images/tourism/case1-before.jpg` and `case1-after.jpg` — **neither file exists**. The `BeforeAfterSlider` renders broken images.
+### ~~3.1 Missing Before/After Slider Images~~ ✅ FIXED
+`BeforeAfterSlider` now uses internal dental images from `public/images/dental/`.
 
-### 3.2 Sitemap Missing `/dental-tourism`
-`sitemap.xml` lists 5 routes but **omits `/dental-tourism`** — the most SEO-important page. Directly hurts Google indexing for dental tourism keywords.
+### ~~3.2 Sitemap Missing `/dental-tourism`~~ ✅ FIXED
+`sitemap.xml` now includes all 7 public routes with `<lastmod>` dates.
 
-### 3.3 Contact Form Has No Backend
-Both `Contact.tsx` and `ConsultationForm.tsx` do `console.log` only — no Netlify Forms, no email, no API.
+### ~~3.3 Contact Form Has No Backend~~ ✅ FIXED
+Both forms wired to Netlify Forms with honeypot spam protection.
 
-### 3.4 Sanity CMS Completely Unwired
-8 schemas, client + hooks (`useSanityQuery`, `urlFor`) exist, but **zero pages import them**. All content hardcoded.
+### ~~3.4 Sanity CMS Completely Unwired~~ ✅ FIXED
+All 7 pages wired via `useCmsData.ts` hooks with fallback-first pattern.
 
 ---
 
@@ -111,12 +111,12 @@ Both `Contact.tsx` and `ConsultationForm.tsx` do `console.log` only — no Netli
 
 ## 6. Prioritized Action Checklist
 
-### 🔴 P0 — Fix Before Any New Features
-- [ ] Add real before/after images or remove BeforeAfterSlider
-- [ ] Add `/dental-tourism` to `sitemap.xml`
-- [ ] Add `<label>` elements to all form inputs
-- [ ] Wire forms to Netlify Forms or email API
-- [ ] Add favicon
+### ~~🔴 P0 — Fix Before Any New Features~~ ✅ ALL DONE
+- [x] ~~Add real before/after images or remove BeforeAfterSlider~~ — Uses internal dental images
+- [x] ~~Add `/dental-tourism` to `sitemap.xml`~~ — All routes in sitemap
+- [x] ~~Add `<label>` elements to all form inputs~~ — ARIA labels added
+- [x] ~~Wire forms to Netlify Forms or email API~~ — Netlify Forms with honeypot
+- [x] ~~Add favicon~~ — `public/favicon.svg` exists
 
 ### 🟠 P1 — SEO & Accessibility Sprint
 - [x] JSON-LD structured data on all pages
@@ -134,12 +134,12 @@ Both `Contact.tsx` and `ConsultationForm.tsx` do `console.log` only — no Netli
 - [ ] Clean dead code
 - [ ] Add `prefers-reduced-motion` support
 
-### 🔵 P3 — CMS Integration
-- [ ] Wire Home hero to Sanity CMS
-- [ ] Wire Services to `service` schema
-- [ ] Wire About to `teamMember` schema
-- [ ] Wire reviews to `testimonial` schema
-- [ ] Wire FAQ to `faq` schema
+### ~~🔵 P3 — CMS Integration~~ ✅ ALL DONE
+- [x] ~~Wire Home hero to Sanity CMS~~
+- [x] ~~Wire Services to `service` schema~~
+- [x] ~~Wire About to `teamMember` schema~~
+- [x] ~~Wire reviews to `testimonial` schema~~
+- [x] ~~Wire FAQ to `faq` schema~~
 
 ### ⚪ P4 — Future Enhancements
 - [ ] WhatsApp chat widget

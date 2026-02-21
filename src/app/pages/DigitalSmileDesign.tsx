@@ -12,7 +12,7 @@ import {
   ArrowRight,
   ChevronRight,
 } from 'lucide-react';
-import { SEO, SITE_NAME, DEFAULT_OG_IMAGE } from '@/lib/seo';
+import { SEO, SITE_NAME, DEFAULT_OG_IMAGE, DSD_JSONLD } from '@/lib/seo';
 
 /* ────────── animation presets ────────── */
 const fadeUp = {
@@ -89,6 +89,11 @@ export default function DigitalSmileDesign() {
         <meta property="og:url" content={seo.canonical} />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seo.title} />
+        <meta name="twitter:description" content={seo.description} />
+        <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+        <script type="application/ld+json">{JSON.stringify(DSD_JSONLD)}</script>
       </Helmet>
 
       {/* ═══════════════════════════════════════════
@@ -98,7 +103,7 @@ export default function DigitalSmileDesign() {
       <section className="relative w-full overflow-hidden">
         {/* 4K Stitch Variant 2 as full hero */}
         <motion.img
-          src="/images/dsd/variant2-4k.png"
+          src="/images/dsd/variant2-4k.webp"
           alt="Luxarian Scientific Digital Smile Design — blueprint and reveal"
           className="block h-auto w-full"
           initial={{ opacity: 0, scale: 1.02 }}
@@ -160,7 +165,7 @@ export default function DigitalSmileDesign() {
           transition={{ duration: 0.8 }}
         >
           <img
-            src="/images/dsd/variant1-4k.png"
+            src="/images/dsd/variant1-4k.webp"
             alt="Digital Smile Design split reality — before and after transformation with golden proportion analysis"
             className="block h-auto w-full"
             loading="lazy"
@@ -294,7 +299,7 @@ export default function DigitalSmileDesign() {
             >
               <div className="relative overflow-hidden rounded-sm shadow-2xl shadow-black/40">
                 <img
-                  src="/images/dsd/variant1-4k.png"
+                  src="/images/dsd/variant1-4k.webp"
                   alt="Golden proportion dental analysis overlay"
                   className="block h-auto w-full"
                   loading="lazy"

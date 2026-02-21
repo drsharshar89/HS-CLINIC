@@ -1,8 +1,31 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, Mail, MapPin } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  Menu,
+  X,
+  Phone,
+  Mail,
+  MapPin,
+  Facebook,
+  Instagram,
+  Youtube,
+  Linkedin,
+  Twitter,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { useState } from 'react';
-import clinicLogo from '../../assets/logo.png';
+import clinicLogo from '../../assets/logo.webp';
 import { useSiteSettings } from '@/hooks/useCmsData';
+
+/** Maps Sanity social platform strings → Lucide icons */
+const SOCIAL_ICONS: Record<string, LucideIcon> = {
+  facebook: Facebook,
+  instagram: Instagram,
+  youtube: Youtube,
+  linkedin: Linkedin,
+  twitter: Twitter,
+  tiktok: Twitter, // Lucide has no TikTok icon; fallback to Twitter-style
+};
 
 export function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -76,6 +99,8 @@ export function Layout() {
                 type="button"
                 className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400 hover:text-white"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-menu"
               >
                 <span className="sr-only">Open main menu</span>
                 {mobileMenuOpen ? (
@@ -90,7 +115,7 @@ export function Layout() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="bg-dark-900 border-b border-white/10 md:hidden">
+          <div id="mobile-menu" className="bg-dark-900 border-b border-white/10 md:hidden">
             <div className="space-y-1 px-4 pt-2 pb-3">
               {navigation.map((item) => (
                 <Link
@@ -113,7 +138,18 @@ export function Layout() {
       </header>
 
       <main id="main" className="flex-grow pt-20">
-        <Outlet />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            onAnimationStart={() => window.scrollTo(0, 0)}
+          >
+            <Outlet />
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       <footer className="bg-dark-900 border-t border-white/5 px-4 py-12 sm:px-6 lg:px-8">
@@ -127,6 +163,26 @@ export function Layout() {
               Pioneering the future of digital dentistry in the Middle East. Precision, technology,
               and art combined.
             </p>
+            {settings.socialLinks.length > 0 && (
+              <div className="flex gap-3">
+                {settings.socialLinks.map((link) => {
+                  const Icon = SOCIAL_ICONS[link.platform];
+                  if (!Icon) return null;
+                  return (
+                    <a
+                      key={link.platform}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={link.platform}
+                      className="hover:bg-gold-400/20 hover:text-gold-400 flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-gray-400 transition-all duration-300"
+                    >
+                      <Icon className="h-4 w-4" />
+                    </a>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           <div>
@@ -168,7 +224,7 @@ export function Layout() {
           </div>
         </div>
         <div className="mt-12 border-t border-white/5 pt-8 text-center">
-          <p className="font-mono text-xs text-gray-600">
+          <p className="font-mono text-xs text-gray-500">
             &copy; {new Date().getFullYear()} Dr. Haitham Sharshar. SYSTEM: ONLINE.
           </p>
         </div>

@@ -29,19 +29,19 @@ const pharaohExperiences = [
   {
     title: 'The Agatha Christie Suite',
     desc: 'Step into the legendary author\u2019s world at the historic Old Cataract Hotel \u2014 where mysteries were penned and empires gazed upon the Nile.',
-    image: '/images/journey/pharaoh-aswan.jpg',
+    image: '/images/journey/pharaoh-aswan.webp',
     location: 'Old Cataract, Aswan',
   },
   {
     title: 'Royal Garden Walk',
     desc: 'A private guided stroll through the Winter Palace gardens, designed as a meditative interval between your treatment sessions.',
-    image: '/images/journey/pharaoh-luxor.jpg',
+    image: '/images/journey/pharaoh-luxor.webp',
     location: 'Winter Palace, Luxor',
   },
   {
     title: 'Post-Op Recovery Villa',
     desc: 'A serene, fully-staffed private villa on the Red Sea coast for the ultimate post-procedure recovery in warmth and privacy.',
-    image: '/images/journey/pharaoh-redsea.jpg',
+    image: '/images/journey/pharaoh-redsea.webp',
     location: 'The Red Sea',
   },
 ];
@@ -131,7 +131,7 @@ export function RoyalDentalJourney() {
           >
             <div className="group relative aspect-[3/4] overflow-hidden rounded-2xl">
               <img
-                src="/images/journey/ritual-clinic.jpg"
+                src="/images/journey/ritual-clinic.webp"
                 alt="High-tech dental clinic interior with modern equipment and warm lighting"
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
@@ -155,7 +155,7 @@ export function RoyalDentalJourney() {
         {/* Full-bleed background image */}
         <div className="absolute inset-0">
           <img
-            src="/images/journey/nile-noir.jpg"
+            src="/images/journey/nile-noir.webp"
             alt="Luxury dinner setup on a private yacht at night on the Nile"
             className="h-full w-full object-cover"
             loading="lazy"

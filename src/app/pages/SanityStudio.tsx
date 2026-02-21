@@ -1,4 +1,6 @@
 import { Helmet } from 'react-helmet-async';
+import { useSearchParams } from 'react-router-dom';
+import { ShieldAlert } from 'lucide-react';
 
 const STUDIO_URL = `https://hs-dental-clinic.sanity.studio`;
 
@@ -7,6 +9,24 @@ const STUDIO_URL = `https://hs-dental-clinic.sanity.studio`;
  * Later this can embed the full Studio via <iframe> or sanity/router.
  */
 export default function SanityStudio() {
+  const [searchParams] = useSearchParams();
+  const isAuthorized = searchParams.get('key') === 'hs89'; // Simple access key
+
+  if (!isAuthorized) {
+    return (
+      <div className="bg-dark-950 flex min-h-screen flex-col items-center justify-center px-4 text-center">
+        <Helmet>
+          <title>404 Not Found | HS Clinic</title>
+        </Helmet>
+        <ShieldAlert className="text-gold-500/20 mb-6 h-16 w-16" />
+        <h1 className="mb-2 font-serif text-2xl text-white">Access Restricted</h1>
+        <p className="max-w-xs text-sm text-gray-500">
+          This secure terminal is only accessible via authorized uplink protocols.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-dark-950 flex min-h-screen flex-col items-center justify-center px-4">
       <Helmet>
@@ -63,8 +83,8 @@ export default function SanityStudio() {
           </svg>
         </a>
 
-        <p className="font-mono text-xs text-gray-600">
-          Project: nk38o90y &middot; Dataset: production
+        <p className="font-mono text-xs text-gray-500">
+          Project ID: nk38o90y &middot; Target: production
         </p>
       </div>
     </div>

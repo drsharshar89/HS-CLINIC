@@ -31,6 +31,13 @@ export const teamMember = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'imageAlt',
+      title: 'Photo Alt Text',
+      type: 'string',
+      description: 'e.g. "Dr. Haitham Sharshar in the clinic"',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',

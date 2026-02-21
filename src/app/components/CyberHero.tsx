@@ -18,7 +18,7 @@ export function CyberHero() {
       {bgUrl && (
         <img
           src={bgUrl}
-          alt=""
+          alt={hero.backgroundImageAlt}
           className="absolute inset-0 h-full w-full object-cover opacity-30"
           loading="eager"
         />

@@ -1,61 +1,42 @@
 import { Helmet } from 'react-helmet-async';
-import { SEO, SITE_NAME, DEFAULT_OG_IMAGE, LOCAL_BUSINESS_JSONLD } from '@/lib/seo';
-import { Activity, Zap, Orbit, BrainCircuit, ShieldCheck, Microscope } from 'lucide-react';
-// import { Render } from "@puckeditor/core";
-// import { config } from "../cms/config";
+import { Link } from 'react-router-dom';
+import { SEO, SITE_NAME, DEFAULT_OG_IMAGE, buildLocalBusinessJsonLd } from '@/lib/seo';
+import {
+  Activity,
+  Zap,
+  Orbit,
+  BrainCircuit,
+  ShieldCheck,
+  Microscope,
+  type LucideIcon,
+} from 'lucide-react';
 import { CyberHero } from '@/app/components/CyberHero';
 import { ClinicalSimulation } from '@/app/components/ClinicalSimulation';
 import { GlowCard } from '@/app/components/ui/GlowCard';
 import { PatientStories } from '@/app/components/PatientStories';
+import { useHomepageSettings, useSiteSettings, useSanityImage } from '@/hooks/useCmsData';
+
+/** Map icon name strings from CMS to Lucide components */
+const ICON_MAP: Record<string, LucideIcon> = {
+  BrainCircuit,
+  Orbit,
+  Activity,
+  Microscope,
+  ShieldCheck,
+  Zap,
+};
 
 export function Home() {
-  // const puckData = localStorage.getItem("puck-data");
+  const { homepage } = useHomepageSettings();
+  const { settings } = useSiteSettings();
+  const ogImageUrl = useSanityImage(settings.ogImage, 1200) || DEFAULT_OG_IMAGE;
+  const jsonLd = buildLocalBusinessJsonLd(settings);
 
-  /*
-  if (puckData) {
-    try {
-      const data = JSON.parse(puckData);
-      if (data.content && data.content.length > 0) {
-        return <Render config={config} data={data} />;
-      }
-    } catch (e) {
-        // Fallback to default
-    }
-  }
-  */
-
-  const features = [
-    {
-      icon: BrainCircuit,
-      title: 'AI Diagnostics',
-      description: 'Advanced machine learning protocols to map your perfect bite pattern.',
-    },
-    {
-      icon: Orbit,
-      title: '3D Jaw Tracking',
-      description: 'Real-time kinetic analysis of mandibular movement in 6 degrees of freedom.',
-    },
-    {
-      icon: Activity,
-      title: 'EMG Biofeedback',
-      description: 'neuromuscular monitoring to ensure muscle harmony and release tension.',
-    },
-    {
-      icon: Microscope,
-      title: 'Micro-Analysis',
-      description: 'Sub-millimeter precision for occlusal contact points and force distribution.',
-    },
-    {
-      icon: ShieldCheck,
-      title: 'Total Protection',
-      description: 'Comprehensive TMJ health preservation using digital splint therapy.',
-    },
-    {
-      icon: Zap,
-      title: 'Laser Precision',
-      description: 'Non-invasive adjustments using state-of-the-art dental laser systems.',
-    },
-  ];
+  const features = homepage.features.map((f) => ({
+    icon: (f.iconName && ICON_MAP[f.iconName]) || Zap,
+    title: f.title,
+    description: f.description,
+  }));
 
   return (
     <div className="bg-dark-950 min-h-screen">
@@ -67,16 +48,16 @@ export function Home() {
         <meta property="og:title" content={SEO.home.title} />
         <meta property="og:description" content={SEO.home.description} />
         <meta property="og:url" content={SEO.home.canonical} />
-        <meta property="og:image" content={DEFAULT_OG_IMAGE} />
+        <meta property="og:image" content={ogImageUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={SITE_NAME} />
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={SEO.home.title} />
         <meta name="twitter:description" content={SEO.home.description} />
-        <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+        <meta name="twitter:image" content={ogImageUrl} />
         {/* JSON-LD Structured Data */}
-        <script type="application/ld+json">{JSON.stringify(LOCAL_BUSINESS_JSONLD)}</script>
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
       <CyberHero />
@@ -123,18 +104,16 @@ export function Home() {
 
         <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
           <h2 className="mb-8 font-serif text-5xl tracking-tighter text-white md:text-7xl">
-            Ready to Upgrade?
+            {homepage.ctaTitle}
           </h2>
-          <p className="mb-12 text-xl font-light text-gray-300">
-            Your smile deserves the precision of the future. Initialize your transformation today.
-          </p>
+          <p className="mb-12 text-xl font-light text-gray-300">{homepage.ctaSubtitle}</p>
 
-          <a
-            href="/contact"
+          <Link
+            to="/contact"
             className="border-gold-400 bg-gold-400/10 text-gold-400 hover:bg-gold-400 hover:text-dark-950 focus:ring-gold-400 focus:ring-offset-dark-950 inline-flex h-12 w-full max-w-xs items-center justify-center rounded-lg border px-6 font-medium transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
           >
-            START SYSTEM ENGINE
-          </a>
+            {homepage.ctaButtonText}
+          </Link>
         </div>
       </section>
     </div>

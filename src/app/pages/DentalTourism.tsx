@@ -24,45 +24,6 @@ import { VIPWelcome } from '@/app/components/tourism/VIPWelcome';
 import { RoyalDentalJourney } from '@/app/components/tourism/RoyalDentalJourney';
 import { useTestimonials, useTourismPricing, useFaqs } from '@/hooks/useCmsData';
 
-const DEFAULT_REVIEWS = [
-  {
-    name: 'James W.',
-    country: '🇬🇧',
-    text: '"Saved 70% compared to the US. The clinic felt like a 5-star hotel."',
-    stars: 5,
-  },
-  {
-    name: 'Maria S.',
-    country: '🇩🇪',
-    text: '"Dr. Sharshar is a magician. My implants are perfect and the trip was unforgettable."',
-    stars: 5,
-  },
-  {
-    name: 'Ahmed K.',
-    country: '🇦🇪',
-    text: '"World-class technology at a fraction of Gulf prices. Highly recommended."',
-    stars: 5,
-  },
-  {
-    name: 'Sarah L.',
-    country: '🇺🇸',
-    text: '"I combined my dental work with visiting the Pyramids. Best decision ever!"',
-    stars: 5,
-  },
-  {
-    name: 'Oliver P.',
-    country: '🇦🇺',
-    text: '"The virtual consultation made everything so easy. Flew in, got treated, explored Cairo."',
-    stars: 5,
-  },
-  {
-    name: 'Fatima R.',
-    country: '🇸🇦',
-    text: '"Premium German implants for a third of the price. The team is incredibly professional."',
-    stars: 5,
-  },
-];
-
 const timelineSteps = [
   {
     icon: Video,
@@ -91,20 +52,17 @@ const timelineSteps = [
 ];
 
 export default function DentalTourism() {
-  const { testimonials: cmsTestimonials } = useTestimonials();
+  const { testimonials } = useTestimonials();
   const { pricing: cmsPricing } = useTourismPricing();
   const { faqs: cmsFaqs } = useFaqs();
 
-  // Use CMS testimonials if available, otherwise hardcoded
-  const reviews =
-    cmsTestimonials.length > 0
-      ? cmsTestimonials.map((t) => ({
-          name: t.name,
-          country: `${t.countryFlag ?? ''} ${t.country ?? ''}`.trim() || '🌍',
-          text: t.text,
-          stars: t.stars,
-        }))
-      : DEFAULT_REVIEWS;
+  // useTestimonials() already returns fallback data if CMS is empty
+  const reviews = testimonials.map((t) => ({
+    name: t.name,
+    country: `${t.countryFlag ?? ''} ${t.country ?? ''}`.trim() || '🌍',
+    text: t.text,
+    stars: t.stars,
+  }));
 
   // Use CMS pricing if available, otherwise hardcoded
   const priceComparison = cmsPricing.map((p) => ({
@@ -254,10 +212,7 @@ export default function DentalTourism() {
 
           <div className="grid gap-8 md:grid-cols-2">
             <div className="border-gold-400/20 relative overflow-hidden rounded-2xl border">
-              <BeforeAfterSlider
-                before="/images/tourism/case1-before.jpg"
-                after="/images/tourism/case1-after.jpg"
-              />
+              <BeforeAfterSlider />
             </div>
             <div className="border-gold-400/20 group relative h-80 overflow-hidden rounded-2xl border">
               <img

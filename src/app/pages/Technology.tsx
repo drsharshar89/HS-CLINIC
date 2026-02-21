@@ -1,42 +1,24 @@
-import { Activity, Cpu, Gauge, Eye, ScanLine, Laptop, Server } from 'lucide-react';
+import { Activity, Cpu, Gauge, Eye, ScanLine, Laptop, Server, type LucideIcon } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
-import { SEO, SITE_NAME, DEFAULT_OG_IMAGE } from '@/lib/seo';
+import { SEO, SITE_NAME, DEFAULT_OG_IMAGE, TECHNOLOGY_JSONLD } from '@/lib/seo';
 import { SectionHeader } from '@/app/components/ui/SectionHeader';
 import { GlowCard } from '@/app/components/ui/GlowCard';
+import { useTechnologySettings, useSanityImage } from '@/hooks/useCmsData';
+
+/** Map icon name strings from CMS to Lucide components */
+const ICON_MAP: Record<string, LucideIcon> = { Activity, Cpu, Gauge, Eye, ScanLine, Laptop };
 
 export function Technology() {
-  const technologies = [
-    {
-      icon: Activity,
-      title: 'Kinematic Jaw Tracking',
-      description: 'Real-time 6-DOF mandibular movement recording.',
-    },
-    {
-      icon: Cpu,
-      title: 'Computerized EMG',
-      description: 'Micron-level detection of muscle electrical potentials.',
-    },
-    {
-      icon: Gauge,
-      title: 'T-Scan Force Analysis',
-      description: 'Digital occlusal force distribution mapping.',
-    },
-    {
-      icon: Eye,
-      title: 'Tekscan Digital Sensors',
-      description: 'High-resolution pressure sensing grid.',
-    },
-    {
-      icon: ScanLine,
-      title: 'CBCT 3D Evaluation',
-      description: 'Volumetric visualization of TMJ structures.',
-    },
-    {
-      icon: Laptop,
-      title: 'JVA (Joint Vibration)',
-      description: 'Acoustic analysis of cartilage friction.',
-    },
-  ];
+  const { tech } = useTechnologySettings();
+  const heroUrl = useSanityImage(tech.heroImage, 1920);
+
+  const technologies = tech.technologies.map(
+    (t: { iconName?: string; title: string; description: string }) => ({
+      icon: (t.iconName && ICON_MAP[t.iconName]) || Activity,
+      title: t.title,
+      description: t.description,
+    })
+  );
 
   return (
     <div className="bg-dark-950 min-h-screen pt-24 pb-12">
@@ -54,6 +36,7 @@ export function Technology() {
         <meta name="twitter:title" content={SEO.technology.title} />
         <meta name="twitter:description" content={SEO.technology.description} />
         <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+        <script type="application/ld+json">{JSON.stringify(TECHNOLOGY_JSONLD)}</script>
       </Helmet>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -63,8 +46,11 @@ export function Technology() {
         <div className="group relative mb-24 overflow-hidden rounded-2xl border border-white/10">
           <div className="from-dark-950 absolute inset-0 z-10 bg-gradient-to-t via-transparent to-transparent" />
           <img
-            src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=2832&auto=format&fit=crop"
-            alt="Advanced Dental Tech"
+            src={
+              heroUrl ||
+              'https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=2832&auto=format&fit=crop'
+            }
+            alt={tech.heroImageAlt || 'Advanced Dental Tech'}
             className="h-96 w-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
           />
@@ -79,23 +65,16 @@ export function Technology() {
 
         {/* Tech Grid */}
         <div className="mb-32 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {technologies.map((tech, index) => (
-            <GlowCard
-              key={index}
-              icon={tech.icon}
-              title={tech.title}
-              description={tech.description}
-            />
-          ))}
+          {technologies.map(
+            (t: { icon: LucideIcon; title: string; description: string }, index: number) => (
+              <GlowCard key={index} icon={t.icon} title={t.title} description={t.description} />
+            )
+          )}
         </div>
 
         {/* Stats Block */}
         <div className="grid gap-8 border-t border-white/5 pt-16 md:grid-cols-3">
-          {[
-            { label: 'Precision', value: '10μm' },
-            { label: 'Data Points', value: '1M+' },
-            { label: 'Analysis Time', value: '<5s' },
-          ].map((stat, i) => (
+          {tech.stats.map((stat: { value: string; label: string }, i: number) => (
             <div key={i} className="text-center">
               <div className="mb-2 font-mono text-4xl font-bold text-white md:text-5xl">
                 {stat.value}

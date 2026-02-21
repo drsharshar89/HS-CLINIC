@@ -15,3 +15,20 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Prerendering: serve pre-rendered HTML to search engines & social crawlers
+# This ensures Google, Facebook, Twitter, WhatsApp see full page content
+# instead of an empty <div id="root"></div>
+# Note: Requires Netlify Pro plan. On free plan, this is silently ignored.
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing]
+  skip_processing = false
+
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+# Bot prerendering (Netlify Pro feature)
+[build.processing.images]
+  compress = true

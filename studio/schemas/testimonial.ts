@@ -43,6 +43,12 @@ export const testimonial = defineType({
       type: 'image',
       options: { hotspot: true },
     }),
+    defineField({
+      name: 'imageAlt',
+      title: 'Photo Alt Text',
+      type: 'string',
+      description: 'e.g. "Happy patient from London after dental implant treatment"',
+    }),
   ],
   preview: {
     select: { title: 'name', subtitle: 'country', media: 'image' },

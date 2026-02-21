@@ -39,6 +39,12 @@ export const service = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'imageAlt',
+      title: 'Image Alt Text',
+      type: 'string',
+      description: 'Describe the image for accessibility & SEO',
+    }),
+    defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',

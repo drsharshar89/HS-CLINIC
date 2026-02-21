@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, Satellite, Radio } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
-import { SEO, SITE_NAME, DEFAULT_OG_IMAGE } from '@/lib/seo';
+import { SEO, SITE_NAME, DEFAULT_OG_IMAGE, buildLocalBusinessJsonLd } from '@/lib/seo';
 import { SectionHeader } from '@/app/components/ui/SectionHeader';
-import { useSiteSettings } from '@/hooks/useCmsData';
+import { useSiteSettings, useSanityImage } from '@/hooks/useCmsData';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -16,30 +16,44 @@ export function Contact() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError(null);
+
     const form = e.currentTarget;
     const formDataObj = new FormData(form);
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(formDataObj as unknown as Record<string, string>).toString(),
-    })
-      .then(() => setSubmitted(true))
-      .catch((err) => console.error('Form submission error:', err));
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        date: '',
-        time: '',
-        message: '',
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formDataObj as unknown as Record<string, string>).toString(),
       });
-    }, 3000);
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          date: '',
+          time: '',
+          message: '',
+        });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        throw new Error('Transmission failed. Please try again or contact us directly.');
+      }
+    } catch (err) {
+      console.error('Form submission error:', err);
+      setSubmitError(err instanceof Error ? err.message : 'Unknown error during transmission.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -52,6 +66,8 @@ export function Contact() {
   };
 
   const { settings } = useSiteSettings();
+  const ogImageUrl = useSanityImage(settings.ogImage, 1200) || DEFAULT_OG_IMAGE;
+  const jsonLd = buildLocalBusinessJsonLd(settings);
 
   const contactInfo = [
     {
@@ -72,7 +88,7 @@ export function Contact() {
     {
       icon: Clock,
       title: 'Operational Window',
-      details: ['Mon - Fri: 0900 - 1800', 'Sat: 0900 - 1400'],
+      details: settings.workingHours.split('|').map((s: string) => s.trim()),
     },
   ];
 
@@ -85,13 +101,14 @@ export function Contact() {
         <meta property="og:title" content={SEO.contact.title} />
         <meta property="og:description" content={SEO.contact.description} />
         <meta property="og:url" content={SEO.contact.canonical} />
-        <meta property="og:image" content={DEFAULT_OG_IMAGE} />
+        <meta property="og:image" content={ogImageUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={SEO.contact.title} />
         <meta name="twitter:description" content={SEO.contact.description} />
-        <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+        <meta name="twitter:image" content={ogImageUrl} />
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -195,7 +212,7 @@ export function Contact() {
                         aria-required="true"
                         value={formData.date}
                         onChange={handleChange}
-                        className="bg-dark-950 focus:border-gold-400 focus:ring-gold-400 w-full rounded border border-white/10 px-4 py-3 text-gray-400 text-white transition-all outline-none focus:ring-1"
+                        className="bg-dark-950 focus:border-gold-400 focus:ring-gold-400 w-full rounded border border-white/10 px-4 py-3 text-white transition-all outline-none focus:ring-1"
                       />
                     </div>
                     <div>
@@ -209,7 +226,7 @@ export function Contact() {
                         aria-required="true"
                         value={formData.time}
                         onChange={handleChange}
-                        className="bg-dark-950 focus:border-gold-400 focus:ring-gold-400 w-full rounded border border-white/10 px-4 py-3 text-gray-400 text-white transition-all outline-none focus:ring-1"
+                        className="bg-dark-950 focus:border-gold-400 focus:ring-gold-400 w-full rounded border border-white/10 px-4 py-3 text-white transition-all outline-none focus:ring-1"
                       >
                         <option value="">Select Time Slot</option>
                         <option value="09:00">09:00 - Morning Block</option>
@@ -233,11 +250,24 @@ export function Contact() {
                     />
                   </div>
                 </div>
+                {submitError && (
+                  <div className="rounded-lg border border-red-500/50 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+                    {submitError}
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="bg-gold-400 text-dark-950 flex w-full items-center justify-center gap-2 rounded py-4 font-bold transition-all hover:shadow-[0_0_20px_rgba(212,175,55,0.6)]"
+                  disabled={isSubmitting}
+                  className="bg-gold-400 text-dark-950 flex w-full items-center justify-center gap-2 rounded py-4 font-bold transition-all hover:shadow-[0_0_20px_rgba(212,175,55,0.6)] disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  TRANSMIT DATA <Send className="h-4 w-4" />
+                  {isSubmitting ? (
+                    'TRANSMITTING...'
+                  ) : (
+                    <>
+                      TRANSMIT DATA <Send className="h-4 w-4" />
+                    </>
+                  )}
                 </button>
               </form>
             )}

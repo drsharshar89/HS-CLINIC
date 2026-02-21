@@ -75,6 +75,60 @@ export const siteSettings = defineType({
         },
       ],
     }),
+    defineField({
+      name: 'workingHours',
+      title: 'Working Hours',
+      type: 'string',
+      description: 'e.g. "Mon–Fri: 09:00–18:00 | Sat: 09:00–14:00"',
+    }),
+    // ── SEO Group ──
+    defineField({
+      name: 'seoTitle',
+      title: 'Default SEO Title Suffix',
+      type: 'string',
+      description: 'Appended to page titles, e.g. "| HS Clinic Cairo"',
+      group: 'seo',
+    }),
+    defineField({
+      name: 'seoDescription',
+      title: 'Default Meta Description',
+      type: 'text',
+      rows: 3,
+      description: 'Fallback description for pages without their own',
+      group: 'seo',
+    }),
+    defineField({
+      name: 'ogImage',
+      title: 'Default Open Graph Image',
+      type: 'image',
+      description: 'Used as the default social sharing image (1200×630 recommended)',
+      options: { hotspot: true },
+      group: 'seo',
+    }),
+    defineField({
+      name: 'ogImageAlt',
+      title: 'OG Image Alt Text',
+      type: 'string',
+      description: 'Alt text for the social sharing image',
+      group: 'seo',
+    }),
+    defineField({
+      name: 'geoLat',
+      title: 'Clinic Latitude',
+      type: 'number',
+      description: 'For Google structured data (e.g. 30.0511)',
+      group: 'seo',
+    }),
+    defineField({
+      name: 'geoLng',
+      title: 'Clinic Longitude',
+      type: 'number',
+      description: 'For Google structured data (e.g. 31.3656)',
+      group: 'seo',
+    }),
+  ],
+  groups: [
+    { name: 'seo', title: 'SEO', icon: () => '🔍' },
   ],
   preview: {
     prepare() {

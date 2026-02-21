@@ -52,6 +52,15 @@ export const tourismPricing = defineType({
       description: 'e.g. "Up to 90%"',
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'order',
+      title: 'Display Order',
+      type: 'number',
+      description: 'Lower numbers appear first (e.g. 1 = most important treatment)',
+    }),
+  ],
+  orderings: [
+    { title: 'Display Order', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] },
   ],
   preview: {
     select: { title: 'treatment', subtitle: 'egyptPrice' },

@@ -13,6 +13,10 @@ import type {
   SanityTourismPricing,
   SanityFaq,
   SanitySiteSettings,
+  SanityAboutSettings,
+  SanityTechnologySettings,
+  SanityHomepageSettings,
+  SanityServicesPageSettings,
   SanityImage,
 } from '@/types/sanity';
 
@@ -34,7 +38,9 @@ const DEFAULT_HERO = {
 };
 
 export function useHero() {
-  const { data, loading, error } = useSanityQuery<SanityHero[]>(`*[_type == "hero"][0...1]`);
+  const { data, loading, error } = useSanityQuery<SanityHero[]>(
+    `*[_type == "hero"][0...1] { title, subtitle, ctaText, ctaLink, backgroundImage, backgroundImageAlt }`
+  );
   const hero = data?.[0];
   return {
     title: hero?.title ?? DEFAULT_HERO.title,
@@ -42,6 +48,7 @@ export function useHero() {
     ctaText: hero?.ctaText ?? DEFAULT_HERO.ctaText,
     ctaLink: hero?.ctaLink ?? DEFAULT_HERO.ctaLink,
     backgroundImage: hero?.backgroundImage ?? null,
+    backgroundImageAlt: hero?.backgroundImageAlt ?? 'Digital dentistry clinic interior',
     loading,
     error,
   };
@@ -103,7 +110,7 @@ const DEFAULT_SERVICES: CmsService[] = [
 export function useServices() {
   const { data, loading, error } = useSanityQuery<SanityService[]>(
     `*[_type == "service"] | order(order asc) {
-      _id, title, description, icon,
+      _id, title, description, icon, imageAlt,
       "slug": slug.current,
       image
     }`
@@ -165,7 +172,7 @@ const DEFAULT_TESTIMONIALS: CmsTestimonial[] = [
 export function useTestimonials() {
   const { data, loading, error } = useSanityQuery<SanityTestimonial[]>(
     `*[_type == "testimonial"] | order(_createdAt desc) {
-      _id, name, country, countryFlag, text, stars, image
+      _id, name, country, countryFlag, text, stars, image, imageAlt
     }`
   );
   const testimonials: CmsTestimonial[] =
@@ -290,7 +297,7 @@ const DEFAULT_PRICING: CmsPricing[] = [
 
 export function useTourismPricing() {
   const { data, loading, error } = useSanityQuery<SanityTourismPricing[]>(
-    `*[_type == "tourismPricing"] | order(treatment asc) {
+    `*[_type == "tourismPricing"] | order(order asc, treatment asc) {
       _id, treatment, egyptPrice, usaPrice, ukPrice,
       turkeyPrice, hungaryPrice, uaePrice, saving
     }`
@@ -375,6 +382,13 @@ export interface CmsSiteSettings {
   email: string;
   address: string;
   socialLinks: Array<{ platform: string; url: string }>;
+  workingHours: string;
+  seoTitle: string;
+  seoDescription: string;
+  ogImage?: SanityImage | null;
+  ogImageAlt: string;
+  geoLat: number;
+  geoLng: number;
 }
 
 const DEFAULT_SETTINGS: CmsSiteSettings = {
@@ -384,12 +398,20 @@ const DEFAULT_SETTINGS: CmsSiteSettings = {
   email: 'clinic@drhaithamsharshar.com',
   address: 'Cairo, Egypt',
   socialLinks: [],
+  workingHours: 'Mon–Fri: 09:00–18:00 | Sat: 09:00–14:00',
+  seoTitle: '',
+  seoDescription: '',
+  ogImage: null,
+  ogImageAlt: '',
+  geoLat: 30.0511,
+  geoLng: 31.3656,
 };
 
 export function useSiteSettings() {
   const { data, loading, error } = useSanityQuery<SanitySiteSettings[]>(
     `*[_type == "siteSettings"][0...1] {
-      clinicName, phone, whatsapp, email, address, socialLinks
+      clinicName, phone, whatsapp, email, address, socialLinks, workingHours,
+      seoTitle, seoDescription, ogImage, ogImageAlt, geoLat, geoLng
     }`
   );
   const doc = data?.[0];
@@ -400,6 +422,223 @@ export function useSiteSettings() {
     email: doc?.email ?? DEFAULT_SETTINGS.email,
     address: doc?.address ?? DEFAULT_SETTINGS.address,
     socialLinks: doc?.socialLinks ?? DEFAULT_SETTINGS.socialLinks,
+    workingHours: doc?.workingHours ?? DEFAULT_SETTINGS.workingHours,
+    seoTitle: doc?.seoTitle ?? '',
+    seoDescription: doc?.seoDescription ?? '',
+    ogImage: doc?.ogImage ?? null,
+    ogImageAlt: doc?.ogImageAlt ?? '',
+    geoLat: doc?.geoLat ?? 30.0511,
+    geoLng: doc?.geoLng ?? 31.3656,
   };
   return { settings, loading, error };
+}
+
+// ─── About Page Settings ─────────────────────────────────────────
+const DEFAULT_ABOUT_SETTINGS = {
+  quote: 'Precision is not just a metric. It is the only acceptable standard.',
+  values: [
+    {
+      title: 'Empathy Engine',
+      description: 'Calibrated care protocols designed for maximum patient comfort.',
+      iconName: 'Heart',
+    },
+    {
+      title: 'Clinical Excellence',
+      description: 'Operating at the bleeding edge of dental science standards.',
+      iconName: 'Award',
+    },
+    {
+      title: 'Continuous Logic',
+      description: 'Never-ending integration of new research and methodologies.',
+      iconName: 'GraduationCap',
+    },
+    {
+      title: 'Holistic Sys',
+      description: 'Connecting oral occlusion to total body biomechanics.',
+      iconName: 'Users',
+    },
+  ],
+  stats: [
+    { value: '20+', label: 'Years R&D' },
+    { value: '5K+', label: 'Cases Logged' },
+    { value: '100%', label: 'Digital Workflow' },
+  ],
+  certifications: ['DSD CERTIFIED', 'T-SCAN MASTER'],
+};
+
+export function useAboutSettings() {
+  const { data, loading, error } = useSanityQuery<SanityAboutSettings[]>(
+    `*[_type == "aboutSettings"][0...1] {
+      quote, values, stats, certifications
+    }`
+  );
+  const doc = data?.[0];
+  return {
+    about: {
+      quote: doc?.quote ?? DEFAULT_ABOUT_SETTINGS.quote,
+      values: doc?.values ?? DEFAULT_ABOUT_SETTINGS.values,
+      stats: doc?.stats ?? DEFAULT_ABOUT_SETTINGS.stats,
+      certifications: doc?.certifications ?? DEFAULT_ABOUT_SETTINGS.certifications,
+    },
+    loading,
+    error,
+  };
+}
+
+// ─── Technology Page Settings ─────────────────────────────────────
+const DEFAULT_TECH_SETTINGS = {
+  technologies: [
+    {
+      title: 'Kinematic Jaw Tracking',
+      description: 'Real-time 6-DOF mandibular movement recording.',
+      iconName: 'Activity',
+    },
+    {
+      title: 'Computerized EMG',
+      description: 'Micron-level detection of muscle electrical potentials.',
+      iconName: 'Cpu',
+    },
+    {
+      title: 'T-Scan Force Analysis',
+      description: 'Digital occlusal force distribution mapping.',
+      iconName: 'Gauge',
+    },
+    {
+      title: 'Tekscan Digital Sensors',
+      description: 'High-resolution pressure sensing grid.',
+      iconName: 'Eye',
+    },
+    {
+      title: 'CBCT 3D Evaluation',
+      description: 'Volumetric visualization of TMJ structures.',
+      iconName: 'ScanLine',
+    },
+    {
+      title: 'JVA (Joint Vibration)',
+      description: 'Acoustic analysis of cartilage friction.',
+      iconName: 'Laptop',
+    },
+  ],
+  stats: [
+    { value: '10μm', label: 'Precision' },
+    { value: '1M+', label: 'Data Points' },
+    { value: '<5s', label: 'Analysis Time' },
+  ],
+};
+
+export function useTechnologySettings() {
+  const { data, loading, error } = useSanityQuery<SanityTechnologySettings[]>(
+    `*[_type == "technologySettings"][0...1] {
+      technologies, heroImage, heroImageAlt, stats
+    }`
+  );
+  const doc = data?.[0];
+  return {
+    tech: {
+      technologies: doc?.technologies ?? DEFAULT_TECH_SETTINGS.technologies,
+      heroImage: doc?.heroImage ?? null,
+      heroImageAlt: doc?.heroImageAlt ?? 'Advanced dental technology equipment',
+      stats: doc?.stats ?? DEFAULT_TECH_SETTINGS.stats,
+    },
+    loading,
+    error,
+  };
+}
+
+// ─── Homepage Settings ────────────────────────────────────────────
+const DEFAULT_HOMEPAGE_SETTINGS = {
+  features: [
+    {
+      title: 'AI Diagnostics',
+      description: 'Advanced machine learning protocols to map your perfect bite pattern.',
+      iconName: 'BrainCircuit',
+    },
+    {
+      title: '3D Jaw Tracking',
+      description: 'Real-time kinetic analysis of mandibular movement in 6 degrees of freedom.',
+      iconName: 'Orbit',
+    },
+    {
+      title: 'EMG Biofeedback',
+      description: 'neuromuscular monitoring to ensure muscle harmony and release tension.',
+      iconName: 'Activity',
+    },
+    {
+      title: 'Micro-Analysis',
+      description: 'Sub-millimeter precision for occlusal contact points and force distribution.',
+      iconName: 'Microscope',
+    },
+    {
+      title: 'Total Protection',
+      description: 'Comprehensive TMJ health preservation using digital splint therapy.',
+      iconName: 'ShieldCheck',
+    },
+    {
+      title: 'Laser Precision',
+      description: 'Non-invasive adjustments using state-of-the-art dental laser systems.',
+      iconName: 'Zap',
+    },
+  ],
+  ctaTitle: 'Ready to Upgrade?',
+  ctaSubtitle:
+    'Your smile deserves the precision of the future. Initialize your transformation today.',
+  ctaButtonText: 'START SYSTEM ENGINE',
+};
+
+export function useHomepageSettings() {
+  const { data, loading, error } = useSanityQuery<SanityHomepageSettings[]>(
+    `*[_type == "homepageSettings"][0...1] {
+      features, ctaTitle, ctaSubtitle, ctaButtonText
+    }`
+  );
+  const doc = data?.[0];
+  return {
+    homepage: {
+      features: doc?.features ?? DEFAULT_HOMEPAGE_SETTINGS.features,
+      ctaTitle: doc?.ctaTitle ?? DEFAULT_HOMEPAGE_SETTINGS.ctaTitle,
+      ctaSubtitle: doc?.ctaSubtitle ?? DEFAULT_HOMEPAGE_SETTINGS.ctaSubtitle,
+      ctaButtonText: doc?.ctaButtonText ?? DEFAULT_HOMEPAGE_SETTINGS.ctaButtonText,
+    },
+    loading,
+    error,
+  };
+}
+
+// ─── Services Page Settings ───────────────────────────────────────
+const DEFAULT_SERVICES_PAGE = {
+  conditions: [
+    'TMJ Disorders',
+    'Chronic Headaches',
+    'Jaw Clicking',
+    'Bruxism',
+    'Uneven Bite',
+    'Facial Neuralgia',
+    'Neck Pain',
+    'Tinnitus',
+    'Limited Opening',
+    'Sleep Apnea',
+  ],
+  processSteps: [
+    { step: '01', title: 'Scan', description: 'Full digital topography & motion capture' },
+    { step: '02', title: 'Analyze', description: 'AI-driven data interpretation' },
+    { step: '03', title: 'Plan', description: 'Virtual treatment modeling' },
+    { step: '04', title: 'Execute', description: 'Laser-guided precision therapy' },
+  ],
+};
+
+export function useServicesPageSettings() {
+  const { data, loading, error } = useSanityQuery<SanityServicesPageSettings[]>(
+    `*[_type == "servicesPageSettings"][0...1] {
+      conditions, processSteps
+    }`
+  );
+  const doc = data?.[0];
+  return {
+    pageSettings: {
+      conditions: doc?.conditions ?? DEFAULT_SERVICES_PAGE.conditions,
+      processSteps: doc?.processSteps ?? DEFAULT_SERVICES_PAGE.processSteps,
+    },
+    loading,
+    error,
+  };
 }
