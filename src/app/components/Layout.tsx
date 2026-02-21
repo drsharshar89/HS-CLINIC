@@ -16,6 +16,7 @@ import type { LucideIcon } from 'lucide-react';
 import { useState } from 'react';
 import clinicLogo from '../../assets/logo.webp';
 import { FloatingCTA } from './FloatingCTA';
+import { CookieConsent } from './CookieConsent';
 import { useSiteSettings } from '@/hooks/useCmsData';
 
 /** Maps Sanity social platform strings → Lucide icons */
@@ -257,6 +258,7 @@ export function Layout() {
 
       {/* Floating WhatsApp + Call CTA */}
       <FloatingCTA />
+      <CookieConsent />
     </div>
   );
 }

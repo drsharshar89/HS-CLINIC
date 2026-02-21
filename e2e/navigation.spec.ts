@@ -31,6 +31,11 @@ test.describe('Navigation — Robot User Journey', () => {
     await page.waitForURL('/dental-tourism');
     await expect(page.locator('body')).toBeVisible();
 
+    // Click Gallery
+    await page.getByRole('link', { name: 'Gallery' }).first().click();
+    await page.waitForURL('/gallery');
+    await expect(page.locator('body')).toBeVisible();
+
     // Click Contact
     await page.getByRole('link', { name: 'Contact' }).first().click();
     await page.waitForURL('/contact');
