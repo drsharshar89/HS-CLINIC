@@ -63,7 +63,7 @@ export function Layout() {
             <div className="flex items-center gap-2">
               <Link to="/" className="group -m-1.5 flex items-center p-1.5">
                 <img
-                  className="h-16 w-auto transition-all group-hover:drop-shadow-[0_0_10px_rgba(212,175,55,0.6)] md:h-20"
+                  className="h-28 w-auto transition-all group-hover:drop-shadow-[0_0_10px_rgba(212,175,55,0.6)] md:h-32"
                   src={clinicLogo}
                   alt="Dr. Haitham Sharshar — Dental Clinic"
                 />

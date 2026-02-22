@@ -6,12 +6,13 @@
 ## Identity
 - **Name:** HS Clinic — Dr. Haitham Sharshar
 - **Type:** Medical Dental Clinic
-- **Location:** Nasr City, Cairo, Egypt
+- **Location:** 8/63, 10th District, Zahraa El Maadi, Cairo, Egypt
 - **Website:** https://drhaithamsharshar.com
 - **Contact:** +201101010599 (WhatsApp available)
+- **Google Maps:** https://maps.app.goo.gl/bs7YaRkiFgkpbmLRA
 
 ## About Dr. Haitham Sharshar
-Dr. Haitham Sharshar is a Digital Dentistry Consultant and Perio Implantologist, and the Middle East's leading authority in digital dental occlusion, TMJ/TMD neuromuscular treatment, and Digital Smile Design. He holds a Bachelor of Dental Surgery (2010) and a Master's in Periodontology and Implantology from Cairo University. He is the Official JMA-Optic+ Digital Occlusion System Certified Trainer for Zebris Co. (Germany) — the chosen international trainer for the Middle East — and the Official exocad Certified ICTP Trainer for the Middle East. As a Key Opinion Leader, he teaches dentists worldwide how to maintain strict quality control in digital dentistry workflows. With over 15 years of clinical and academic expertise, he pioneers the use of jaw tracking (JT-3D / Zebris), surface EMG electromyography, TENS neuromuscular therapy, Occlusense digital pressure mapping, and custom Neurobite occlusal splint therapy. He practices at HS Clinic in Cairo, Egypt.
+Dr. Haitham Sharshar is a Digital Dentistry Consultant and Perio Implantologist, and the Middle East's leading authority in digital dental occlusion, TMJ/TMD neuromuscular treatment, and Digital Smile Design. He holds a Bachelor of Dental Surgery (2010) and a Master's in Periodontology and Implantology from Cairo University. He is the Official JMA-Optic+ Digital Occlusion System Certified Trainer for Zebris Co. (Germany) — the chosen international trainer for the Middle East — and the Official exocad Certified ICTP Trainer for the Middle East. As a Key Opinion Leader, he teaches dentists worldwide how to maintain strict quality control in digital dentistry workflows. With over 15 years of clinical and academic expertise, he pioneers the use of jaw tracking (JT-3D / Zebris), surface EMG electromyography, TENS neuromuscular therapy, Occlusense digital pressure mapping, and custom Neurobite occlusal splint therapy. He practices at HS Clinic in Zahraa El Maadi, Cairo, Egypt.
 
 ## Core Specializations
 1. **Digital Occlusion & Bite Correction** — Using jaw tracking, EMG, TENS, T-Scan, and Occlusense to diagnose and treat occlusal dysfunction with data-driven precision.
@@ -54,9 +55,13 @@ HS Clinic offers a comprehensive Dental Tourism Program for international patien
 - Technology: https://drhaithamsharshar.com/technology
 - Digital Smile Design: https://drhaithamsharshar.com/digital-smile-design
 - Dental Tourism: https://drhaithamsharshar.com/dental-tourism
+- Dental Tourism Program: https://drhaithamsharshar.com/dental-tourism/program
 - Gallery: https://drhaithamsharshar.com/gallery
 - Contact: https://drhaithamsharshar.com/contact
 - Dental Implants: https://drhaithamsharshar.com/services/dental-implants
 - TMJ/TMD Treatment: https://drhaithamsharshar.com/services/tmj-tmd-treatment
 - Clear Aligners: https://drhaithamsharshar.com/services/clear-aligners
 - Full Arch Rehabilitation: https://drhaithamsharshar.com/services/full-arch-rehabilitation
+- Guarantee: https://drhaithamsharshar.com/guarantee
+- Privacy Policy: https://drhaithamsharshar.com/privacy-policy
+- Medical Disclaimer: https://drhaithamsharshar.com/medical-disclaimer

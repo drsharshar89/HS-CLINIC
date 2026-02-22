@@ -402,7 +402,7 @@ const DEFAULT_SETTINGS: CmsSiteSettings = {
   phone: '+201101010599',
   whatsapp: '+201101010599',
   email: 'clinic@drhaithamsharshar.com',
-  address: 'Cairo, Egypt',
+  address: '8/63, 10th District, Zahraa El Maadi, Cairo, Egypt',
   socialLinks: [],
   workingHours: 'Mon–Fri: 09:00–18:00 | Sat: 09:00–14:00',
   seoTitle: '',

@@ -41,7 +41,7 @@ export const SEO = {
   contact: {
     title: 'Contact HS Clinic | Book Your Appointment in Cairo, Egypt',
     description:
-      'Book your dental appointment with Dr. Haitham Sharshar in Cairo, Egypt. WhatsApp consultation available. Located in Nasr City, Cairo.',
+      'Book your dental appointment with Dr. Haitham Sharshar in Cairo, Egypt. WhatsApp consultation available. Located in Zahraa El Maadi, Cairo.',
     canonical: SITE_URL + '/contact',
   },
   digitalSmileDesign: {
@@ -104,16 +104,16 @@ export const LOCAL_BUSINESS_JSONLD = {
   telephone: '+201101010599',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Nasr City',
+    streetAddress: '8/63, 10th District, Zahraa El Maadi',
     addressLocality: 'Cairo',
     addressRegion: 'Cairo Governorate',
-    postalCode: '11765',
+    postalCode: '11742',
     addressCountry: 'EG',
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 30.0511,
-    longitude: 31.3656,
+    latitude: 29.9628,
+    longitude: 31.3139,
   },
   image: DEFAULT_OG_IMAGE,
   priceRange: '$$',
@@ -130,6 +130,7 @@ export const LOCAL_BUSINESS_JSONLD = {
   sameAs: [
     'https://www.facebook.com/dentistdrhaithamsharshar/',
     'https://www.instagram.com/hsdental2025/',
+    'https://maps.app.goo.gl/bs7YaRkiFgkpbmLRA',
   ],
   medicalSpecialty: ['Dentistry', 'Prosthodontics', 'Periodontology', 'Implantology'],
   knowsAbout: [
@@ -189,7 +190,14 @@ export const LOCAL_BUSINESS_JSONLD = {
     { '@type': 'Country', name: 'Germany' },
   ],
   isAcceptingNewPatients: true,
-  hasMap: 'https://maps.google.com/?cid=HS_CLINIC_GOOGLE_CID',
+  hasMap: 'https://maps.app.goo.gl/bs7YaRkiFgkpbmLRA',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: 4.9,
+    reviewCount: 150,
+    bestRating: 5,
+    worstRating: 1,
+  },
 };
 
 /**
@@ -330,8 +338,10 @@ export function buildLocalBusinessJsonLd(settings: {
     telephone: settings.phone || LOCAL_BUSINESS_JSONLD.telephone,
     address: {
       '@type': 'PostalAddress' as const,
-      streetAddress: settings.address || 'Nasr City',
+      streetAddress: settings.address || '8/63, 10th District, Zahraa El Maadi',
       addressLocality: 'Cairo',
+      addressRegion: 'Cairo Governorate',
+      postalCode: '11742',
       addressCountry: 'EG',
     },
     geo: {

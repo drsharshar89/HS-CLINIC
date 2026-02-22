@@ -326,19 +326,30 @@ export function Contact() {
               })}
             </div>
 
-            {/* Satellite Map Placeholder */}
-            <div className="group relative h-64 overflow-hidden rounded-xl border border-white/10">
-              <img
-                src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
-                alt="Global Location"
-                className="h-full w-full object-cover opacity-50 transition-transform duration-1000 group-hover:scale-110"
+            {/* Google Maps Embed */}
+            <div className="group relative overflow-hidden rounded-xl border border-white/10">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.0!2d31.3139!3d29.9628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDU3JzQ2LjEiTiAzMcKwMTgnNTAuMCJF!5e0!3m2!1sen!2seg!4v1"
+                width="100%"
+                height="256"
+                style={{
+                  border: 0,
+                  filter: 'invert(90%) hue-rotate(180deg) brightness(0.9) contrast(1.1)',
+                }}
+                allowFullScreen
                 loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="HS Clinic Location — Zahraa El Maadi, Cairo"
+                className="w-full"
               />
-              <div className="from-dark-950 absolute inset-0 bg-gradient-to-t to-transparent" />
-              <div className="center absolute inset-0 flex items-center justify-center">
-                <div className="bg-gold-400 h-4 w-4 animate-ping rounded-full" />
-                <MapPin className="absolute h-6 w-6 text-white" />
-              </div>
+              <a
+                href="https://maps.app.goo.gl/bs7YaRkiFgkpbmLRA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-dark-950/80 text-gold-400 hover:text-gold-300 absolute right-3 bottom-3 flex items-center gap-2 rounded-lg border border-white/10 px-4 py-2 text-sm backdrop-blur-sm transition-colors"
+              >
+                <MapPin className="h-4 w-4" /> Get Directions
+              </a>
             </div>
           </div>
         </div>
