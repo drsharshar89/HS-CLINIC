@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, Satellite, Radio } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, Satellite, Radio, MessageCircle } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { SEO, SITE_NAME, DEFAULT_OG_IMAGE, buildLocalBusinessJsonLd } from '@/lib/seo';
 import { SectionHeader } from '@/app/components/ui/SectionHeader';
@@ -69,16 +69,24 @@ export function Contact() {
   const ogImageUrl = useSanityImage(settings.ogImage, 1200) || DEFAULT_OG_IMAGE;
   const jsonLd = buildLocalBusinessJsonLd(settings);
 
+  // Derive clickable links from settings
+  const phoneDigits = settings.phone.replace(/[^0-9+]/g, '');
+  const waDigits = (settings.whatsapp || settings.phone).replace(/[^0-9]/g, '');
+  const formattedPhone =
+    settings.phone.replace(/^\+(\d{3})(\d{3})(\d{3})(\d{4})$/, '+$1 $2 $3 $4') || settings.phone;
+
   const contactInfo = [
     {
       icon: Phone,
       title: 'Direct Line',
-      details: [settings.phone, 'Priority Support'],
+      details: [formattedPhone, 'Priority Support'],
+      href: `tel:${phoneDigits}`,
     },
     {
       icon: Mail,
       title: 'Digital Uplink',
       details: [settings.email, 'Encrypted Channel'],
+      href: `mailto:${settings.email}`,
     },
     {
       icon: MapPin,
@@ -275,21 +283,47 @@ export function Contact() {
 
           {/* Visuals & Info */}
           <div className="space-y-8">
+            {/* WhatsApp CTA */}
+            <a
+              href={`https://wa.me/${waDigits}?text=Hello%20Dr.%20Haitham%2C%20I%20would%20like%20to%20book%20a%20consultation.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-3 rounded-xl border border-[#25D366]/30 bg-[#25D366]/10 px-5 py-4 transition-all hover:border-[#25D366]/60 hover:bg-[#25D366]/20"
+            >
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25D366] shadow-lg shadow-[#25D366]/30 transition-transform group-hover:scale-110">
+                <MessageCircle className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <p className="font-bold text-white">WhatsApp Consultation</p>
+                <p className="text-sm text-[#25D366]">Tap to chat — instant response</p>
+              </div>
+            </a>
+
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {contactInfo.map((info, index) => (
-                <div
-                  key={index}
-                  className="bg-dark-900/30 hover:border-gold-400/30 rounded-xl border border-white/5 p-4 transition-colors"
-                >
-                  <info.icon className="text-gold-500 mb-3 h-6 w-6" />
-                  <h3 className="mb-1 font-bold text-white">{info.title}</h3>
-                  {info.details.map((d, i) => (
-                    <p key={i} className="text-xs text-gray-500">
-                      {d}
-                    </p>
-                  ))}
-                </div>
-              ))}
+              {contactInfo.map((info, index) => {
+                const Wrapper = info.href ? 'a' : 'div';
+                const wrapperProps = info.href
+                  ? {
+                      href: info.href,
+                      target: info.href.startsWith('mailto') ? undefined : ('_self' as const),
+                    }
+                  : {};
+                return (
+                  <Wrapper
+                    key={index}
+                    {...wrapperProps}
+                    className="bg-dark-900/30 hover:border-gold-400/30 rounded-xl border border-white/5 p-4 transition-colors"
+                  >
+                    <info.icon className="text-gold-500 mb-3 h-6 w-6" />
+                    <h3 className="mb-1 font-bold text-white">{info.title}</h3>
+                    {info.details.map((d, i) => (
+                      <p key={i} className="text-xs text-gray-500">
+                        {d}
+                      </p>
+                    ))}
+                  </Wrapper>
+                );
+              })}
             </div>
 
             {/* Satellite Map Placeholder */}

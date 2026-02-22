@@ -399,7 +399,7 @@ export interface CmsSiteSettings {
 
 const DEFAULT_SETTINGS: CmsSiteSettings = {
   clinicName: 'HS Clinic — Digital Occlusion',
-  phone: '+20 123 456 7890',
+  phone: '+201101010599',
   whatsapp: '+201101010599',
   email: 'clinic@drhaithamsharshar.com',
   address: 'Cairo, Egypt',

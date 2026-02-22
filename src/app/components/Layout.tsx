@@ -61,20 +61,12 @@ export function Layout() {
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Global">
           <div className="flex h-20 items-center justify-between">
             <div className="flex items-center gap-2">
-              <Link to="/" className="group -m-1.5 flex items-center gap-2 p-1.5">
+              <Link to="/" className="group -m-1.5 flex items-center p-1.5">
                 <img
-                  className="h-11 w-auto brightness-200 transition-all group-hover:drop-shadow-[0_0_10px_rgba(212,175,55,0.6)] md:h-14"
+                  className="h-16 w-auto brightness-200 transition-all group-hover:drop-shadow-[0_0_10px_rgba(212,175,55,0.6)] md:h-20"
                   src={clinicLogo}
-                  alt="Dr. Sharshar Logo"
+                  alt="Dr. Haitham Sharshar — Dental Clinic"
                 />
-                <div className="flex flex-col">
-                  <span className="group-hover:text-gold-400 font-serif text-xl font-bold tracking-tight text-white transition-colors">
-                    DR. SHARSHAR
-                  </span>
-                  <span className="text-gold-400 font-mono text-[11px] tracking-[0.2em] uppercase md:text-sm md:tracking-[0.25em]">
-                    Digital Occlusion
-                  </span>
-                </div>
               </Link>
             </div>
 
@@ -159,8 +151,11 @@ export function Layout() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:grid-cols-4">
           <div className="col-span-1 md:col-span-2">
             <div className="mb-4 flex items-center gap-2">
-              <img className="h-10 w-auto brightness-200" src={clinicLogo} alt="Logo" />
-              <span className="font-serif text-xl font-bold text-white">DR. SHARSHAR</span>
+              <img
+                className="h-12 w-auto brightness-200"
+                src={clinicLogo}
+                alt="Dr. Haitham Sharshar — Dental Clinic"
+              />
             </div>
             <p className="mb-6 max-w-sm font-light text-gray-400">
               Pioneering the future of digital dentistry in the Middle East. Precision, technology,
