@@ -52,7 +52,7 @@ export function ConsultationForm() {
                   8/63, 10th District, Zahraa El Maadi, Cairo, Egypt
                 </div>
                 <a
-                  href="https://wa.me/201101010599"
+                  href="https://api.whatsapp.com/send/?phone=201101010599"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gold-400 hover:text-gold-300 mt-2 inline-block text-xs"

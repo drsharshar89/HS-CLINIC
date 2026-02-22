@@ -63,7 +63,7 @@ export function Layout() {
             <div className="flex items-center gap-2">
               <Link to="/" className="group -m-1.5 flex items-center p-1.5">
                 <img
-                  className="h-16 w-auto brightness-200 transition-all group-hover:drop-shadow-[0_0_10px_rgba(212,175,55,0.6)] md:h-20"
+                  className="h-16 w-auto transition-all group-hover:drop-shadow-[0_0_10px_rgba(212,175,55,0.6)] md:h-20"
                   src={clinicLogo}
                   alt="Dr. Haitham Sharshar — Dental Clinic"
                 />
@@ -152,7 +152,7 @@ export function Layout() {
           <div className="col-span-1 md:col-span-2">
             <div className="mb-4 flex items-center gap-2">
               <img
-                className="h-12 w-auto brightness-200"
+                className="h-16 w-auto"
                 src={clinicLogo}
                 alt="Dr. Haitham Sharshar — Dental Clinic"
               />

@@ -285,7 +285,7 @@ export function Contact() {
           <div className="space-y-8">
             {/* WhatsApp CTA */}
             <a
-              href={`https://wa.me/${waDigits}?text=Hello%20Dr.%20Haitham%2C%20I%20would%20like%20to%20book%20a%20consultation.`}
+              href={`https://api.whatsapp.com/send/?phone=${waDigits}&text=Hello%20Dr.%20Haitham%2C%20I%20would%20like%20to%20book%20a%20consultation.`}
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-3 rounded-xl border border-[#25D366]/30 bg-[#25D366]/10 px-5 py-4 transition-all hover:border-[#25D366]/60 hover:bg-[#25D366]/20"

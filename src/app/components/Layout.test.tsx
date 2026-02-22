@@ -17,7 +17,7 @@ function renderLayout() {
 describe('Layout', () => {
   it('renders the clinic logo', () => {
     renderLayout();
-    const logos = screen.getAllByAltText(/logo/i);
+    const logos = screen.getAllByAltText(/Dr\. Haitham Sharshar/i);
     expect(logos.length).toBeGreaterThan(0);
   });
 

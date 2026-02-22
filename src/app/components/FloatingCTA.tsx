@@ -12,7 +12,7 @@ import { useSiteSettings } from '@/hooks/useCmsData';
 export function FloatingCTA() {
   const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
-  const { data: settings } = useSiteSettings();
+  const { settings } = useSiteSettings();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,7 +44,7 @@ export function FloatingCTA() {
         >
           {/* WhatsApp Button */}
           <a
-            href={`https://wa.me/${waDigits}?text=Hello%20Dr.%20Haitham%2C%20I%20would%20like%20to%20book%20a%20consultation.`}
+            href={`https://api.whatsapp.com/send/?phone=${waDigits}&text=Hello%20Dr.%20Haitham%2C%20I%20would%20like%20to%20book%20a%20consultation.`}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat on WhatsApp"

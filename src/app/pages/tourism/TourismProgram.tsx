@@ -360,7 +360,7 @@ export default function TourismProgram() {
               <Phone size={18} /> Get Free Quote
             </Link>
             <a
-              href="https://wa.me/201101010599"
+              href="https://api.whatsapp.com/send/?phone=201101010599"
               target="_blank"
               rel="noopener noreferrer"
               style={{

@@ -158,7 +158,7 @@ export default function DentalTourism() {
                 </span>
               </Link>
               <a
-                href="https://wa.me/201101010599"
+                href="https://api.whatsapp.com/send/?phone=201101010599"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border-gold-400/30 text-gold-400 hover:bg-gold-400/10 flex items-center gap-2 rounded-lg border px-8 py-4 transition-all"
