@@ -3,12 +3,14 @@ import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
 import { schemaTypes } from './schemas';
 
+const dataset = (process.env.SANITY_STUDIO_DATASET as string) || 'production';
+
 export default defineConfig({
   name: 'hs-dental-clinic',
-  title: 'HS Dental Clinic',
+  title: `HS Dental Clinic${dataset !== 'production' ? ` [${dataset.toUpperCase()}]` : ''}`,
 
   projectId: 'nk38o90y',
-  dataset: 'production',
+  dataset,
 
   plugins: [
     structureTool({
