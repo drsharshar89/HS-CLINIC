@@ -730,3 +730,15 @@ export function buildAggregateRatingJsonLd(data: {
     },
   };
 }
+
+/**
+ * Build hreflang link objects for react-helmet-async.
+ * Returns self-referencing `en` + `x-default` tags for the given canonical URL.
+ * Important for dental tourism SEO — signals Google that the page targets English-speaking patients globally.
+ */
+export function buildHreflangTags(canonicalUrl: string) {
+  return [
+    { rel: 'alternate', hrefLang: 'en', href: canonicalUrl },
+    { rel: 'alternate', hrefLang: 'x-default', href: canonicalUrl },
+  ];
+}

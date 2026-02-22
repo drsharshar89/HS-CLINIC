@@ -975,7 +975,8 @@ export function useBeforeAfterCases() {
    ================================================================ */
 export function useYoutubeVideos(category: string) {
   const { data, loading, error } = useSanityQuery<SanityYoutubeVideo[]>(
-    `*[_type == "youtubeVideo" && category == "${category}"] | order(sortOrder asc) { _id, title, videoId, description, category, sortOrder }`
+    `*[_type == "youtubeVideo" && category == $category] | order(sortOrder asc) { _id, title, videoId, description, category, sortOrder }`,
+    { category }
   );
 
   const videos = (data ?? []).map((v) => ({
@@ -1263,12 +1264,13 @@ const PILLAR_DEFAULTS: Record<string, ServicePillarData> = {
 
 export function useServicePillar(slug: string) {
   const { data, loading, error } = useSanityQuery<SanityServicePillar[]>(
-    `*[_type == "servicePillar" && slug.current == "${slug}"][0...1] {
+    `*[_type == "servicePillar" && slug.current == $slug][0...1] {
       serviceTitle, seoTitle, seoDescription,
       heroTagline, heroTitle, heroSubtitle, heroImage,
       sections, technologies, benefits, faqs,
       ctaPrimary, ctaSecondary
-    }`
+    }`,
+    { slug }
   );
   const doc = data?.[0];
   const defaults = PILLAR_DEFAULTS[slug] ?? PILLAR_DEFAULTS['dental-implants'];

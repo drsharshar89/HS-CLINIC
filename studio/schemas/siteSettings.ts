@@ -12,7 +12,7 @@ export const siteSettings = defineType({
       name: 'clinicName',
       title: 'Clinic Name',
       type: 'string',
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required().max(80),
       initialValue: 'HS Clinic — Digital Occlusion',
     }),
     defineField({
@@ -87,6 +87,7 @@ export const siteSettings = defineType({
       title: 'Default SEO Title Suffix',
       type: 'string',
       description: 'Appended to page titles, e.g. "| HS Clinic Cairo"',
+      validation: (rule) => rule.max(60),
       group: 'seo',
     }),
     defineField({
@@ -95,6 +96,7 @@ export const siteSettings = defineType({
       type: 'text',
       rows: 3,
       description: 'Fallback description for pages without their own',
+      validation: (rule) => rule.max(160),
       group: 'seo',
     }),
     defineField({

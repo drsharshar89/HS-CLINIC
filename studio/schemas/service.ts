@@ -24,7 +24,7 @@ export const service = defineType({
       title: 'Description',
       type: 'text',
       rows: 4,
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required().max(300),
     }),
     defineField({
       name: 'icon',

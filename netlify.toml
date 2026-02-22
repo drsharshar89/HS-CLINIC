@@ -11,6 +11,14 @@
   # embedded by Vite into client JS by design (safe, not secrets).
   SECRETS_SCAN_OMIT_KEYS = "SANITY_API_TOKEN,VITE_SANITY_DATASET,VITE_SANITY_PROJECT_ID"
 
+# www → apex redirect (canonical URL for SEO)
+[[redirects]]
+  from = "https://www.drhaithamsharshar.com/*"
+  to = "https://drhaithamsharshar.com/:splat"
+  status = 301
+  force = true
+
+# SPA catch-all
 [[redirects]]
   from = "/*"
   to = "/index.html"
