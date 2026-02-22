@@ -63,7 +63,7 @@ export function Layout() {
             <div className="flex items-center gap-2">
               <Link to="/" className="group -m-1.5 flex items-center gap-2 p-1.5">
                 <img
-                  className="h-10 w-auto brightness-200 transition-all group-hover:drop-shadow-[0_0_10px_rgba(212,175,55,0.6)]"
+                  className="h-11 w-auto brightness-200 transition-all group-hover:drop-shadow-[0_0_10px_rgba(212,175,55,0.6)] md:h-14"
                   src={clinicLogo}
                   alt="Dr. Sharshar Logo"
                 />
@@ -71,7 +71,7 @@ export function Layout() {
                   <span className="group-hover:text-gold-400 font-serif text-xl font-bold tracking-tight text-white transition-colors">
                     DR. SHARSHAR
                   </span>
-                  <span className="text-gold-400 font-mono text-xs tracking-[0.2em] uppercase">
+                  <span className="text-gold-400 font-mono text-[11px] tracking-[0.2em] uppercase md:text-sm md:tracking-[0.25em]">
                     Digital Occlusion
                   </span>
                 </div>
@@ -85,10 +85,10 @@ export function Layout() {
                   key={item.name}
                   to={item.href}
                   aria-current={isActive(item.href) ? 'page' : undefined}
-                  className={`hover:text-gold-400 text-sm font-medium transition-all duration-300 hover:tracking-wide ${
+                  className={`relative text-sm font-medium transition-colors duration-300 after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:transition-all after:duration-300 after:ease-out ${
                     isActive(item.href)
-                      ? 'text-gold-400 border-gold-400 border-b-2'
-                      : 'text-gray-400'
+                      ? 'text-gold-400 after:bg-gold-400 after:w-full'
+                      : 'hover:text-gold-400 after:bg-gold-400 text-gray-400 hover:after:w-full'
                   }`}
                 >
                   {item.name}
@@ -159,7 +159,7 @@ export function Layout() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:grid-cols-4">
           <div className="col-span-1 md:col-span-2">
             <div className="mb-4 flex items-center gap-2">
-              <img className="h-8 w-auto brightness-200" src={clinicLogo} alt="Logo" />
+              <img className="h-10 w-auto brightness-200" src={clinicLogo} alt="Logo" />
               <span className="font-serif text-xl font-bold text-white">DR. SHARSHAR</span>
             </div>
             <p className="mb-6 max-w-sm font-light text-gray-400">

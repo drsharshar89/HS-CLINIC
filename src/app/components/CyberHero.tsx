@@ -57,7 +57,7 @@ export function CyberHero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mx-auto mb-12 max-w-3xl text-xl leading-relaxed font-light text-gray-400 md:text-2xl"
+          className="mx-auto mb-12 max-w-3xl text-xl leading-relaxed font-normal text-gray-300 md:text-2xl"
         >
           {hero.subtitle}
         </motion.p>
@@ -92,7 +92,7 @@ export function CyberHero() {
       <motion.div
         animate={{ y: [0, -20, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-1/4 left-10 hidden lg:block"
+        className="pointer-events-none absolute top-1/4 left-4 hidden scale-[0.85] md:block lg:left-10 lg:scale-100"
       >
         <div className="glass-card border-gold-400 border-l-4 p-4">
           <div className="text-gold-400 mb-1 font-mono text-xs">DATA STREAM</div>
@@ -103,7 +103,7 @@ export function CyberHero() {
       <motion.div
         animate={{ y: [0, 20, 0] }}
         transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        className="absolute right-10 bottom-1/4 hidden lg:block"
+        className="pointer-events-none absolute right-4 bottom-1/4 hidden scale-[0.85] md:block lg:right-10 lg:scale-100"
       >
         <div className="glass-card border-gold-500 border-r-4 p-4">
           <div className="text-gold-500 mb-1 font-mono text-xs">SCAN COMPLETE</div>
