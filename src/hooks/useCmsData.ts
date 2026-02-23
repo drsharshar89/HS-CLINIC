@@ -49,7 +49,7 @@ export function useHero() {
     loading,
     error,
   } = useSanityQuery<SanityHero>(
-    `*[_type == "hero"] | order(_id == "hero" desc) [0] { title, subtitle, ctaText, ctaLink, backgroundImage, backgroundImageAlt }`
+    `coalesce(*[_type == "hero" && _id == "hero"][0], *[_type == "hero"][0]) { title, subtitle, ctaText, ctaLink, backgroundImage, backgroundImageAlt }`
   );
   return {
     title: hero?.title ?? DEFAULT_HERO.title,
