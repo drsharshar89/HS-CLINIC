@@ -12,6 +12,7 @@ import {
   buildFaqJsonLd,
 } from '@/lib/seo';
 import { useServicePillar } from '@/hooks/useCmsData';
+import { urlFor } from '@/lib/sanityClient';
 import { MedicallyReviewedBadge } from '@/app/components/MedicallyReviewedBadge';
 
 /** JSON-LD for Full-Arch Rehabilitation procedure */
@@ -125,6 +126,21 @@ export default function FullArchRehab() {
               </Link>
             )}
           </div>
+          {pillar.heroImage && (
+            <motion.div
+              className="mt-10 overflow-hidden rounded-2xl border border-amber-500/20"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              <img
+                src={urlFor(pillar.heroImage).width(1200).quality(85).auto('format').url()}
+                alt={pillar.heroTitle}
+                className="h-auto w-full object-cover"
+                loading="lazy"
+              />
+            </motion.div>
+          )}
         </motion.div>
       </section>
 

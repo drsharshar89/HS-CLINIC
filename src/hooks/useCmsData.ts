@@ -403,7 +403,10 @@ const DEFAULT_SETTINGS: CmsSiteSettings = {
   whatsapp: '+201101010599',
   email: 'clinic@drhaithamsharshar.com',
   address: '8/63, 10th District, Zahraa El Maadi, Cairo, Egypt',
-  socialLinks: [],
+  socialLinks: [
+    { platform: 'facebook', url: 'https://www.facebook.com/dentistdrhaithamsharshar/' },
+    { platform: 'instagram', url: 'https://www.instagram.com/hsdental2025/' },
+  ],
   workingHours: 'Mon–Fri: 09:00–18:00 | Sat: 09:00–14:00',
   seoTitle: '',
   seoDescription: '',
@@ -996,6 +999,8 @@ export interface ServicePillarData {
   heroTagline: string;
   heroTitle: string;
   heroSubtitle: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  heroImage?: any;
   faqs: Array<{ question: string; answer: string }>;
   benefits: Array<{ title: string; description?: string }>;
   technologies: Array<{ name: string; description?: string; iconName?: string }>;
@@ -1279,6 +1284,7 @@ export function useServicePillar(slug: string) {
     heroTagline: doc?.heroTagline ?? defaults.heroTagline,
     heroTitle: doc?.heroTitle ?? defaults.heroTitle,
     heroSubtitle: doc?.heroSubtitle ?? defaults.heroSubtitle,
+    heroImage: doc?.heroImage,
     faqs: doc?.faqs ?? defaults.faqs,
     benefits: doc?.benefits ?? defaults.benefits,
     technologies: doc?.technologies ?? defaults.technologies,
