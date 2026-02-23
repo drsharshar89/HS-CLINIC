@@ -18,46 +18,74 @@ export default defineConfig({
         S.list()
           .title('Content')
           .items([
-            // Singletons (always exactly one document each)
+            // ── Global ──────────────────────────────────────────
             S.listItem()
               .title('Site Settings')
               .icon(() => '⚙️')
               .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
+
+            S.divider(),
+
+            // ── Homepage ────────────────────────────────────────
             S.listItem()
               .title('Hero Section')
               .icon(() => '🏠')
               .child(S.document().schemaType('hero').documentId('hero')),
-            S.divider(),
-            // Page Settings singletons
             S.listItem()
               .title('Homepage Settings')
               .icon(() => '🏡')
               .child(S.document().schemaType('homepageSettings').documentId('homepageSettings')),
+
+            S.divider(),
+
+            // ── Page Settings (singletons) ──────────────────────
             S.listItem()
-              .title('About Page Settings')
+              .title('About Page')
               .icon(() => '📋')
               .child(S.document().schemaType('aboutSettings').documentId('aboutSettings')),
             S.listItem()
-              .title('Services Page Settings')
+              .title('Services Page')
               .icon(() => '🩺')
-              .child(S.document().schemaType('servicesPageSettings').documentId('servicesPageSettings')),
+              .child(
+                S.document()
+                  .schemaType('servicesPageSettings')
+                  .documentId('servicesPageSettings'),
+              ),
             S.listItem()
-              .title('Technology Page Settings')
+              .title('Technology Page')
               .icon(() => '🔬')
-              .child(S.document().schemaType('technologySettings').documentId('technologySettings')),
+              .child(
+                S.document().schemaType('technologySettings').documentId('technologySettings'),
+              ),
             S.listItem()
-              .title('DSD Page Settings')
+              .title('DSD Page')
               .icon(() => '💎')
               .child(S.document().schemaType('dsdSettings').documentId('dsdSettings')),
             S.listItem()
-              .title('Tourism Page Settings')
+              .title('Tourism Page')
               .icon(() => '✈️')
               .child(S.document().schemaType('tourismSettings').documentId('tourismSettings')),
+
             S.divider(),
-            // All other document types (exclude singletons from the generic list)
-            ...S.documentTypeListItems().filter(
-              (item) => !['siteSettings', 'hero', 'homepageSettings', 'aboutSettings', 'servicesPageSettings', 'technologySettings', 'dsdSettings', 'tourismSettings'].includes(item.getId() ?? '')
-            ),
+
+            // ── Collections ─────────────────────────────────────
+            S.documentTypeListItem('service').title('Services').icon(() => '💊'),
+            S.documentTypeListItem('testimonial').title('Testimonials').icon(() => '⭐'),
+            S.documentTypeListItem('teamMember').title('Team Members').icon(() => '👤'),
+            S.documentTypeListItem('tourismPricing').title('Tourism Pricing').icon(() => '💰'),
+            S.documentTypeListItem('faq').title('FAQs').icon(() => '❓'),
+            S.documentTypeListItem('beforeAfterCase')
+              .title('Before/After Cases')
+              .icon(() => '📸'),
+            S.documentTypeListItem('youtubeVideo').title('YouTube Videos').icon(() => '🎬'),
+
+            S.divider(),
+
+            // ── SEO Content ─────────────────────────────────────
+            S.documentTypeListItem('servicePillar')
+              .title('Service Pillar Pages')
+              .icon(() => '📄'),
+            S.documentTypeListItem('page').title('Pages').icon(() => '📝'),
           ]),
     }),
     visionTool(), // GROQ playground — useful for debugging queries

@@ -58,6 +58,7 @@ export default function TmdTreatment() {
         <meta property="og:description" content={seoDesc} />
         <meta property="og:url" content={SEO.tmdTreatment.canonical} />
         <meta property="og:image" content={DEFAULT_OG_IMAGE} />
+        <meta property="og:image:alt" content="Dr. Haitham Sharshar — HS Clinic Cairo" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:locale" content="en_EG" />
@@ -99,7 +100,13 @@ export default function TmdTreatment() {
             </div>
           )}
           <h1 className="mb-6 text-4xl font-bold text-white md:text-5xl">
-            Advanced <span className="text-amber-400">TMJ/TMD Neuromuscular Treatment</span>
+            {pillar.heroTitle === 'Advanced TMJ/TMD Neuromuscular Treatment' ? (
+              <>
+                Advanced <span className="text-amber-400">TMJ/TMD Neuromuscular Treatment</span>
+              </>
+            ) : (
+              <span className="text-amber-400">{pillar.heroTitle}</span>
+            )}
           </h1>
           <p className="mb-8 max-w-3xl text-lg leading-relaxed text-gray-300">
             {pillar.heroSubtitle}
@@ -143,7 +150,7 @@ export default function TmdTreatment() {
       </section>
 
       {/* Diagnostic Technology Grid */}
-      {pillar.technologies.length > 0 && (
+      {pillar.technologies?.length > 0 && (
         <section className="mx-auto mb-20 max-w-6xl px-4">
           <h2 className="mb-8 text-3xl font-bold text-white">Our TMD Diagnostic Technology</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -187,23 +194,25 @@ export default function TmdTreatment() {
       </section>
 
       {/* FAQ */}
-      <section className="mx-auto mb-20 max-w-6xl px-4">
-        <h2 className="mb-8 text-3xl font-bold text-white">Frequently Asked Questions</h2>
-        <div className="space-y-4">
-          {pillar.faqs.map((faq) => (
-            <details
-              key={faq.question}
-              className="group bg-dark-900/50 rounded-xl border border-white/10"
-            >
-              <summary className="flex cursor-pointer items-center justify-between p-5 font-medium text-white">
-                {faq.question}
-                <ChevronRight className="h-4 w-4 text-amber-400 transition-transform group-open:rotate-90" />
-              </summary>
-              <p className="px-5 pb-5 text-sm leading-relaxed text-gray-400">{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      {pillar.faqs?.length > 0 && (
+        <section className="mx-auto mb-20 max-w-6xl px-4">
+          <h2 className="mb-8 text-3xl font-bold text-white">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {pillar.faqs.map((faq) => (
+              <details
+                key={faq.question}
+                className="group bg-dark-900/50 rounded-xl border border-white/10"
+              >
+                <summary className="flex cursor-pointer items-center justify-between p-5 font-medium text-white">
+                  {faq.question}
+                  <ChevronRight className="h-4 w-4 text-amber-400 transition-transform group-open:rotate-90" />
+                </summary>
+                <p className="px-5 pb-5 text-sm leading-relaxed text-gray-400">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Related Services */}
       <section className="mx-auto mb-20 max-w-6xl px-4">
@@ -259,7 +268,7 @@ export default function TmdTreatment() {
             to="/contact"
             className="text-dark-950 inline-flex items-center gap-2 rounded-lg bg-amber-500 px-8 py-4 text-lg font-semibold transition-colors hover:bg-amber-400"
           >
-            Book Your TMD Evaluation <ArrowRight className="h-5 w-5" />
+            {pillar.ctaPrimary} <ArrowRight className="h-5 w-5" />
           </Link>
         </div>
       </section>
