@@ -105,7 +105,7 @@ export function Layout() {
                       />
                     </Link>
                     {servicesOpen && (
-                      <div className="absolute top-full left-1/2 z-50 mt-2 -translate-x-1/2">
+                      <div className="absolute top-full left-1/2 z-50 -translate-x-1/2 pt-2">
                         <div className="bg-dark-900/95 w-56 overflow-hidden rounded-xl border border-white/10 shadow-2xl shadow-black/40 backdrop-blur-xl">
                           <div className="p-2">
                             {item.subItems.map((sub) => (

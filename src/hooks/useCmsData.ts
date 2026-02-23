@@ -44,10 +44,13 @@ const DEFAULT_HERO = {
 };
 
 export function useHero() {
-  const { data, loading, error } = useSanityQuery<SanityHero[]>(
-    `*[_type == "hero"][0...1] { title, subtitle, ctaText, ctaLink, backgroundImage, backgroundImageAlt }`
+  const {
+    data: hero,
+    loading,
+    error,
+  } = useSanityQuery<SanityHero>(
+    `*[_type == "hero"] | order(_id == "hero" desc) [0] { title, subtitle, ctaText, ctaLink, backgroundImage, backgroundImageAlt }`
   );
-  const hero = data?.[0];
   return {
     title: hero?.title ?? DEFAULT_HERO.title,
     subtitle: hero?.subtitle ?? DEFAULT_HERO.subtitle,
