@@ -6,6 +6,7 @@ import {
   DEFAULT_OG_IMAGE,
   buildLocalBusinessJsonLd,
   WEBSITE_JSONLD,
+  ORGANIZATION_JSONLD,
 } from '@/lib/seo';
 import {
   Activity,
@@ -68,6 +69,8 @@ export function Home() {
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         {/* JSON-LD WebSite schema for sitelinks search box */}
         <script type="application/ld+json">{JSON.stringify(WEBSITE_JSONLD)}</script>
+        {/* JSON-LD Organization schema for Google Knowledge Panel logo */}
+        <script type="application/ld+json">{JSON.stringify(ORGANIZATION_JSONLD)}</script>
       </Helmet>
 
       <CyberHero />

@@ -59,8 +59,15 @@ async function generateSitemap() {
 
   const today = new Date().toISOString().split('T')[0];
 
-  // Merge static + dynamic
-  const allEntries = [...staticRoutes.map((r) => ({ ...r, lastmod: today })), ...dynamicEntries];
+  // Merge static + dynamic, deduplicating by path (dynamic wins when paths collide)
+  const entryMap = new Map();
+  for (const r of staticRoutes) {
+    entryMap.set(r.path, { ...r, lastmod: today });
+  }
+  for (const d of dynamicEntries) {
+    entryMap.set(d.path, d); // dynamic entry overrides static (has real _updatedAt)
+  }
+  const allEntries = [...entryMap.values()];
 
   // Build XML
   const urls = allEntries

@@ -198,6 +198,49 @@ export const LOCAL_BUSINESS_JSONLD = {
 };
 
 /**
+ * JSON-LD: Organization schema for Google Knowledge Panel.
+ * Provides structured logo + social links independently of MedicalClinic type.
+ * Google uses this to populate the Knowledge Panel sidebar with logo, name, URL,
+ * and social media links.
+ */
+export const ORGANIZATION_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': SITE_URL + '/#organization',
+  name: 'HS Clinic - Dr. Haitham Sharshar',
+  alternateName: 'HS Dental Clinic Cairo',
+  url: SITE_URL,
+  logo: {
+    '@type': 'ImageObject',
+    url: SITE_URL + '/assets/logo.webp',
+    width: 512,
+    height: 512,
+  },
+  image: DEFAULT_OG_IMAGE,
+  description:
+    "The Middle East's premier digital dentistry center led by Dr. Haitham Sharshar — specializing in digital occlusion, TMJ/TMD treatment, dental implants, and cosmetic dentistry in Cairo, Egypt.",
+  telephone: '+201101010599',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '8/63, 10th District, Zahraa El Maadi',
+    addressLocality: 'Cairo',
+    addressRegion: 'Cairo Governorate',
+    postalCode: '11742',
+    addressCountry: 'EG',
+  },
+  sameAs: [
+    'https://www.facebook.com/dentistdrhaithamsharshar/',
+    'https://www.instagram.com/hsdental2025/',
+    'https://maps.app.goo.gl/bs7YaRkiFgkpbmLRA',
+  ],
+  founder: {
+    '@type': 'Person',
+    '@id': SITE_URL + '/#doctor',
+    name: 'Dr. Haitham Sharshar',
+  },
+};
+
+/**
  * JSON-LD: Person schema for Dr. Haitham Sharshar.
  * Enriched with credentials, affiliations, and expertise for AI/GEO entity recognition.
  */
