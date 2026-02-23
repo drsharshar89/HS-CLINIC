@@ -430,7 +430,24 @@ export function useSiteSettings() {
     whatsapp: doc?.whatsapp ?? DEFAULT_SETTINGS.whatsapp,
     email: doc?.email ?? DEFAULT_SETTINGS.email,
     address: doc?.address ?? DEFAULT_SETTINGS.address,
-    socialLinks: doc?.socialLinks ?? DEFAULT_SETTINGS.socialLinks,
+    socialLinks: (() => {
+      const cms = doc?.socialLinks ?? [];
+      const canonical: Record<string, string> = {
+        facebook: 'https://www.facebook.com/dentistdrhaithamsharshar/',
+        instagram: 'https://www.instagram.com/hsdental2025/',
+      };
+      // Merge: use canonical override for known platforms, keep CMS for others
+      const merged = cms.map((link) =>
+        canonical[link.platform] ? { ...link, url: canonical[link.platform] } : link
+      );
+      // Add any canonical platforms missing from CMS
+      for (const [platform, url] of Object.entries(canonical)) {
+        if (!merged.some((l) => l.platform === platform)) {
+          merged.push({ platform, url });
+        }
+      }
+      return merged;
+    })(),
     workingHours: doc?.workingHours ?? DEFAULT_SETTINGS.workingHours,
     seoTitle: doc?.seoTitle ?? '',
     seoDescription: doc?.seoDescription ?? '',
