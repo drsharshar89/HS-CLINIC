@@ -233,6 +233,140 @@ The Home link (`/`) needs special handling — `startsWith('/')` would match eve
 
 ---
 
+## Lesson 7: Duplicate Sanity Documents — Wrong Document Returned
+
+### Symptom
+
+User uploads a new hero background image in Sanity Studio and publishes it, but the live site still shows the old image.
+
+### Root Cause
+
+**Two documents** of the same `_type` existed in Sanity:
+
+- `_id: "YVgrcz49aySnBCWpOUBJWE"` — auto-generated ID, old data (300×168 image)
+- `_id: "hero"` — singleton ID, new data (1376×767 image)
+
+The GROQ query `*[_type == "hero"][0]` returned whichever document comes first in Sanity's internal ordering — which was the OLD one (uppercase `_id` sorts before lowercase in ASCII).
+
+### Fix
+
+Use `coalesce()` to always prefer the singleton:
+
+```groq
+coalesce(*[_type == "hero" && _id == "hero"][0], *[_type == "hero"][0])
+```
+
+### Prevention Rule
+
+> **RULE: When diagnosing "CMS update not appearing", ALWAYS query the Sanity API to check how many documents of that `_type` exist. If there are duplicates, the query may return the wrong one. Use `coalesce()` or explicit `_id` filtering to target the correct singleton.**
+
+### Detection
+
+```
+https://<PROJECT_ID>.api.sanity.io/v2026-02-14/data/query/production?query=*[_type == "<TYPE>"]{_id, title}
+```
+
+If `result` array has more than 1 item for a singleton type → you have duplicates.
+
+### Cleanup
+
+Delete the duplicate document in Sanity Studio to prevent future confusion. Keep only the singleton with the known `_id`.
+
+---
+
+## Lesson 8: GROQ `order()` Does NOT Support Boolean `desc`
+
+### Symptom
+
+Sanity API returns `400 Bad Request` with "unexpected postfix operator `desc`". Hero section shows no background image at all.
+
+### Root Cause
+
+Used `order(_id == "hero" desc)` in GROQ — this is **invalid syntax**. The `desc` keyword in GROQ `order()` only works on field names (e.g., `order(_createdAt desc)`), NOT on boolean expressions.
+
+```groq
+// ❌ INVALID — causes 400 error
+*[_type == "hero"] | order(_id == "hero" desc) [0]
+
+// ✅ CORRECT — use coalesce instead
+coalesce(*[_type == "hero" && _id == "hero"][0], *[_type == "hero"][0])
+```
+
+### Prevention Rule
+
+> **RULE: NEVER use `order()` with boolean expressions or comparison operators. For "prefer this document" logic, ALWAYS use `coalesce()` with two separate filtered queries. Test GROQ queries in Sanity's Vision tool BEFORE pushing to production.**
+
+### Impact
+
+This caused a **live site breakage** — the hero section had no background image because the entire Sanity query failed. The `??` fallback pattern only covers missing fields, NOT failed queries.
+
+### Testing
+
+Before pushing any GROQ query change, test it in Sanity Vision:
+
+1. Go to `hs-dental-clinic.sanity.studio`
+2. Click "Vision" tab
+3. Paste the query
+4. If it returns data → safe to push
+
+---
+
+## Lesson 9: CMS Data Overrides Code Defaults
+
+### Symptom
+
+Added correct social media URLs to `DEFAULT_SETTINGS.socialLinks` in code, but the live site still shows wrong URLs.
+
+### Root Cause
+
+The merge logic `doc?.socialLinks ?? DEFAULT_SETTINGS.socialLinks` uses `??` (nullish coalescing). If the CMS returns ANY value (even wrong URLs), the defaults are ignored. The CMS had `instagram.com/dr.haithamsharshar` (wrong) overriding the code default `instagram.com/hsdental2025/` (correct).
+
+### Fix
+
+For critical URLs that must always be correct, use a **canonical override** pattern:
+
+```typescript
+const canonical: Record<string, string> = {
+  facebook: 'https://www.facebook.com/dentistdrhaithamsharshar/',
+  instagram: 'https://www.instagram.com/hsdental2025/',
+};
+// Override CMS values with canonical URLs for known platforms
+const merged = cmsLinks.map((link) =>
+  canonical[link.platform] ? { ...link, url: canonical[link.platform] } : link
+);
+```
+
+### Prevention Rule
+
+> **RULE: For business-critical data (social links, phone numbers, addresses), NEVER rely solely on `??` fallback — CMS may contain WRONG data that overrides correct defaults. Use canonical overrides for values that must always be correct, or fix the CMS data directly.**
+
+---
+
+## Lesson 10: `brightness-200` Washes Out Transparent Images
+
+### Symptom
+
+Logo image appears as a washed-out white blob in the header. The gold colors are invisible.
+
+### Root Cause
+
+The `brightness-200` CSS filter was applied to boost brightness for a dark/colored logo on a dark background. When the logo was swapped to a transparent-background version with gold colors, the filter doubled the brightness of the already-bright gold → turned it white.
+
+### Fix
+
+Remove `brightness-200` when using transparent-background images:
+
+```diff
+- className="h-16 w-auto brightness-200 transition-all"
++ className="h-16 w-auto transition-all"
+```
+
+### Prevention Rule
+
+> **RULE: When swapping an image asset, ALWAYS check if the old image had CSS filters (`brightness`, `contrast`, `invert`, `saturate`). These filters are tuned for the OLD image's colors and will distort the new image. Remove or re-calibrate filters after every image swap.**
+
+---
+
 ## Quick Reference: Diagnostic Flowchart
 
 ```
@@ -241,8 +375,18 @@ CMS data not showing on live site?
 │   └── Yes → Add domain to Sanity CORS origins
 ├── Query Sanity API directly — does the document exist?
 │   ├── No results → Check slug for whitespace
+│   ├── Multiple results for a singleton → DUPLICATE DOCUMENTS (Lesson 7)
+│   │   └── Fix with coalesce() query, delete the duplicate
 │   └── Results exist → Check TypeScript interface + hook return + JSX rendering
+├── API returns 400 error → Invalid GROQ syntax (Lesson 8)
+│   └── Test query in Sanity Vision before pushing
 └── Data flows but looks wrong → Check field name mapping between schema and GROQ
+
+CMS returns data but code defaults are showing?
+└── Check if CMS values override your defaults → Use canonical overrides (Lesson 9)
+
+Image looks washed out / wrong colors?
+└── Check for CSS brightness/contrast filters from the previous image (Lesson 10)
 
 Dropdown disappears on hover?
 └── Check for margin between trigger and panel → Replace with padding

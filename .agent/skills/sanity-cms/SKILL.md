@@ -78,7 +78,10 @@ export function useServicePillar(slug: string) {
 ## GROQ Query Patterns
 
 ```groq
-// Fetch a singleton
+// Fetch a singleton (prefer known _id, fallback to any)
+coalesce(*[_type == "hero" && _id == "hero"][0], *[_type == "hero"][0])
+
+// Fetch a singleton (simple)
 *[_type == "siteSettings"][0]
 
 // Fetch a service pillar by slug
@@ -90,6 +93,9 @@ export function useServicePillar(slug: string) {
 // Fetch slugs + types for prerendering
 *[_type in ["post", "service"] && defined(slug.current)]{_type, "slug": slug.current}
 ```
+
+> [!CAUTION]
+> **`order()` does NOT support boolean `desc`.** Using `order(_id == "hero" desc)` causes a 400 error. For "prefer this document" logic, always use `coalesce()` with two filtered queries.
 
 ## Sanity → Netlify Webhook
 

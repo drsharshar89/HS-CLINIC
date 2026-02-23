@@ -70,3 +70,36 @@ If images don't show despite data existing:
 | TMJ/TMD Treatment | `tmj-tmd-treatment`        |
 | Clear Aligners    | `clear-aligners`           |
 | Full Arch Rehab   | `full-arch-rehabilitation` |
+
+## Step 6: Check for Duplicate Documents (Singletons)
+
+If a CMS update "doesn't appear" despite being published, there may be **multiple documents of the same type**:
+
+```
+https://nk38o90y.api.sanity.io/v2026-02-14/data/query/production?query=*[_type == "<TYPE>"]{_id, title}
+```
+
+If `result` has more than 1 document for a singleton type → the GROQ query `[0]` may return the wrong one.
+
+**Fix:** Use `coalesce()` to prefer the singleton:
+
+```groq
+coalesce(*[_type == "hero" && _id == "hero"][0], *[_type == "hero"][0])
+```
+
+**Cleanup:** Delete the duplicate in Sanity Studio.
+
+## Step 7: Validate GROQ Syntax Before Pushing
+
+**NEVER push a GROQ query change without testing it first.** Invalid syntax causes 400 errors and silent data loss (no fallback protects against a failed query).
+
+**Known invalid patterns:**
+
+- `order(_id == "hero" desc)` — ❌ `desc` only works on field names, NOT boolean expressions
+- `order(booleanExpression asc)` — ❌ same issue
+
+**Test in Sanity Vision:**
+
+1. Go to `hs-dental-clinic.sanity.studio` → "Vision" tab
+2. Paste the query
+3. If it returns data → safe to push
