@@ -4,7 +4,21 @@ description: Coding rules and constraints for the HS Clinic website project
 
 # HS Clinic — Agent Coding Rules
 
+> **⚠️ MANDATORY: Before making ANY change, read `.agent/AGENTS.md` and `.agent/skills/debugging-lessons/SKILL.md` first.**
+
 Before making ANY change to this project, read and follow these rules.
+
+## 0. Mandatory Pre-Work Reading
+
+These files contain lessons from production incidents. Reading them prevents you from making the same expensive mistakes:
+
+| Priority     | File                                       | What It Prevents                     |
+| ------------ | ------------------------------------------ | ------------------------------------ |
+| 🔴 MUST      | `.agent/skills/debugging-lessons/SKILL.md` | 6 specific bugs that cost hours each |
+| 🔴 MUST      | `.agent/workflows/safety-protocol.md`      | Regressions and broken deploys       |
+| 🟡 If CMS    | `.agent/workflows/sanity-debug.md`         | CMS data not appearing               |
+| 🟡 If Git    | `.agent/skills/git-windows/SKILL.md`       | Git hanging on Windows               |
+| 🟡 If Deploy | `.agent/skills/netlify-deploy/SKILL.md`    | Deploy failures                      |
 
 ## 1. Tech Stack (Non-Negotiable)
 
@@ -24,9 +38,9 @@ Before making ANY change to this project, read and follow these rules.
 
 NEVER install any of the following. If you think you need one, STOP and find the Tailwind/Radix/framer-motion equivalent instead:
 
-- @mui/material, @mui/icons-material, @emotion/* (wrong design system)
+- @mui/material, @mui/icons-material, @emotion/\* (wrong design system)
 - styled-components (wrong styling approach)
-- next-themes, next/* (wrong framework — this is Vite, NOT Next.js)
+- next-themes, next/\* (wrong framework — this is Vite, NOT Next.js)
 - motion (duplicate of framer-motion)
 - react-slick (use framer-motion)
 - react-dnd (no drag-drop needed)
@@ -92,4 +106,3 @@ If the page is blank, do NOT deploy. Check console for errors.
 - eslint.config.js — Lint rules
 - index.html — Font preconnect links + global error handler (safety net)
 - `_AGENT_COORD/VITE_CONFIG_RULES.md` — Root cause of blank page bug & prevention rules
-

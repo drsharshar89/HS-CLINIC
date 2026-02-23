@@ -1,10 +1,40 @@
 ---
-description: Guardian Safety Protocol — mandatory 5-step process for every code change
+description: Guardian Safety Protocol — mandatory 6-step process for every code change
 ---
 
 # Guardian Safety Protocol
 
-Every task MUST follow these 5 steps. No exceptions.
+Every task MUST follow these 6 steps. No exceptions.
+
+---
+
+## Step 0: Knowledge Check (MANDATORY — Do This First)
+
+Before planning or writing ANY code, read these files:
+
+1. **`.agent/AGENTS.md`** — Master operating manual
+2. **`.agent/skills/debugging-lessons/SKILL.md`** — 6 production debugging lessons
+
+You must confirm to yourself that you understand:
+
+- [ ] The 5-link CMS data pipeline (Schema → GROQ → Type → Hook → JSX)
+- [ ] Why `margin` between a trigger and dropdown panel causes hover gaps
+- [ ] Why a page "looking fine" doesn't mean CMS data is flowing
+- [ ] How to query the Sanity API directly to verify stored data
+- [ ] That production domains must be whitelisted in Sanity CORS
+
+**If your task involves Sanity CMS**, also read:
+
+- `.agent/workflows/sanity-debug.md`
+- `.agent/skills/sanity-cms/SKILL.md`
+
+**If your task involves Git**, also read:
+
+- `.agent/skills/git-windows/SKILL.md`
+
+**If your task involves deployment**, also read:
+
+- `.agent/skills/netlify-deploy/SKILL.md`
 
 ---
 
@@ -27,8 +57,9 @@ Before writing any code:
 Before making any edits:
 
 // turbo
+
 1. Run `npm run build` — verify it passes with 0 errors
-// turbo
+   // turbo
 2. Run `npm run test` — verify all tests pass
 3. If either fails, **STOP** — do not proceed. Report the failure to the user first
 
@@ -55,10 +86,11 @@ While writing code:
 After finishing a task, do NOT just say "Done." Run these checks:
 
 // turbo
+
 1. `npm run build` → must be 0 errors
-// turbo
+   // turbo
 2. `npm run test` → all tests must pass
-// turbo
+   // turbo
 3. `npm run lint` → 0 errors
 4. Mental Simulation Report — confirm in writing:
    - ✅ Homepage still loads
