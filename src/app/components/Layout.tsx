@@ -11,6 +11,7 @@ import {
   Youtube,
   Linkedin,
   Twitter,
+  ChevronDown,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useState } from 'react';
@@ -31,13 +32,21 @@ const SOCIAL_ICONS: Record<string, LucideIcon> = {
 
 export function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const location = useLocation();
   const { settings } = useSiteSettings();
+
+  const serviceSubItems = [
+    { name: 'Dental Implants', href: '/services/dental-implants' },
+    { name: 'TMJ/TMD Treatment', href: '/services/tmj-tmd-treatment' },
+    { name: 'Clear Aligners', href: '/services/clear-aligners' },
+    { name: 'Full Arch Rehab', href: '/services/full-arch-rehabilitation' },
+  ];
 
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
-    { name: 'Services', href: '/services' },
+    { name: 'Services', href: '/services', subItems: serviceSubItems },
     { name: 'Technology', href: '/technology' },
     { name: 'Smile Design', href: '/digital-smile-design' },
     { name: 'Dental Tourism', href: '/dental-tourism' },
@@ -45,7 +54,8 @@ export function Layout() {
     { name: 'Contact', href: '/contact' },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) =>
+    location.pathname === path || location.pathname.startsWith(path + '/');
 
   return (
     <div className="bg-dark-950 selection:bg-gold-400/30 selection:text-gold-400 flex min-h-screen flex-col font-sans text-gray-200">
@@ -72,20 +82,65 @@ export function Layout() {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex md:gap-x-8">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  aria-current={isActive(item.href) ? 'page' : undefined}
-                  className={`relative text-sm font-medium transition-colors duration-300 after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:transition-all after:duration-300 after:ease-out ${
-                    isActive(item.href)
-                      ? 'text-gold-400 after:bg-gold-400 after:w-full'
-                      : 'hover:text-gold-400 after:bg-gold-400 text-gray-400 hover:after:w-full'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navigation.map((item) =>
+                item.subItems ? (
+                  <div
+                    key={item.name}
+                    className="group relative"
+                    onMouseEnter={() => setServicesOpen(true)}
+                    onMouseLeave={() => setServicesOpen(false)}
+                  >
+                    <Link
+                      to={item.href}
+                      aria-current={isActive(item.href) ? 'page' : undefined}
+                      className={`relative inline-flex items-center gap-1 text-sm font-medium transition-colors duration-300 after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:transition-all after:duration-300 after:ease-out ${
+                        isActive(item.href)
+                          ? 'text-gold-400 after:bg-gold-400 after:w-full'
+                          : 'hover:text-gold-400 after:bg-gold-400 text-gray-400 hover:after:w-full'
+                      }`}
+                    >
+                      {item.name}
+                      <ChevronDown
+                        className={`h-3.5 w-3.5 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`}
+                      />
+                    </Link>
+                    {servicesOpen && (
+                      <div className="absolute top-full left-1/2 z-50 mt-2 -translate-x-1/2">
+                        <div className="bg-dark-900/95 w-56 overflow-hidden rounded-xl border border-white/10 shadow-2xl shadow-black/40 backdrop-blur-xl">
+                          <div className="p-2">
+                            {item.subItems.map((sub) => (
+                              <Link
+                                key={sub.name}
+                                to={sub.href}
+                                className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                                  isActive(sub.href)
+                                    ? 'bg-gold-400/10 text-gold-400'
+                                    : 'hover:text-gold-400 text-gray-300 hover:bg-white/5'
+                                }`}
+                              >
+                                {sub.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                    className={`relative text-sm font-medium transition-colors duration-300 after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:transition-all after:duration-300 after:ease-out ${
+                      isActive(item.href)
+                        ? 'text-gold-400 after:bg-gold-400 after:w-full'
+                        : 'hover:text-gold-400 after:bg-gold-400 text-gray-400 hover:after:w-full'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                )
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -112,21 +167,69 @@ export function Layout() {
         {mobileMenuOpen && (
           <div id="mobile-menu" className="bg-dark-900 border-b border-white/10 md:hidden">
             <div className="space-y-1 px-4 pt-2 pb-3">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  aria-current={isActive(item.href) ? 'page' : undefined}
-                  className={`block rounded-md px-3 py-2 text-base font-medium ${
-                    isActive(item.href)
-                      ? 'bg-gold-400/10 text-gold-400'
-                      : 'text-gray-300 hover:bg-white/5 hover:text-white'
-                  }`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navigation.map((item) =>
+                item.subItems ? (
+                  <div key={item.name}>
+                    <button
+                      type="button"
+                      onClick={() => setServicesOpen(!servicesOpen)}
+                      className={`flex w-full items-center justify-between rounded-md px-3 py-2 text-base font-medium ${
+                        isActive(item.href)
+                          ? 'bg-gold-400/10 text-gold-400'
+                          : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                      }`}
+                    >
+                      {item.name}
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`}
+                      />
+                    </button>
+                    {servicesOpen && (
+                      <div className="mt-1 ml-4 space-y-1 border-l border-white/10 pl-3">
+                        <Link
+                          to={item.href}
+                          className={`block rounded-md px-3 py-1.5 text-sm font-medium ${
+                            location.pathname === item.href
+                              ? 'text-gold-400'
+                              : 'hover:text-gold-400 text-gray-400'
+                          }`}
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          All Services
+                        </Link>
+                        {item.subItems.map((sub) => (
+                          <Link
+                            key={sub.name}
+                            to={sub.href}
+                            className={`block rounded-md px-3 py-1.5 text-sm font-medium ${
+                              isActive(sub.href)
+                                ? 'text-gold-400'
+                                : 'hover:text-gold-400 text-gray-400'
+                            }`}
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {sub.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                    className={`block rounded-md px-3 py-2 text-base font-medium ${
+                      isActive(item.href)
+                        ? 'bg-gold-400/10 text-gold-400'
+                        : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                    }`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                )
+              )}
             </div>
           </div>
         )}
