@@ -218,12 +218,14 @@ export default function TourismProgram() {
         <meta property="og:description" content={SEO.tourismProgram.description} />
         <meta property="og:url" content={SEO.tourismProgram.canonical} />
         <meta property="og:image" content={DEFAULT_OG_IMAGE} />
+        <meta property="og:image:alt" content="Dr. Haitham Sharshar — HS Clinic Cairo" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:locale" content="en_EG" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={SEO.tourismProgram.title} />
         <meta name="twitter:description" content={SEO.tourismProgram.description} />
+        <meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
         <script type="application/ld+json">{tourismJsonLd}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>
         <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>

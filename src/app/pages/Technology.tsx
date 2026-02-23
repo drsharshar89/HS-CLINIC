@@ -30,6 +30,7 @@ export function Technology() {
         <meta property="og:description" content={SEO.technology.description} />
         <meta property="og:url" content={SEO.technology.canonical} />
         <meta property="og:image" content={DEFAULT_OG_IMAGE} />
+        <meta property="og:image:alt" content="Dr. Haitham Sharshar — HS Clinic Cairo" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta name="twitter:card" content="summary_large_image" />
@@ -60,6 +61,18 @@ export function Technology() {
               SYSTEM STATUS: OPTIMAL
             </div>
             <h3 className="font-serif text-3xl text-white">Next-Gen Integration</h3>
+            <p className="mt-2 max-w-lg text-sm text-gray-300">
+              Powered by our{' '}
+              <a
+                href="https://exocad.com/integration/technology-partners"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold-400 underline decoration-1 underline-offset-2"
+              >
+                certified In-House Digital Dental Lab
+              </a>
+              .
+            </p>
           </div>
         </div>
 

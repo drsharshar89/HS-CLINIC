@@ -1,14 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
-import {
-  SEO,
-  SITE_NAME,
-  DEFAULT_OG_IMAGE,
-  DENTAL_TOURISM_JSONLD,
-  buildFaqJsonLd,
-  buildAggregateRatingJsonLd,
-} from '@/lib/seo';
+import { SEO, SITE_NAME, DEFAULT_OG_IMAGE, DENTAL_TOURISM_JSONLD, buildFaqJsonLd } from '@/lib/seo';
 import { Globe, ChevronRight, Phone, Star, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { WhyHSClinic } from '@/app/components/tourism/WhyHSClinic';
@@ -37,12 +30,6 @@ export default function DentalTourism() {
   const faqJsonLd = useMemo(
     () => buildFaqJsonLd(cmsFaqs.map((f) => ({ question: f.question, answer: f.answer }))),
     [cmsFaqs]
-  );
-
-  // Build AggregateRating from testimonials for trust signal
-  const ratingJsonLd = useMemo(
-    () => buildAggregateRatingJsonLd({ ratingValue: 4.9, reviewCount: 150 }),
-    []
   );
 
   // useTestimonials() already returns fallback data if CMS is empty
@@ -83,6 +70,7 @@ export default function DentalTourism() {
         <meta property="og:description" content={SEO.dentalTourism.description} />
         <meta property="og:url" content={SEO.dentalTourism.canonical} />
         <meta property="og:image" content={DEFAULT_OG_IMAGE} />
+        <meta property="og:image:alt" content="Dr. Haitham Sharshar — HS Clinic Cairo" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:locale" content="en_EG" />
@@ -94,8 +82,6 @@ export default function DentalTourism() {
         <script type="application/ld+json">{JSON.stringify(DENTAL_TOURISM_JSONLD)}</script>
         {/* JSON-LD: FAQPage schema for AI/GEO answer extraction */}
         <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
-        {/* JSON-LD: AggregateRating for trust signal */}
-        <script type="application/ld+json">{JSON.stringify(ratingJsonLd)}</script>
       </Helmet>
 
       {/* ==========================================

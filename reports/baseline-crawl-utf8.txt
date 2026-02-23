@@ -1,0 +1,103 @@
+﻿--- Normal User-Agent Crawl ---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="google-site-verification" content="IXOZQwQkHOVZoMwMEJ5iab8wEdQBE2_LhYEhoqFhkhA" />
+    <meta
+      name="description"
+      content="Dr. Haitham Sharshar Dental Clinic - The leading specialized center for Digital Dental Occlusion, TMJ treatment, and Cosmetic Dentistry in the Middle East."
+    />
+    <title>Dr. Haitham Sharshar | Digital Occlusion & Cosmetic Dentistry | Cairo</title>
+    <!-- hreflang tags for international SEO targeting -->
+    <link rel="alternate" hreflang="en" href="https://drhaithamsharshar.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://drhaithamsharshar.com/" />
+    <!-- Self-hosted fonts ΓÇö no external requests -->
+    <link
+      rel="preload"
+      href="/fonts/inter-latin-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/playfair-display-latin-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/jetbrains-mono-latin-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <script type="module" crossorigin src="/assets/index-DP2c9qtX.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BPJcgELK.css">
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <!-- SAFETY NET: Catch silent module evaluation crashes that cause blank pages.
+         Without this, a crashing ES module produces NO console output ΓÇö just a blank page.
+         See _AGENT_COORD/VITE_CONFIG_RULES.md for the full root cause analysis. -->
+    <script>
+      window.addEventListener('error', function (e) {
+        if (
+          document.getElementById('root') &&
+
+--- Googlebot Crawl ---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="google-site-verification" content="IXOZQwQkHOVZoMwMEJ5iab8wEdQBE2_LhYEhoqFhkhA" />
+    <meta
+      name="description"
+      content="Dr. Haitham Sharshar Dental Clinic - The leading specialized center for Digital Dental Occlusion, TMJ treatment, and Cosmetic Dentistry in the Middle East."
+    />
+    <title>Dr. Haitham Sharshar | Digital Occlusion & Cosmetic Dentistry | Cairo</title>
+    <!-- hreflang tags for international SEO targeting -->
+    <link rel="alternate" hreflang="en" href="https://drhaithamsharshar.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://drhaithamsharshar.com/" />
+    <!-- Self-hosted fonts ΓÇö no external requests -->
+    <link
+      rel="preload"
+      href="/fonts/inter-latin-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/playfair-display-latin-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/jetbrains-mono-latin-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <script type="module" crossorigin src="/assets/index-DP2c9qtX.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BPJcgELK.css">
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <!-- SAFETY NET: Catch silent module evaluation crashes that cause blank pages.
+         Without this, a crashing ES module produces NO console output ΓÇö just a blank page.
+         See _AGENT_COORD/VITE_CONFIG_RULES.md for the full root cause analysis. -->
+    <script>
+      window.addEventListener('error', function (e) {
+        if (
+          document.getElementById('root') &&

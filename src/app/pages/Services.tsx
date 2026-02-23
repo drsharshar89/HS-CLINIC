@@ -54,6 +54,7 @@ export function Services() {
         <meta property="og:description" content={SEO.services.description} />
         <meta property="og:url" content={SEO.services.canonical} />
         <meta property="og:image" content={DEFAULT_OG_IMAGE} />
+        <meta property="og:image:alt" content="Dr. Haitham Sharshar — HS Clinic Cairo" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta name="twitter:card" content="summary_large_image" />

@@ -33,6 +33,7 @@ export default function DigitalSmileDesign() {
         <meta property="og:title" content={seo.title} />
         <meta property="og:description" content={seo.description} />
         <meta property="og:image" content={DEFAULT_OG_IMAGE} />
+        <meta property="og:image:alt" content="Dr. Haitham Sharshar — HS Clinic Cairo" />
         <meta property="og:url" content={seo.canonical} />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:type" content="website" />

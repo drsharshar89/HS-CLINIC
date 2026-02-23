@@ -5,7 +5,6 @@ import {
   SITE_NAME,
   DEFAULT_OG_IMAGE,
   buildLocalBusinessJsonLd,
-  buildAggregateRatingJsonLd,
   WEBSITE_JSONLD,
 } from '@/lib/seo';
 import {
@@ -38,7 +37,6 @@ export function Home() {
   const { settings } = useSiteSettings();
   const ogImageUrl = useSanityImage(settings.ogImage, 1200) || DEFAULT_OG_IMAGE;
   const jsonLd = buildLocalBusinessJsonLd(settings);
-  const ratingJsonLd = buildAggregateRatingJsonLd({ ratingValue: 4.9, reviewCount: 150 });
 
   const features = homepage.features.map((f) => ({
     icon: (f.iconName && ICON_MAP[f.iconName]) || Zap,
@@ -57,6 +55,7 @@ export function Home() {
         <meta property="og:description" content={SEO.home.description} />
         <meta property="og:url" content={SEO.home.canonical} />
         <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:alt" content="Dr. Haitham Sharshar — HS Clinic Cairo" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:locale" content="en_EG" />
@@ -69,8 +68,6 @@ export function Home() {
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         {/* JSON-LD WebSite schema for sitelinks search box */}
         <script type="application/ld+json">{JSON.stringify(WEBSITE_JSONLD)}</script>
-        {/* JSON-LD AggregateRating for trust signal */}
-        <script type="application/ld+json">{JSON.stringify(ratingJsonLd)}</script>
       </Helmet>
 
       <CyberHero />

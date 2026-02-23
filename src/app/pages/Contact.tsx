@@ -110,6 +110,7 @@ export function Contact() {
         <meta property="og:description" content={SEO.contact.description} />
         <meta property="og:url" content={SEO.contact.canonical} />
         <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:alt" content="Dr. Haitham Sharshar — HS Clinic Cairo" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta name="twitter:card" content="summary_large_image" />

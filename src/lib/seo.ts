@@ -191,13 +191,10 @@ export const LOCAL_BUSINESS_JSONLD = {
   ],
   isAcceptingNewPatients: true,
   hasMap: 'https://maps.app.goo.gl/bs7YaRkiFgkpbmLRA',
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: 4.9,
-    reviewCount: 150,
-    bestRating: 5,
-    worstRating: 1,
-  },
+  // NOTE: aggregateRating intentionally omitted.
+  // On YMYL medical sites, hardcoded review data without a live on-page review
+  // system can trigger a Google manual action. Let your Google Business Profile
+  // organically supply star ratings to the Knowledge Panel instead.
 };
 
 /**
@@ -720,26 +717,9 @@ export function buildBreadcrumbJsonLd(items: Array<{ name: string; url: string }
   };
 }
 
-/** Build AggregateRating JSON-LD from review data */
-export function buildAggregateRatingJsonLd(data: {
-  ratingValue: number;
-  reviewCount: number;
-  bestRating?: number;
-}) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Dentist',
-    '@id': SITE_URL + '/#clinic',
-    name: 'HS Clinic - Dr. Haitham Sharshar',
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: data.ratingValue,
-      reviewCount: data.reviewCount,
-      bestRating: data.bestRating ?? 5,
-      worstRating: 1,
-    },
-  };
-}
+// NOTE: buildAggregateRatingJsonLd was removed.
+// On YMYL medical sites, fabricated review data triggers Google manual actions.
+// Star ratings should come from your Google Business Profile organically.
 
 /**
  * Build hreflang link objects for react-helmet-async.

@@ -45,6 +45,7 @@ export function About() {
         <meta property="og:description" content={SEO.about.description} />
         <meta property="og:url" content={SEO.about.canonical} />
         <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:alt" content="Dr. Haitham Sharshar — HS Clinic Cairo" />
         <meta property="og:type" content="profile" />
         <meta property="og:site_name" content={SITE_NAME} />
         <meta name="twitter:card" content="summary_large_image" />
@@ -106,14 +107,45 @@ export function About() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              {about.certifications.map((cert, i) => (
-                <div
-                  key={i}
-                  className={`rounded border border-white/10 bg-white/5 px-4 py-2 font-mono text-sm ${i === 0 ? 'text-gold-400' : 'text-gold-500'}`}
-                >
-                  {cert}
-                </div>
-              ))}
+              {about.certifications.map((cert, i) => {
+                let certContent: React.ReactNode = cert;
+
+                // Add verification links for AI crawling support based on known CMS string matches
+                if (typeof cert === 'string') {
+                  if (cert.includes('Zebris')) {
+                    certContent = (
+                      <a
+                        href="https://www.zebris.de/en/dental"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline"
+                      >
+                        {cert}
+                      </a>
+                    );
+                  } else if (cert.includes('exocad')) {
+                    certContent = (
+                      <a
+                        href="https://exocad.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline"
+                      >
+                        {cert}
+                      </a>
+                    );
+                  }
+                }
+
+                return (
+                  <div
+                    key={i}
+                    className={`rounded border border-white/10 bg-white/5 px-4 py-2 font-mono text-sm ${i === 0 ? 'text-gold-400' : 'text-gold-500'}`}
+                  >
+                    {certContent}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
