@@ -18,70 +18,143 @@ export default defineConfig({
         S.list()
           .title('Content')
           .items([
-            // ── Global ──────────────────────────────────────────
+            // ── Global Settings ─────────────────────────────────
             S.listItem()
-              .title('Site Settings')
+              .title('Global Settings')
               .icon(() => '⚙️')
               .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
 
             S.divider(),
 
-            // ── Homepage ────────────────────────────────────────
+            // ── Pages ───────────────────────────────────────────
+
+            // Homepage (folder: hero + homepage settings)
             S.listItem()
-              .title('Hero Section')
+              .title('Homepage')
               .icon(() => '🏠')
-              .child(S.document().schemaType('hero').documentId('hero')),
-            S.listItem()
-              .title('Homepage Settings')
-              .icon(() => '🏡')
-              .child(S.document().schemaType('homepageSettings').documentId('homepageSettings')),
+              .child(
+                S.list()
+                  .title('Homepage')
+                  .items([
+                    S.listItem()
+                      .title('Hero Section')
+                      .icon(() => '🎯')
+                      .child(S.document().schemaType('hero').documentId('hero')),
+                    S.listItem()
+                      .title('Homepage Settings')
+                      .icon(() => '🏡')
+                      .child(
+                        S.document()
+                          .schemaType('homepageSettings')
+                          .documentId('homepageSettings'),
+                      ),
+                  ]),
+              ),
 
-            S.divider(),
-
-            // ── Page Settings (singletons) ──────────────────────
+            // About Page (folder: settings + team members)
             S.listItem()
               .title('About Page')
               .icon(() => '📋')
-              .child(S.document().schemaType('aboutSettings').documentId('aboutSettings')),
+              .child(
+                S.list()
+                  .title('About Page')
+                  .items([
+                    S.listItem()
+                      .title('About Page Settings')
+                      .icon(() => '📋')
+                      .child(
+                        S.document().schemaType('aboutSettings').documentId('aboutSettings'),
+                      ),
+                    S.documentTypeListItem('teamMember')
+                      .title('Team Members')
+                      .icon(() => '👤'),
+                  ]),
+              ),
+
+            // Services (folder: page settings + service cards)
             S.listItem()
-              .title('Services Page')
+              .title('Services')
               .icon(() => '🩺')
               .child(
-                S.document()
-                  .schemaType('servicesPageSettings')
-                  .documentId('servicesPageSettings'),
+                S.list()
+                  .title('Services')
+                  .items([
+                    S.listItem()
+                      .title('Services Page Settings')
+                      .icon(() => '🩺')
+                      .child(
+                        S.document()
+                          .schemaType('servicesPageSettings')
+                          .documentId('servicesPageSettings'),
+                      ),
+                    S.documentTypeListItem('service')
+                      .title('Service Cards')
+                      .icon(() => '💊'),
+                  ]),
               ),
+
+            // Technology Page (singleton — opens directly)
             S.listItem()
               .title('Technology Page')
               .icon(() => '🔬')
               .child(
                 S.document().schemaType('technologySettings').documentId('technologySettings'),
               ),
+
+            // DSD Page (singleton — opens directly)
             S.listItem()
               .title('DSD Page')
               .icon(() => '💎')
               .child(S.document().schemaType('dsdSettings').documentId('dsdSettings')),
+
+            // Dental Tourism (folder: settings + pricing)
             S.listItem()
-              .title('Tourism Page')
+              .title('Dental Tourism')
               .icon(() => '✈️')
-              .child(S.document().schemaType('tourismSettings').documentId('tourismSettings')),
+              .child(
+                S.list()
+                  .title('Dental Tourism')
+                  .items([
+                    S.listItem()
+                      .title('Tourism Page Settings')
+                      .icon(() => '✈️')
+                      .child(
+                        S.document()
+                          .schemaType('tourismSettings')
+                          .documentId('tourismSettings'),
+                      ),
+                    S.documentTypeListItem('tourismPricing')
+                      .title('Tourism Pricing')
+                      .icon(() => '💰'),
+                  ]),
+              ),
+
+            // Gallery (folder: before/after + videos)
+            S.listItem()
+              .title('Gallery')
+              .icon(() => '📸')
+              .child(
+                S.list()
+                  .title('Gallery')
+                  .items([
+                    S.documentTypeListItem('beforeAfterCase')
+                      .title('Before/After Cases')
+                      .icon(() => '📸'),
+                    S.documentTypeListItem('youtubeVideo')
+                      .title('YouTube Videos')
+                      .icon(() => '🎬'),
+                  ]),
+              ),
 
             S.divider(),
 
-            // ── Collections ─────────────────────────────────────
-            S.documentTypeListItem('service').title('Services').icon(() => '💊'),
+            // ── Shared Content ──────────────────────────────────
             S.documentTypeListItem('testimonial').title('Testimonials').icon(() => '⭐'),
-            S.documentTypeListItem('teamMember').title('Team Members').icon(() => '👤'),
-            S.documentTypeListItem('tourismPricing').title('Tourism Pricing').icon(() => '💰'),
             S.documentTypeListItem('faq').title('FAQs').icon(() => '❓'),
-            S.documentTypeListItem('beforeAfterCase')
-              .title('Before/After Cases')
-              .icon(() => '📸'),
-            S.documentTypeListItem('youtubeVideo').title('YouTube Videos').icon(() => '🎬'),
 
             S.divider(),
 
-            // ── SEO Content ─────────────────────────────────────
+            // ── SEO Pillar Content ──────────────────────────────
             S.documentTypeListItem('servicePillar')
               .title('Service Pillar Pages')
               .icon(() => '📄'),
