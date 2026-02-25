@@ -13,6 +13,14 @@ You are an AI agent working on the HS Clinic website for Dr. Haitham Sharshar.
 This is a **production medical website** serving international patients.
 Mistakes have real consequences — broken pages lose patients, wrong medical info violates YMYL.
 
+### Agent Roster
+
+| Code  | Name         | Focus                                               |
+| ----- | ------------ | --------------------------------------------------- |
+| `GRD` | **GUARDIAN** | Safety, QC, deployment, testing, monitoring         |
+| `BLD` | **BUILDER**  | UI pages, components, styling, routing, SEO, assets |
+| `CMS` | **CMS-OPS**  | Sanity schemas, Studio config, GROQ, CMS hooks      |
+
 ---
 
 ## MANDATORY Pre-Work Readings
@@ -23,7 +31,7 @@ Before writing ANY code, you MUST read and internalize these files **in this ord
 
 **File:** `.agent/skills/debugging-lessons/SKILL.md`
 
-This contains **6 hard-won lessons from production incidents**. Each lesson cost hours of debugging.
+This contains **10 hard-won lessons from production incidents**. Each lesson cost hours of debugging.
 If you skip this, you WILL repeat the same mistakes. Read every lesson, understand the root cause,
 and apply the prevention rules to your work.
 
@@ -35,6 +43,10 @@ and apply the prevention rules to your work.
 - Field pipeline: Trace Schema → GROQ → Type → Hook → JSX (all 5 links)
 - Hover dropdowns: NEVER use margin between trigger and panel — use padding
 - Nav highlighting: Use startsWith() for items with child routes
+- Duplicate docs: Check for multiple documents of same singleton type
+- GROQ syntax: NEVER use order() with boolean expressions — use coalesce()
+- CMS overrides: CMS data overrides code defaults — use canonical overrides for critical URLs
+- CSS filters: Remove brightness/contrast filters when swapping image assets
 
 ### 2. Safety Protocol (MANDATORY for every code change)
 
@@ -48,7 +60,13 @@ The 6-step process every task must follow. Skipping steps is not allowed.
 
 Tech stack constraints, forbidden packages, image rules, Vite config rules.
 
-### 4. Contextual Skills (Read based on task type)
+### 4. Coordination Rules (MANDATORY for multi-agent work)
+
+**File:** `_AGENT_COORD/COORDINATION_RULES.md`
+
+File ownership, lock protocol, request/proposal system, deployment rules.
+
+### 5. Contextual Skills (Read based on task type)
 
 | If your task involves... | Read this skill                         |
 | ------------------------ | --------------------------------------- |
@@ -85,10 +103,11 @@ When in doubt, add a new component — don't modify an existing one.
 F:\HS CLINIC\
 ├── src/
 │   ├── app/pages/services/     ← 4 service pillar pages (CMS-powered)
-│   ├── hooks/useCmsData.ts     ← ALL Sanity hooks live here
+│   ├── hooks/useCmsData.ts     ← ALL Sanity hooks live here (SHARED: see OWNER_MAP)
 │   ├── lib/sanityClient.ts     ← Sanity client + urlFor helper
 │   └── lib/seo.ts              ← JSON-LD constants
 ├── studio/                     ← Sanity Studio (schemas, config)
+├── _AGENT_COORD/               ← Multi-agent coordination hub
 ├── .agent/skills/              ← Agent memory (you are reading one now)
 └── .agent/workflows/           ← Mandatory processes
 ```
