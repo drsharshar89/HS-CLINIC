@@ -85,7 +85,7 @@ export function Contact() {
     {
       icon: Mail,
       title: 'Digital Uplink',
-      details: [settings.email, 'Encrypted Channel'],
+      details: [settings.email.replace('@', '\u200B@\u200B'), 'Encrypted Channel'],
       href: `mailto:${settings.email}`,
     },
     {

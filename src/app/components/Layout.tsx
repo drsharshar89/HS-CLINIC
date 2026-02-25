@@ -297,7 +297,13 @@ export function Layout() {
               </li>
               <li className="hover:text-gold-400 flex items-center gap-2 text-gray-400 transition-colors">
                 <Mail className="text-gold-500 h-4 w-4" />
-                <span>{settings.email}</span>
+                <a
+                  href={`mailto:${settings.email}`}
+                  className="hover:text-gold-400 transition-colors"
+                  aria-label={`Email ${settings.email}`}
+                >
+                  <span>{settings.email.replace('@', '\u200B@\u200B')}</span>
+                </a>
               </li>
               <li className="hover:text-gold-400 flex items-start gap-2 text-gray-400 transition-colors">
                 <MapPin className="text-gold-500 mt-1 h-4 w-4" />
