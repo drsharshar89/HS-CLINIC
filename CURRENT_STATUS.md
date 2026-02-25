@@ -19,7 +19,7 @@
 
 ## What's Working
 
-- **16 routes** routed and lazy-loaded:
+- **17 routes** routed and lazy-loaded:
   1. Home (`/`)
   2. About (`/about`)
   3. Services (`/services`)
@@ -35,7 +35,8 @@
   13. Full Arch Rehabilitation (`/services/full-arch-rehabilitation`) — SEO Pillar, CMS-wired
   14. Guarantee (`/guarantee`)
   15. Privacy Policy (`/privacy-policy`) — noindex
-  16. Medical Disclaimer (`/medical-disclaimer`) — noindex
+  16. Terms of Service (`/terms-of-service`) — noindex
+  17. Medical Disclaimer (`/medical-disclaimer`) — noindex
 - **17 Sanity schemas** registered (8 original + 6 page settings + 3 collection types)
 - **All pages CMS-wired** via `useCmsData.ts` hooks with fallback-first pattern
 - **4 service pillar pages** with rich SEO (JSON-LD, breadcrumbs, FAQ schema) + CMS dynamic content

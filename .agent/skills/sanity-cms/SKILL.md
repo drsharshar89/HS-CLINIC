@@ -23,23 +23,33 @@ This project uses Sanity.io as the headless CMS.
 
 ## Schema Architecture
 
-17 schemas registered:
+17 schemas registered in `studio/schemas/index.ts`:
 
-**Singletons (page settings):**
+**Singletons (page settings — one document each):**
 
-- `siteSettings` — Global site config (logo, social, contact)
-- `homepageSettings` — Hero, features, CTA
-- `aboutSettings` — Bio, credentials, timeline
-- `gallerySettings` — Gallery page config
-- `tourismSettings` — Tourism page config
+- `siteSettings` — Global site config (logo, social links, contact info, OG image)
+- `hero` — Homepage hero section (title, subtitle, CTA, background image)
+- `homepageSettings` — Homepage features, testimonials toggle
+- `aboutSettings` — Doctor bio, credentials, timeline
+- `servicesPageSettings` — Services index page config
+- `technologySettings` — Technology page config
 - `dsdSettings` — Digital Smile Design page config
+- `tourismSettings` — Tourism page config (pricing, FAQ, VIP program)
 
-**Collections:**
+**Collections (multiple documents):**
 
-- `beforeAfterCase` — Gallery before/after cases
-- `servicePillar` — 4 service pillar pages (dental-implants, tmj-tmd-treatment, clear-aligners, full-arch-rehabilitation)
-- `post` — Blog posts (slug-based)
-- `service` — Service documents (slug-based)
+- `service` — Service documents (slug-based, used on Services page)
+- `testimonial` — Patient testimonials
+- `teamMember` — Clinic team members
+- `faq` — Frequently asked questions
+- `tourismPricing` — Tourism treatment pricing tiers
+- `beforeAfterCase` — Gallery before/after cases with images
+- `youtubeVideo` — YouTube video embeds with category filtering
+- `servicePillar` — 4 SEO pillar pages (dental-implants, tmj-tmd-treatment, clear-aligners, full-arch-rehabilitation)
+- `page` — Generic CMS pages (slug-based, Portable Text body)
+
+> [!CAUTION]
+> `gallerySettings` and `post` do **NOT** exist as schemas despite being referenced in older documentation. Do not attempt to query these types.
 
 ## CMS Hook Pattern
 
