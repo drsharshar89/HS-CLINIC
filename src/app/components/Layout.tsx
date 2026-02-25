@@ -86,7 +86,7 @@ export function Layout() {
                 item.subItems ? (
                   <div
                     key={item.name}
-                    className="group relative"
+                    className="group relative flex items-center"
                     onMouseEnter={() => setServicesOpen(true)}
                     onMouseLeave={() => setServicesOpen(false)}
                   >
