@@ -9,9 +9,9 @@ export const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.webp`;
 
 export const SEO = {
   home: {
-    title: 'Dr. Haitham Sharshar | Digital Occlusion & Cosmetic Dentistry | Cairo',
+    title: 'Dr. Haitham Sharshar | Dental Implants & Smile Design Cairo',
     description:
-      'Leading dental clinic in Cairo, Egypt specializing in digital occlusion, TMJ treatment, cosmetic dentistry, and dental implants. AI-driven diagnostics with 15+ years of expertise.',
+      'Leading dental clinic in Cairo specializing in digital occlusion, TMJ treatment, cosmetic dentistry, and dental implants.',
     canonical: SITE_URL + '/',
   },
   about: {

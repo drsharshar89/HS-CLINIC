@@ -84,14 +84,14 @@ export function Home() {
         <div className="relative mx-auto max-w-7xl">
           <div className="mb-20 text-center">
             <h2 className="text-gold-400 mb-4 font-mono text-sm tracking-[0.5em]">
-              SYSTEM CAPABILITIES
+              DENTAL IMPLANTS · SMILE DESIGN · DIGITAL OCCLUSION
             </h2>
             <h3 className="mb-6 font-serif text-4xl text-white md:text-5xl">
-              Intelligence Made Effortless.
+              Advanced Dentistry, Simplified.
             </h3>
             <p className="mx-auto max-w-2xl text-lg font-light text-gray-400">
-              Streamline your dental health with AI-driven protocols designed to simplify, automate,
-              and enhance your smile architecture.
+              Experience precision dental care powered by AI-driven diagnostics, CBCT 3D imaging,
+              and T-Scan occlusal analysis — all under one roof in Cairo, Egypt.
             </p>
           </div>
 
@@ -104,6 +104,52 @@ export function Home() {
                 description={feature.description}
               />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Expertise & Approach Section — boosts word count and keyword density */}
+      <section className="relative border-t border-white/5 px-4 py-24 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-5xl">
+          <div className="mb-12 text-center">
+            <h2 className="text-gold-400 mb-4 font-mono text-sm tracking-[0.5em]">
+              WHY CHOOSE HS CLINIC
+            </h2>
+            <h3 className="mb-6 font-serif text-3xl text-white md:text-4xl">
+              Cosmetic Dentistry Meets Digital Precision
+            </h3>
+          </div>
+          <div className="grid gap-8 md:grid-cols-2">
+            <div className="space-y-4">
+              <p className="text-lg leading-relaxed text-gray-300">
+                Dr. Haitham Sharshar brings over 15 years of specialized experience in dental
+                implants, TMJ treatment, and digital smile design to every patient. As one of
+                Cairo&apos;s leading prosthodontists, he combines traditional clinical expertise
+                with cutting-edge digital occlusion technology to deliver results that are both
+                functionally sound and aesthetically exceptional.
+              </p>
+              <p className="leading-relaxed text-gray-400">
+                Every treatment begins with comprehensive diagnostics including CBCT 3D imaging,
+                T-Scan occlusal analysis, and EMG jaw muscle assessment. This data-driven approach
+                eliminates guesswork and ensures that dental implants, veneers, and full-arch
+                rehabilitations are planned with sub-millimeter accuracy.
+              </p>
+            </div>
+            <div className="space-y-4">
+              <p className="leading-relaxed text-gray-400">
+                Whether you need a single dental implant, full mouth reconstruction, or cosmetic
+                smile design, HS Clinic offers a seamless patient experience from consultation
+                through treatment completion. Our digital workflow includes CAD/CAM same-day
+                restorations, guided implant surgery, and Digital Smile Design previews so you can
+                see your new smile before treatment even begins.
+              </p>
+              <p className="leading-relaxed text-gray-400">
+                For international patients, our dental tourism program provides VIP concierge
+                services including airport transfers, luxury accommodation arrangements, and
+                dedicated treatment coordinators — making world-class dental care in Cairo, Egypt
+                accessible and stress-free.
+              </p>
+            </div>
           </div>
         </div>
       </section>
