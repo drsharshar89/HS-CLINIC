@@ -138,6 +138,69 @@ export const HOMEPAGE_FAQS = [
 ];
 
 /**
+ * Breadcrumb JSON-LD Schema builder.
+ * Google shows clickable navigation trails in search results:
+ *   Home > Services > Dental Implants
+ * This improves CTR and helps Google understand site structure.
+ */
+export function buildBreadcrumbJsonLd(
+  crumbs: readonly { readonly name: string; readonly path: string }[]
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: crumbs.map((crumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: crumb.name,
+      item: SITE_URL + crumb.path,
+    })),
+  };
+}
+
+/** Common breadcrumb paths for reuse across pages */
+export const BREADCRUMBS = {
+  home: [{ name: 'Home', path: '/' }],
+  about: [
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+  ],
+  services: [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+  ],
+  technology: [
+    { name: 'Home', path: '/' },
+    { name: 'Technology', path: '/technology' },
+  ],
+  dentalTourism: [
+    { name: 'Home', path: '/' },
+    { name: 'Dental Tourism', path: '/dental-tourism' },
+  ],
+  gallery: [
+    { name: 'Home', path: '/' },
+    { name: 'Gallery', path: '/gallery' },
+  ],
+  contact: [
+    { name: 'Home', path: '/' },
+    { name: 'Contact', path: '/contact' },
+  ],
+  dsd: [
+    { name: 'Home', path: '/' },
+    { name: 'Digital Smile Design', path: '/digital-smile-design' },
+  ],
+} as const;
+
+/** Helper: build service-specific breadcrumbs */
+export function serviceBreadcrumbs(serviceName: string, serviceSlug: string) {
+  return [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: serviceName, path: `/services/${serviceSlug}` },
+  ];
+}
+
+/**
  * JSON-LD: MedicalClinic + Dentist schema for Google Rich Results & AI/GEO engines.
  * Dual-typed for maximum schema coverage.
  */
@@ -791,20 +854,6 @@ export function buildFaqJsonLd(faqs: Array<{ question: string; answer: string }>
         '@type': 'Answer',
         text: faq.answer,
       },
-    })),
-  };
-}
-
-/** Build BreadcrumbList JSON-LD from an array of breadcrumb items */
-export function buildBreadcrumbJsonLd(items: Array<{ name: string; url: string }>) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.name,
-      item: item.url,
     })),
   };
 }

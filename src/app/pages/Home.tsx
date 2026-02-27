@@ -6,7 +6,9 @@ import {
   DEFAULT_OG_IMAGE,
   buildLocalBusinessJsonLd,
   buildFAQJsonLd,
+  buildBreadcrumbJsonLd,
   HOMEPAGE_FAQS,
+  BREADCRUMBS,
   WEBSITE_JSONLD,
   ORGANIZATION_JSONLD,
 } from '@/lib/seo';
@@ -41,6 +43,7 @@ export function Home() {
   const ogImageUrl = useSanityImage(settings.ogImage, 1200) || DEFAULT_OG_IMAGE;
   const jsonLd = buildLocalBusinessJsonLd(settings);
   const faqJsonLd = buildFAQJsonLd(HOMEPAGE_FAQS);
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd(BREADCRUMBS.home);
 
   const features = homepage.features.map((f) => ({
     icon: (f.iconName && ICON_MAP[f.iconName]) || Zap,
@@ -76,6 +79,8 @@ export function Home() {
         <script type="application/ld+json">{JSON.stringify(ORGANIZATION_JSONLD)}</script>
         {/* JSON-LD FAQ schema for rich snippets in search results */}
         <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
+        {/* JSON-LD Breadcrumb schema for navigation trails in search results */}
+        <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>
       </Helmet>
 
       <CyberHero />
