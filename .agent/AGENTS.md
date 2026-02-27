@@ -64,9 +64,20 @@ Tech stack constraints, forbidden packages, image rules, Vite config rules.
 
 **File:** `_AGENT_COORD/COORDINATION_RULES.md`
 
-File ownership, lock protocol, request/proposal system, deployment rules.
+### 5. Anti-Destruction Policy (ABSOLUTE — No Exceptions)
 
-### 5. Contextual Skills (Read based on task type)
+**File:** `_AGENT_COORD/ANTI_DESTRUCTION_POLICY.md`
+
+**Key rules you MUST follow:**
+
+- NEVER delete any source file without explicit user command
+- NEVER rewrite an entire file — only patch/edit specific sections
+- NEVER remove any existing feature, route, or component
+- ALWAYS run `npm run build` before AND after changes
+- If build breaks → immediately revert and report
+- Protected files (require PROPOSAL): `vite.config.ts`, `netlify.toml`, `tsconfig.json`
+
+### 6. Contextual Skills (Read based on task type)
 
 | If your task involves... | Read this skill                         |
 | ------------------------ | --------------------------------------- |

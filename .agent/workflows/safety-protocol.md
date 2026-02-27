@@ -114,3 +114,19 @@ If the user requests something risky:
    - Deleting any file
    - Changing the routing structure
    - Modifying `index.html`
+
+---
+
+## Step 6: Anti-Destruction Rules (ABSOLUTE — No Exceptions)
+
+**Read:** `_AGENT_COORD/ANTI_DESTRUCTION_POLICY.md`
+
+Summary of non-negotiable rules:
+
+1. **NEVER delete** any source file without explicit user command
+2. **NEVER rewrite** an entire file — only patch/edit specific sections
+3. **NEVER remove** any existing feature, route, or component
+4. **NEVER modify** protected files without a PROPOSAL
+5. **ALWAYS** run `npm run build` before AND after changes
+6. **If build breaks** → immediately revert and report
+7. **If in doubt, DON'T.** Ask the user first.

@@ -1,1 +1,56 @@
-npx lint-staged
+#!/bin/sh
+# HS Clinic — Anti-Destruction Pre-Commit Hook
+# Blocks dangerous commits automatically.
+
+# Colors
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# --- Check 1: Block mass file deletions ---
+DELETED_COUNT=$(git diff --cached --diff-filter=D --name-only | wc -l)
+if [ "$DELETED_COUNT" -gt 3 ]; then
+  echo "${RED}❌ BLOCKED: You are deleting $DELETED_COUNT files in one commit.${NC}"
+  echo "${YELLOW}   Anti-Destruction Policy limits deletion to 3 files per commit.${NC}"
+  echo "   If this is intentional, use: git commit --no-verify"
+  exit 1
+fi
+
+# --- Check 2: Warn on protected file modifications ---
+PROTECTED_FILES="vite.config.ts netlify.toml tsconfig.json"
+for file in $PROTECTED_FILES; do
+  if git diff --cached --name-only | grep -q "^${file}$"; then
+    echo "${YELLOW}⚠️  WARNING: You are modifying protected file: ${file}${NC}"
+    echo "   This requires a PROPOSAL in _AGENT_COORD/PROPOSALS/"
+    echo "   If this was approved, use: git commit --no-verify"
+    exit 1
+  fi
+done
+
+# --- Check 3: Block deletion of key source directories ---
+PROTECTED_DIRS="src/app/pages src/app/components src/hooks src/lib"
+for dir in $PROTECTED_DIRS; do
+  DELETED_IN_DIR=$(git diff --cached --diff-filter=D --name-only | grep "^${dir}/" | wc -l)
+  if [ "$DELETED_IN_DIR" -gt 0 ]; then
+    echo "${RED}❌ BLOCKED: Deleting files from protected directory: ${dir}/${NC}"
+    echo "   Files being deleted:"
+    git diff --cached --diff-filter=D --name-only | grep "^${dir}/"
+    echo ""
+    echo "   Anti-Destruction Policy: Source files cannot be deleted."
+    echo "   To rename/move, use git mv instead."
+    echo "   If this is intentional, use: git commit --no-verify"
+    exit 1
+  fi
+done
+
+# --- Check 4: Block package.json script modifications ---
+if git diff --cached --name-only | grep -q "^package.json$"; then
+  if git diff --cached package.json | grep -q '"scripts"'; then
+    echo "${YELLOW}⚠️  WARNING: package.json scripts section was modified.${NC}"
+    echo "   This requires a PROPOSAL in _AGENT_COORD/PROPOSALS/"
+    echo "   If this was approved, use: git commit --no-verify"
+    exit 1
+  fi
+fi
+
+echo "✅ Anti-destruction checks passed."

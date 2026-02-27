@@ -5,6 +5,8 @@ import {
   SITE_NAME,
   DEFAULT_OG_IMAGE,
   buildLocalBusinessJsonLd,
+  buildFAQJsonLd,
+  HOMEPAGE_FAQS,
   WEBSITE_JSONLD,
   ORGANIZATION_JSONLD,
 } from '@/lib/seo';
@@ -38,6 +40,7 @@ export function Home() {
   const { settings } = useSiteSettings();
   const ogImageUrl = useSanityImage(settings.ogImage, 1200) || DEFAULT_OG_IMAGE;
   const jsonLd = buildLocalBusinessJsonLd(settings);
+  const faqJsonLd = buildFAQJsonLd(HOMEPAGE_FAQS);
 
   const features = homepage.features.map((f) => ({
     icon: (f.iconName && ICON_MAP[f.iconName]) || Zap,
@@ -71,6 +74,8 @@ export function Home() {
         <script type="application/ld+json">{JSON.stringify(WEBSITE_JSONLD)}</script>
         {/* JSON-LD Organization schema for Google Knowledge Panel logo */}
         <script type="application/ld+json">{JSON.stringify(ORGANIZATION_JSONLD)}</script>
+        {/* JSON-LD FAQ schema for rich snippets in search results */}
+        <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
       </Helmet>
 
       <CyberHero />

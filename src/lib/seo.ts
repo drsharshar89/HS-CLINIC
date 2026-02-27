@@ -89,6 +89,55 @@ export const SEO = {
 } as const;
 
 /**
+ * FAQ JSON-LD Schema builder.
+ * Google shows expandable Q&A rich snippets in search results when this is present.
+ * Use on service pages to boost click-through rate.
+ */
+export function buildFAQJsonLd(faqs: { question: string; answer: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+/** Pre-built FAQ data for the homepage / general pages */
+export const HOMEPAGE_FAQS = [
+  {
+    question: 'What dental services does HS Clinic in Cairo offer?',
+    answer:
+      'HS Clinic offers dental implants, cosmetic dentistry, TMJ/TMD treatment, digital smile design, full-arch rehabilitation, clear aligners, and Hollywood smile makeovers. All treatments use AI-driven diagnostics and CBCT 3D imaging.',
+  },
+  {
+    question: 'How much do dental implants cost in Egypt compared to the US?',
+    answer:
+      'Dental implants in Egypt typically cost 70-90% less than in the US or UK, while using the same premium materials (Straumann, Nobel Biocare). A single implant at HS Clinic starts from $400-600 compared to $3,000-5,000 in the US.',
+  },
+  {
+    question: 'Does HS Clinic offer dental tourism packages?',
+    answer:
+      'Yes. Our dental tourism program includes VIP airport transfers, luxury accommodation arrangements, dedicated treatment coordinators, and comprehensive treatment plans — all designed for international patients visiting Cairo, Egypt.',
+  },
+  {
+    question: 'What is digital occlusion and why does it matter?',
+    answer:
+      'Digital occlusion uses T-Scan sensors, EMG muscle analysis, and CBCT imaging to precisely measure how your teeth come together. This data-driven approach ensures dental work like implants, crowns, and veneers are functionally perfect — not just aesthetically pleasing.',
+  },
+  {
+    question: 'How do I book an appointment with Dr. Haitham Sharshar?',
+    answer:
+      'You can book via WhatsApp for instant response, call +201101010599, or use the appointment form on our Contact page. International patients can request a virtual consultation first.',
+  },
+];
+
+/**
  * JSON-LD: MedicalClinic + Dentist schema for Google Rich Results & AI/GEO engines.
  * Dual-typed for maximum schema coverage.
  */
